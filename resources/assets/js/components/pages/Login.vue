@@ -1,16 +1,48 @@
 <template>
-    <div>
-        <div v-if="!isLoggedIn">
-            <label for="email">Email address</label>
-            <input type="text" name="email" id="email"/>
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" autocomplete="new-password"/>
-            <button v-on:click="login">Submit</button>
-            <button>Reset</button>
-        </div>
-        <div v-if="isLoggedIn">
-            <button v-on:click="logout">Logout</button>
-        </div>
+    <div class="container" style="display: grid; height: 100vh">
+        <el-card class="box-card" style="margin: auto; width: 50%">
+            <div>
+                <h1>Espace d'administration</h1>
+                <el-form ref="loginForm" :model="user" v-if="!isLoggedIn">
+
+                    <el-form-item v-if="hasLoginError">
+                        <el-alert
+                                title="Merci de vérifier vos paramètres de connection"
+                                type="error"
+                                :closable="false">
+                        </el-alert>
+                    </el-form-item>
+
+                    <el-form-item label="Adresse email">
+                        <el-input v-model="user.email"/>
+                    </el-form-item>
+
+                    <el-form-item label="Mot de passe">
+                        <el-input type="password" v-model="user.password" auto-complete="off"/>
+                    </el-form-item>
+
+                    <el-form-item>
+                        <el-button type="primary" @click="onSubmit">Se connecter</el-button>
+                        <el-button>Cancel</el-button>
+                    </el-form-item>
+
+                </el-form>
+
+                <el-form v-if="isLoggedIn">
+                    <el-form-item>
+                        <el-form-item v-if="hasLoginError">
+                            <el-alert
+                                    title="Merci de vérifier vos paramètres de connection"
+                                    type="error"
+                                    :closable="false">
+                            </el-alert>
+                        </el-form-item>
+                        <p>Vous êtes déjà connecté</p>
+                        <el-button type="default" @click="logout">Se déconnecter</el-button>
+                    </el-form-item>
+                </el-form>
+            </div>
+        </el-card>
     </div>
 </template>
 
@@ -22,28 +54,35 @@
             return {
                 auth: new Authentication(),
                 isLoggedIn: false,
+                user: {
+                    email: '',
+                    password: ''
+                },
+                hasLoginError: false,
             }
         },
         mounted() {
             this.isLoggedIn = Authentication.isLoggedIn()
         },
         methods: {
-            login() {
-                this.auth.bearerLogIn('admin@test.dev', 'admin')
+            onSubmit() {
+                this.auth.bearerLogIn(this.user.email, this.user.password)
                     .then(data => {
-                        this.isLoggedIn = Authentication.isLoggedIn()
+                        this.isLoggedIn = Authentication.isLoggedIn();
+                        this.hasLoginError = false
                     })
                     .catch(errors => {
-                        console.log('can not connect')
+                        this.hasLoginError = true
                     })
             },
             logout() {
                 this.auth.bearerLogOut()
                     .then(response => {
-                        this.isLoggedIn = Authentication.isLoggedIn()
+                        this.isLoggedIn = Authentication.isLoggedIn();
+                        this.hasLoginError = false
                     })
                     .catch(error => {
-                        console.log('error occur')
+                        this.hasLoginError = true
                     })
             }
         }

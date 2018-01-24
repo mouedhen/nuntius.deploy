@@ -18,6 +18,12 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter);
 
+
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/fr'
+
+Vue.use(ElementUI, { locale });
+
 import App from './components/shared/App'
 import router from './routes'
 

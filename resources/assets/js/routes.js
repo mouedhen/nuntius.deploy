@@ -29,7 +29,7 @@ const router = new VueRouter({
             path: '/login',
             name: 'login',
             component: Login,
-            beforeEnter: authMiddleware
+            // beforeEnter: authMiddleware
         }
     ]
 });
