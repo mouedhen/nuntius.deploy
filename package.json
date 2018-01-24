@@ -11,7 +11,9 @@
     },
     "dependencies": {
         "axios": "^0.17.1",
+        "tiny-cookie": "^2.1.1",
         "vue": "^2.5.13",
+        "vue-mc": "^0.2.3",
         "vue-router": "^3.0.1"
     },
     "devDependencies": {

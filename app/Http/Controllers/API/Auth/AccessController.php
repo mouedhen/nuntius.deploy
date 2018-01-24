@@ -12,6 +12,7 @@ namespace App\Http\Controllers\API\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class AccessController extends Controller
@@ -30,8 +31,8 @@ class AccessController extends Controller
     {
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
             $user = Auth::user();
-            $success['token'] = $user->createToken('nuntius')->accessToken;
-            return response()->json(['success' => $success], 200);
+            $user['token'] = $user->createToken('nuntius')->accessToken;
+            return response()->json($user, 200);
         }
         return response()->json(['error' => 'Unauthorized'], 401);
     }
@@ -41,16 +42,17 @@ class AccessController extends Controller
         if (!$this->guard()->check()) {
             return response([
                 'message' => 'No active user session was found'
-            ], 404);
+            ], 401);
         }
 
         $request->user('api')->token()->revoke();
-
-        Auth::guard()->logout();
+        DB::table('oauth_access_tokens')->where('user_id', '=', $request->user('api')->id)->update(array('revoked' => false));
+        // Auth::guard()->logout();
 
         Session::flush();
 
         Session::regenerate();
+
 
         return response([
             'message' => 'User was logged out'
