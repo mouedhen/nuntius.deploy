@@ -57,8 +57,8 @@ class AccessController extends Controller
         ]);
     }
 
-    public function profile()
+    public function profile(Request $request)
     {
-        return response()->json(Auth::user, 200);
+        return response()->json($request->user(), 200);
     }
 }
