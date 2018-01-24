@@ -2,11 +2,14 @@
 
 namespace App\Exceptions;
 
+use App\Traits\RestExceptionHandlerTrait;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler
 {
+    use RestExceptionHandlerTrait;
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -28,11 +31,11 @@ class Handler extends ExceptionHandler
 
     /**
      * Report or log an exception.
-     *
      * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
      *
-     * @param  \Exception  $exception
-     * @return void
+     * @param Exception $exception
+     * @return mixed|void
+     * @throws Exception
      */
     public function report(Exception $exception)
     {
@@ -41,13 +44,15 @@ class Handler extends ExceptionHandler
 
     /**
      * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param \Illuminate\Http\Request $request
+     * @param Exception $exception
+     * @return \Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+        if (!$this->isApiCall($request)) {
+            return parent::render($request, $exception);
+        }
+        return $this->getJsonResponseForException($request, $exception);
     }
 }

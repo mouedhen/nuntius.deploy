@@ -13,6 +13,17 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+use Illuminate\Support\Facades\Route;
+
+Route::group([
+    'prefix' => 'v1',
+], function () {
+
+    Route::post('login', 'API\\Auth\\AccessController@login');
+    Route::post('logout', 'API\\Auth\\AccessController@logout');
+
+    Route::middleware('auth:api')->get('/user', function (Request $request) {
+        return $request->user();
+    });
+
 });

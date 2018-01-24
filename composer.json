@@ -5,17 +5,18 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=7.0.0",
-        "fideloper/proxy": "~3.3",
-        "laravel/framework": "5.5.*",
-        "laravel/tinker": "~1.0"
+        "php": ">=7.1.0",
+        "fideloper/proxy": "~3.3.4",
+        "laravel/framework": "5.5.32",
+        "laravel/passport": "^4.0",
+        "laravel/tinker": "~1.0.3"
     },
     "require-dev": {
-        "filp/whoops": "~2.0",
-        "fzaninotto/faker": "~1.4",
+        "filp/whoops": "~2.1.14",
+        "fzaninotto/faker": "~1.7.1",
         "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "~6.0",
-        "symfony/thanks": "^1.0"
+        "phpunit/phpunit": "~6.5.5",
+        "symfony/thanks": "^1.0.3"
     },
     "autoload": {
         "classmap": [

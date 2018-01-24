@@ -1,22 +1,24 @@
+import '@babel/polyfill'
+import axios from 'axios'
+import Vue from 'vue'
 
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+window.axios = axios;
+window.Vue = Vue;
 
-require('./bootstrap');
+axios.defaults.headers.common = {
+    'X-CSRF-TOKEN': window.Laravel.csrfToken,
+    'X-Requested-With': 'XMLHttpRequest'
+};
 
-window.Vue = require('vue');
+import VueRouter from 'vue-router'
 
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
+Vue.use(VueRouter);
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+import App from './components/shared/App'
+import router from './routes'
 
+
+Vue.component('app', App);
 const app = new Vue({
-    el: '#app'
-});
+    router,
+}).$mount('#app');
