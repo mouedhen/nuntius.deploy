@@ -8,6 +8,7 @@
     <title>{{ config('app.name') }}</title>
 
     <link href="{{ mix('css/app.css') }}" rel="stylesheet" type="text/css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <script>
         window.Laravel = {!! json_encode([

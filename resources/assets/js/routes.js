@@ -1,44 +1,30 @@
 import VueRouter from 'vue-router'
 
-import Authentication from './helpers/Authentication'
+import Home from './components/pages/Home.vue'
 
-function authMiddleware(to, from, next) {
-    if (!Authentication.isLoggedIn() && to.fullPath !== '/login') {
-        router.push('/login')
-    } else if (Authentication.isLoggedIn() && to.fullPath === '/login') {
-        router.push(from.path);
-    } else {
-        next();
-    }
-}
-
-import Dashboard from './components/pages/Dashboard'
-import UsersIndex from './components/pages/UsersIndex'
-import Login from './components/pages/Login'
+import {routes as customersRoutes} from './modules/missions/customers/routes'
+import {routes as missionsRoutes} from './modules/missions/missions/routes'
 
 const router = new VueRouter({
     mode: 'history',
     routes: [
+        ...customersRoutes,
+        ...missionsRoutes,
         {
             path: '/',
             name: 'index',
-            component: Dashboard,
-            beforeEnter: authMiddleware
+            component: Home,
+            meta: {}
         },
         {
-            path: '/users',
-            name: 'users:index',
-            component: UsersIndex,
-            beforeEnter: authMiddleware
+            path: '/locations',
+            name: 'locations:index',
+            component: Home,
+            meta: {}
         },
-        {
-
-            path: '/login',
-            name: 'login',
-            component: Login,
-            // beforeEnter: authMiddleware
-        }
     ]
 });
+
+
 
 export default router;

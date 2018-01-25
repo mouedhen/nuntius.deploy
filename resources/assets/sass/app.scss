@@ -1,29 +1,92 @@
-// @import "reset";
-@import '~element-ui/lib/theme-chalk/index.css';
-@import '~element-ui/lib/theme-chalk/display.css';
-
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,600,700,900');
+@import "vendor/base";
+@import "~element-ui/lib/theme-chalk/index.css";
 
 html, body {
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0;
+  margin: 0;
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Raleway", sans-serif;
 }
 
-#app {
-  min-height: 100vh;
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }
 
-.el-col {
-  padding: 15px;
+.full-height {
+  height: calc(100vh - 120px);
+}
+
+.cloudy-background {
+  background-color: #F5F5F5 !important;
+}
+
+.position-ref {
+  position: relative;
+}
+
+.content {
+  margin-top: -30px;
+}
+
+.title {
+  text-align: center;
+  font-size: 84px;
+  font-weight: 100;
+}
+
+.viewport-height {
+  min-height: calc(100vh - 61px);
 }
 
 .container {
-  min-height: calc(100vh - 91px);
-  background: #EEEEEE;
-  padding: 15px
+  padding: 20px;
 }
 
-@import "login";
+.scrollableY {
+  height: calc(100vh - 61px);
+  overflow-y: scroll;
+}
+
+.scrollableX {
+  overflow-x: scroll;
+}
+
+.scrollableY::-webkit-scrollbar {
+  width: 2px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background-color: #F5F5F5;
+}
+
+.scrollableY::-webkit-scrollbar {
+  width: 2px;
+  background-color: #F5F5F5;
+}
+
+.scrollableY::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .2);
+  background-color: #555;
+}
+
+dt {
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+@media print
+{
+  .noprint {display:none;}
+  .printcontent {width: 100vw; overflow: visible}
+}
+
+.card {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  margin-bottom: 10px;
+}
+
+.card:hover {
+  // box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
