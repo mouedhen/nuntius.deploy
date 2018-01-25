@@ -21,10 +21,16 @@
     "autoload": {
         "classmap": [
             "database/seeds",
-            "database/factories"
+            "database/factories",
+            "packages/selenkeys/missions/src/database/seeds",
+            "packages/selenkeys/missions/src/database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Selenkeys\\Core\\": "packages/selenkeys/core/src",
+            "Selenkeys\\Core\\App\\": "packages/selenkeys/core/src/app",
+            "Selenkeys\\Missions\\": "packages/selenkeys/missions/src",
+            "Selenkeys\\Missions\\App\\": "packages/selenkeys/missions/src/app"
         }
     },
     "autoload-dev": {
