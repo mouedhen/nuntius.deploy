@@ -20,9 +20,11 @@ Vue.use(VueRouter);
 
 
 import ElementUI from 'element-ui'
+import DataTables from 'vue-data-tables'
 import locale from 'element-ui/lib/locale/lang/fr'
 
 Vue.use(ElementUI, { locale });
+Vue.use(DataTables);
 
 import App from './components/shared/App'
 import router from './routes'

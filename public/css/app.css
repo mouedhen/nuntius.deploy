@@ -12,6 +12,43 @@ body {
 }
 
 .el-col {
-  padding: 12px;
+  padding: 15px;
+}
+
+.container {
+  min-height: calc(100vh - 91px);
+  background: #EEEEEE;
+  padding: 15px;
+}
+
+.login-container {
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: url(/images/login-background.jpg?d8fbb5d444d8e6c3f06abe73c826cb09) no-repeat center fixed;
+  background-size: cover;
+}
+
+.login-container .el-card {
+  width: 60%;
+}
+
+@media screen and (max-width: 800px) {
+  .login-container .el-card {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-container .el-card {
+    width: 95%;
+  }
 }
 

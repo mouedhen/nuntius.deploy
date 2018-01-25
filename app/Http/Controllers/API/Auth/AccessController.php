@@ -46,7 +46,9 @@ class AccessController extends Controller
         }
 
         $request->user('api')->token()->revoke();
-        DB::table('oauth_access_tokens')->where('user_id', '=', $request->user('api')->id)->update(array('revoked' => false));
+
+        // TODO force only one session per user
+        // DB::table('oauth_access_tokens')->where('user_id', '=', $request->user('api')->id)->update(array('revoked' => false));
         // Auth::guard()->logout();
 
         Session::flush();

@@ -15,6 +15,12 @@ Route::group([
         Route::post('logout', 'API\\Auth\\AccessController@logout');
         Route::get('profile', 'API\\Auth\\AccessController@profile');
 
+        Route::apiResources([
+            'users' => 'API\\Resources\\UserController',
+        ], [
+            'except' => ['create', 'edit',]
+        ]);
+
     });
 
 });

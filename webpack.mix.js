@@ -2,6 +2,7 @@ const mix = require('laravel-mix');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 mix
+    .copy('resources/assets/images', 'public/images')
     .extract([
         'axios',
         'element-ui',

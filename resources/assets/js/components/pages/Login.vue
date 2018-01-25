@@ -1,6 +1,6 @@
 <template>
-    <div class="container" style="display: grid; height: 100vh">
-        <el-card class="box-card" style="margin: auto; width: 50%">
+    <div class="container login-container">
+        <el-card class="box-card">
             <div>
                 <h1>Espace d'administration</h1>
                 <el-form ref="loginForm" :model="user" v-if="!isLoggedIn">
@@ -32,13 +32,13 @@
                     <el-form-item>
                         <el-form-item v-if="hasLoginError">
                             <el-alert
-                                    title="Merci de vérifier vos paramètres de connection"
+                                    title="Une erreur inattendue s'est produite lors de la déconnection, merci de réessayer"
                                     type="error"
                                     :closable="false">
                             </el-alert>
                         </el-form-item>
                         <p>Vous êtes déjà connecté</p>
-                        <el-button type="default" @click="logout">Se déconnecter</el-button>
+                        <el-button type="primary" @click="logout">Se déconnecter</el-button>
                     </el-form-item>
                 </el-form>
             </div>
@@ -69,7 +69,8 @@
                 this.auth.bearerLogIn(this.user.email, this.user.password)
                     .then(data => {
                         this.isLoggedIn = Authentication.isLoggedIn();
-                        this.hasLoginError = false
+                        this.hasLoginError = false;
+                        this.$router.push({name: 'index'});
                     })
                     .catch(errors => {
                         this.hasLoginError = true

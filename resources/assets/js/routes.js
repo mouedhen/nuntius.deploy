@@ -1,8 +1,5 @@
 import VueRouter from 'vue-router'
 
-import Dashboard from './components/pages/Dashboard'
-import Login from './components/pages/Login'
-
 import Authentication from './helpers/Authentication'
 
 function authMiddleware(to, from, next) {
@@ -15,13 +12,23 @@ function authMiddleware(to, from, next) {
     }
 }
 
+import Dashboard from './components/pages/Dashboard'
+import UsersIndex from './components/pages/UsersIndex'
+import Login from './components/pages/Login'
+
 const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path: '/',
-            name: 'dashboard',
+            name: 'index',
             component: Dashboard,
+            beforeEnter: authMiddleware
+        },
+        {
+            path: '/users',
+            name: 'users:index',
+            component: UsersIndex,
             beforeEnter: authMiddleware
         },
         {
