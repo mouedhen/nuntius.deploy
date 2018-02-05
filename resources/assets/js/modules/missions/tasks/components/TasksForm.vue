@@ -5,26 +5,18 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="Start date and time" prop="start_date_time">
-                        <el-date-picker
-                                v-model="task.start_date_time"
-                                :editable="true"
-                                type="datetime"
-                                style="width: 100%"
-                                :default-value="now"
-                                placeholder="Select date and time">
-                        </el-date-picker>
+                        <div class="el-input">
+                            <input class="el-input__inner" id="start_date_time" name="start_date_time"
+                                   type="datetime-local" v-model="task.start_date_time" />
+                        </div>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="End date and time" prop="end_date_time">
-                        <el-date-picker
-                                :editable="true"
-                                v-model="task.end_date_time"
-                                type="datetime"
-                                style="width: 100%"
-                                :default-value="now"
-                                placeholder="Select date and time">
-                        </el-date-picker>
+                        <div class="el-input">
+                            <input class="el-input__inner" id="end_date_time" name="end_date_time"
+                                   type="datetime-local" v-model="task.end_date_time"/>
+                        </div>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -32,12 +24,12 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="Conductor" prop="conductor">
-                        <el-input type="text" v-model="task.conductor"></el-input>
+                        <el-input type="text" v-model="task.conductor"/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="Tractor" prop="tractor">
-                        <el-input type="text" v-model="task.tractor"></el-input>
+                        <el-input type="text" v-model="task.tractor"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -45,12 +37,12 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="Tool" prop="tool">
-                        <el-input type="text" v-model="task.tool"></el-input>
+                        <el-input type="text" v-model="task.tool"/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="Tool Config" prop="tool_configuration">
-                        <el-input type="number" v-model="task.tool_configuration"></el-input>
+                        <el-input type="number" v-model="task.tool_configuration"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -58,12 +50,12 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="Depth in CM" prop="depth_in_cm">
-                        <el-input type="number" v-model="task.depth_in_cm"></el-input>
+                        <el-input type="number" v-model="task.depth_in_cm"/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="Width in M" prop="width_in_m">
-                        <el-input type="number" v-model="task.width_in_m"></el-input>
+                        <el-input type="number" v-model="task.width_in_m"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -71,12 +63,12 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="Average speed" prop="average_speed">
-                        <el-input type="number" v-model="task.average_speed"></el-input>
+                        <el-input type="number" v-model="task.average_speed"/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="Worked area" prop="worked_area">
-                        <el-input type="number" v-model="task.worked_area"></el-input>
+                        <el-input type="number" v-model="task.worked_area"/>
                     </el-form-item>
                 </el-col>
             </el-row>
@@ -84,18 +76,18 @@
             <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="Average consumption" prop="average_consumption">
-                        <el-input type="number" v-model="task.average_consumption"></el-input>
+                        <el-input type="number" v-model="task.average_consumption"/>
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
                     <el-form-item label="Fuel consumption" prop="fuel_consumption">
-                        <el-input type="number" v-model="task.fuel_consumption"></el-input>
+                        <el-input type="number" v-model="task.fuel_consumption"/>
                     </el-form-item>
                 </el-col>
             </el-row>
 
             <el-form-item label="Observation" prop="observation">
-                <el-input type="textarea" v-model="task.observation"></el-input>
+                <el-input type="textarea" v-model="task.observation"/>
             </el-form-item>
 
             <el-form-item>

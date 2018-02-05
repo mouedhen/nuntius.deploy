@@ -15,10 +15,20 @@ const LiveReloadPlugin = require('webpack-livereload-plugin');
 mix.js('resources/assets/js/app.js', 'public/js')
     .sass('resources/assets/sass/app.scss', 'public/css')
     .extract([
+        '@turf/turf',
         'axios',
-        'vue',
-        'vue-router',
+        'chart.js',
         'element-ui',
+        'moment',
+        'moment-duration-format',
+        'moment-timezone',
+        'tiny-cookie',
+        'vue',
+        'vue-chartjs',
+        'vue-data-tables',
+        'vue-resource',
+        'vue-router',
+        'vuex',
     ])
     .webpackConfig({
         plugins: [

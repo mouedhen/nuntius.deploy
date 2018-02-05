@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <missions-side-bar :index="index"></missions-side-bar>
+            <missions-side-bar :index="index"/>
         </el-col>
         <el-col :span="20" class="container">
             <el-breadcrumb separator="/">

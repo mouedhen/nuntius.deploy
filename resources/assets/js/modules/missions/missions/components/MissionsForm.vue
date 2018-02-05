@@ -3,12 +3,12 @@
 
         <el-form-item label="Estimated start date" prop="estimated_start_date">
             <el-date-picker type="date" placeholder="Pick a date"
-                            v-model="mission.estimated_start_date" style="width: 100%;"></el-date-picker>
+                            v-model="mission.estimated_start_date" style="width: 100%;"/>
         </el-form-item>
 
         <el-form-item label="Estimated end date" prop="estimated_end_date">
             <el-date-picker type="date" placeholder="Pick a date"
-                            v-model="mission.estimated_end_date" style="width: 100%;"></el-date-picker>
+                            v-model="mission.estimated_end_date" style="width: 100%;"/>
         </el-form-item>
 
         <el-form-item label="Customer" prop="customer_id">

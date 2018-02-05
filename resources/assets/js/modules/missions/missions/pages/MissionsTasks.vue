@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <missions-side-bar :index="index"></missions-side-bar>
+            <missions-side-bar :index="index"/>
         </el-col>
         <el-col :span="20" class="scrollableY container">
             <el-breadcrumb separator="/">
@@ -12,6 +12,7 @@
 
             <div class="container">
                 <h1 style="text-align: center">Mission - {{mission.label}}</h1>
+                <div style="text-align: center">{{start_date}}</div>
                 <div>
                     <!--
                     <el-row>
@@ -33,8 +34,8 @@
                         </el-col>
                     </el-row>
                     -->
-                    <tasks-form :task="task" v-on:submit="submitTask"></tasks-form>
-                    <tasks-table :tasks="mission.tasks"></tasks-table>
+                    <tasks-form :task="task" v-on:submit="submitTask"/>
+                    <tasks-table :tasks="mission.tasks"/>
                 </div>
             </div>
 
@@ -47,6 +48,8 @@
     import MissionsSideBar from './../components/MissionsSideBar.vue'
     import TasksForm from './../../tasks/components/TasksForm.vue'
     import TasksTable from './../../tasks/components/TasksTable.vue'
+
+    import moment from 'moment'
 
     import {missionDetails} from '../config'
     import {initialTaskData} from '../../tasks/config'
@@ -61,7 +64,9 @@
             }
         },
         computed: {
-            //
+            start_date: function () {
+                return moment(this.mission.estimated_start_date).format('DD/MM/YYYY')
+            }
         },
         mounted() {
             this.$store.dispatch('fetchMission', {missionID: this.$route.params.id}).then(mission => {

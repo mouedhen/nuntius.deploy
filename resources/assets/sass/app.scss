@@ -1,5 +1,11 @@
-@import "vendor/base";
-@import "~element-ui/lib/theme-chalk/index.css";
+// @import "vendor/base";
+/* theme color */
+$--color-primary: #E65100;
+
+/* icon font path, required */
+$--font-path: '~element-ui/lib/theme-chalk/fonts';
+
+@import "~element-ui/packages/theme-chalk/src/index";
 
 html, body {
   margin: 0;

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <top-menu class="noprint"></top-menu>
+        <top-menu class="noprint"/>
         <transition name="fade">
-            <router-view></router-view>
+            <router-view/>
         </transition>
     </div>
 </template>

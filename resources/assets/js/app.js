@@ -1,15 +1,19 @@
 import 'babel-polyfill'
 import axios from 'axios'
-import Vue from 'vue'
 
-window.Vue = Vue;
 window.axios = axios;
-
 
 axios.defaults.headers.common = {
     'X-CSRF-TOKEN': window.Laravel.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest'
+    'X-Requested-With': 'XMLHttpRequest',
+    'Content-Type': 'application/json',
+    'Authorization': Cookies.get('token'),
 };
+
+import * as Cookies from 'tiny-cookie'
+import Vue from 'vue'
+
+window.Vue = Vue;
 
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'

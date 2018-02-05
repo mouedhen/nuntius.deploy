@@ -1,18 +1,18 @@
 <template>
-    <div>
+    <div class="">
         <div class="small">
             <bar-chart :chart-data="datacollection" :options="options" :height="100"/>
         </div>
         <el-row>
             <el-col :span="12">
                 <div class="small">
-                    <bar-chart :chart-data="datacollection2" :options="options" :height="200"/>
+                    <bar-chart :chart-data="datacollection2" :options="options" :height="100"/>
                 </div>
             </el-col>
 
             <el-col :span="12">
                 <div class="small">
-                    <bar-chart :chart-data="datacollection3" :options="options" :height="200"/>
+                    <bar-chart :chart-data="datacollection3" :options="options" :height="100"/>
                 </div>
             </el-col>
         </el-row>
