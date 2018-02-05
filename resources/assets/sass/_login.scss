@@ -1,0 +1,22 @@
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url("../images/login-background.png") no-repeat center fixed;
+  -webkit-background-size: cover;
+  background-size: cover;
+  .el-card {
+    width: 60%;
+    @media screen and (max-width: 800px) {
+      width: 80%;
+    }
+    @media screen and (max-width: 480px) {
+      width: 95%;
+    }
+  }
+}
+
+.right-nav-item {
+  float: right !important;
+  margin-right: 12px !important;
+}

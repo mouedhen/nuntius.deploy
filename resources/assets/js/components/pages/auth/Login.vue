@@ -1,5 +1,5 @@
 <template>
-    <div class="container login-container">
+    <div class="container login-container full-height">
         <el-card class="box-card">
             <div>
                 <h1>Espace d'administration</h1>
@@ -75,7 +75,23 @@
                     })
                     .catch(errors => {
                         this.hasLoginError = true
-                    })
+                    });
+
+                this.$store.dispatch('fetchCustomers')
+                    .catch(error => {
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Error when reading records'
+                        });
+                    });
+
+                this.$store.dispatch('fetchMissions')
+                    .catch(error => {
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Error when reading records'
+                        });
+                    });
             },
             logout() {
                 this.auth.bearerLogOut()
@@ -91,32 +107,10 @@
             loadData() {
                 this.$store.dispatch('login', Authentication.isLoggedIn());
                 this.$store.dispatch('fetchUsers').catch(e => console.log(e));
-
-                this.$store.dispatch('fetchCountries').catch(e => console.log(e));
-                this.$store.dispatch('fetchCities').catch(e => console.log(e));
-                this.$store.dispatch('fetchMunicipalities').catch(e => console.log(e));
-
-                this.$store.dispatch('fetchNotices').catch(e => console.log(e));
-
-                this.$store.dispatch('fetchClaimers').catch(e => console.log(e));
-                this.$store.dispatch('fetchClaims').catch(e => console.log(e));
-                this.$store.dispatch('fetchKeywords').catch(e => console.log(e));
-                this.$store.dispatch('fetchThemes').catch(e => console.log(e));
             },
             reinitData() {
                 this.$store.dispatch('login', Authentication.isLoggedIn());
                 this.$store.dispatch('reinitUsers').catch(e => console.log(e));
-
-                this.$store.dispatch('reinitCountries').catch(e => console.log(e));
-                this.$store.dispatch('reinitCities').catch(e => console.log(e));
-                this.$store.dispatch('reinitMunicipalities').catch(e => console.log(e));
-
-                this.$store.dispatch('reinitNotices').catch(e => console.log(e));
-
-                this.$store.dispatch('reinitClaimers').catch(e => console.log(e));
-                this.$store.dispatch('reinitClaims').catch(e => console.log(e));
-                this.$store.dispatch('reinitKeywords').catch(e => console.log(e));
-                this.$store.dispatch('reinitThemes').catch(e => console.log(e));
             }
         }
     }

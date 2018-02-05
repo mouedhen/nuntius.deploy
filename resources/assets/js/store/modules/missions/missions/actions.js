@@ -3,12 +3,18 @@ import axios from 'axios'
 import {apiDomain as apiUrl} from '../../../../config'
 
 import {
+    REINIT_MISSIONS,
     FETCH_MISSIONS,
     FETCH_MISSION,
     CREATE_MISSION,
     UPDATE_MISSION,
     DELETE_MISSION
 } from './mutation-types'
+
+
+export function reinitMissions({commit}) {
+    commit(REINIT_MISSIONS, [])
+}
 
 export function fetchMissions({commit}) {
     return axios(

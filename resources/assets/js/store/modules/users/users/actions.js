@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-import {apiDomain as apiUrl} from '../../../../conf'
+import {apiDomain as apiUrl} from '../../../../config'
 
 import {
     REINIT_USERS,

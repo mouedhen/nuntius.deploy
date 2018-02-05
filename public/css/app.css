@@ -64044,6 +64044,41 @@
           box-sizing: border-box;
 }
 
+.login-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: url(/images/login-background.png?f0edf90e7636b30a10b587f9735dc0f7) no-repeat center fixed;
+  background-size: cover;
+}
+
+.login-container .el-card {
+  width: 60%;
+}
+
+@media screen and (max-width: 800px) {
+  .login-container .el-card {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .login-container .el-card {
+    width: 95%;
+  }
+}
+
+.right-nav-item {
+  float: right !important;
+  margin-right: 12px !important;
+}
+
 html,
 body {
   margin: 0;
@@ -64064,7 +64099,7 @@ body {
 }
 
 .full-height {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 101px);
 }
 
 .cloudy-background {

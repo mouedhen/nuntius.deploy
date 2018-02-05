@@ -30,10 +30,8 @@ import DataTables from 'vue-data-tables'
 Vue.use(ElementUI, { locale });
 Vue.use(DataTables);
 
-//@todo add authentication logic
-
-import router from './routes'
 import store from './store'
+import router from './routes'
 import App from './components/App.vue'
 
 Vue.component('app', App);

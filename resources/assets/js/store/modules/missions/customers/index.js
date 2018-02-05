@@ -2,6 +2,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 
 import {
+    REINIT_CUSTOMERS,
     FETCH_CUSTOMERS,
     FETCH_CUSTOMER,
     CREATE_CUSTOMER,
@@ -14,6 +15,11 @@ const initialState = {
 };
 
 const mutations = {
+
+    [REINIT_CUSTOMERS] (state) {
+        state.all = initialState.all
+    },
+
     [FETCH_CUSTOMERS] (state, customers) {
         state.all = customers
     },

@@ -2,6 +2,7 @@ import * as actions from './actions'
 import * as getters from './getters'
 
 import {
+    REINIT_TASKS,
     FETCH_TASKS,
     FETCH_TASK,
     CREATE_TASK,
@@ -14,6 +15,11 @@ const initialState = {
 };
 
 const mutations = {
+
+    [REINIT_TASKS] (state) {
+        state.all = initialState.all
+    },
+
     [FETCH_TASKS] (state, tasks) {
         state.all = tasks
     },

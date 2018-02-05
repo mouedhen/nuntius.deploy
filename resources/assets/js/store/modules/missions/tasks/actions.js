@@ -3,12 +3,17 @@ import axios from 'axios'
 import {apiDomain as apiUrl} from '../../../../config'
 
 import {
+    REINIT_TASKS,
     FETCH_TASKS,
     FETCH_TASK,
     CREATE_TASK,
     UPDATE_TASK,
     DELETE_TASK
 } from './mutation-types'
+
+export function reinitTasks({commit}) {
+    commit(REINIT_TASKS, [])
+}
 
 export function fetchTasks({commit}) {
     return axios(

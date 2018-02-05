@@ -8,7 +8,6 @@
 </template>
 
 <script>
-    import {mapGetters, mapActions} from 'vuex'
     import TopMenu from './pages/shared/TopMenu.vue'
 
     export default {

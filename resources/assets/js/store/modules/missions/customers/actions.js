@@ -3,12 +3,17 @@ import axios from 'axios'
 import {apiDomain as apiUrl} from '../../../../config'
 
 import {
+    REINIT_CUSTOMERS,
     FETCH_CUSTOMERS,
     FETCH_CUSTOMER,
     CREATE_CUSTOMER,
     UPDATE_CUSTOMER,
     DELETE_CUSTOMER
 } from './mutation-types'
+
+export async function reinitUsers({commit}) {
+    commit(REINIT_CUSTOMERS, [])
+}
 
 export function fetchCustomers({commit}) {
     return axios(
