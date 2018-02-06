@@ -19,7 +19,7 @@ export function fetchTasks({commit}) {
     return axios(
         {
             method: 'GET',
-            url: apiUrl + '/tasks/',
+            url: apiUrl + '/tasks',
         })
         .then(response => {
             commit(FETCH_TASKS, response.data.data);
@@ -49,7 +49,7 @@ export function createTask({commit}, {task}) {
     return axios(
         {
             method: 'POST',
-            url: apiUrl + '/tasks/',
+            url: apiUrl + '/tasks',
             data: task
         })
         .then(response => {

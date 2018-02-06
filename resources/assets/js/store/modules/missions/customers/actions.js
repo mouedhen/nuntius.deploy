@@ -19,7 +19,7 @@ export function fetchCustomers({commit}) {
     return axios(
         {
             method: 'GET',
-            url: apiUrl + '/customers/',
+            url: apiUrl + '/customers',
         })
         .then(response => {
             commit(FETCH_CUSTOMERS, response.data.data);
@@ -49,7 +49,7 @@ export function createCustomer({commit}, {customer}) {
     return axios(
         {
             method: 'POST',
-            url: apiUrl + '/customers/',
+            url: apiUrl + '/customers',
             data: customer
         })
         .then(response => {

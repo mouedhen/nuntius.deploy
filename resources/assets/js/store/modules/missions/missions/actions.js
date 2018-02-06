@@ -20,7 +20,7 @@ export function fetchMissions({commit}) {
     return axios(
         {
             method: 'GET',
-            url: apiUrl + '/missions/',
+            url: apiUrl + '/missions',
         })
         .then(response => {
             commit(FETCH_MISSIONS, response.data.data);
@@ -50,7 +50,7 @@ export function createMission({commit}, {mission}) {
     return axios(
         {
             method: 'POST',
-            url: apiUrl + '/missions/',
+            url: apiUrl + '/missions',
             data: mission
         })
         .then(response => {
