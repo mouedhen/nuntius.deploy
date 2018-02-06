@@ -13195,7 +13195,7 @@ function fetchCustomers(_ref3) {
 
     return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
         method: 'GET',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/'
+        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers'
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_CUSTOMERS */], response.data.data);
         return response.data.data;
@@ -13225,7 +13225,7 @@ function createCustomer(_ref6, _ref7) {
 
     return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
         method: 'POST',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/',
+        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers',
         data: customer
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_CUSTOMER */], response.data.data);
@@ -13384,7 +13384,7 @@ function fetchMissions(_ref2) {
 
     return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
         method: 'GET',
-        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions/'
+        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions'
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_MISSIONS */], response.data.data);
         return response.data.data;
@@ -13414,7 +13414,7 @@ function createMission(_ref5, _ref6) {
 
     return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
         method: 'POST',
-        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions/',
+        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions',
         data: mission
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_MISSION */], response.data.data);
@@ -13573,7 +13573,7 @@ function fetchTasks(_ref2) {
 
     return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
         method: 'GET',
-        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/tasks/'
+        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/tasks'
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_TASKS */], response.data.data);
         return response.data.data;
@@ -13603,7 +13603,7 @@ function createTask(_ref5, _ref6) {
 
     return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
         method: 'POST',
-        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/tasks/',
+        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/tasks',
         data: task
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_TASK */], response.data.data);
