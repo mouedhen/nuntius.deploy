@@ -5,35 +5,15 @@
         </el-col>
         <el-col :span="20" class="scrollableY container">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ name: 'missions:index' }">Missions Management</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ name: 'missions:create' }">Missions List</el-breadcrumb-item>
-                <el-breadcrumb-item>Missions Tasks</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'missions:index' }">Gestion des Missions</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'missions:list' }">Liste des Missions</el-breadcrumb-item>
+                <el-breadcrumb-item>Liste des Tâches de la Mission</el-breadcrumb-item>
             </el-breadcrumb>
 
             <div class="container">
                 <h1 style="text-align: center">Mission - {{mission.label}}</h1>
                 <div style="text-align: center">{{start_date}}</div>
                 <div>
-                    <!--
-                    <el-row>
-                        <el-col :span="20">
-                            <dl>
-                                <dt style="font-weight: 600">Estimated start date</dt>
-                                <dd>{{mission.estimated_start_date}}</dd>
-                                <dt style="font-weight: 600">Estimated end date</dt>
-                                <dd>{{mission.estimated_end_date}}</dd>
-                            </dl>
-                        </el-col>
-                        <el-col :span="4">
-                            <dl>
-                                <dt style="font-weight: 600">Customer ID</dt>
-                                <dd>{{mission.customer.label}}</dd>
-                                <dt style="font-weight: 600">Customer name</dt>
-                                <dd>{{mission.customer.name}}</dd>
-                            </dl>
-                        </el-col>
-                    </el-row>
-                    -->
                     <tasks-form :task="task" v-on:submit="submitTask"/>
                     <tasks-table :tasks="mission.tasks"/>
                 </div>

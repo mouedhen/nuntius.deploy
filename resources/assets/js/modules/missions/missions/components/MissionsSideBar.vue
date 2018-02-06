@@ -9,11 +9,11 @@
 
         <el-submenu index="0" >
             <template slot="title">
-                <span>Missions management</span>
+                <span>Gestion des Missions</span>
             </template>
-            <el-menu-item index="0-0" :route="{name: 'missions:index'}">Missions dashboard</el-menu-item>
-            <el-menu-item index="0-1" :route="{name: 'missions:create'}">Missions create</el-menu-item>
-            <el-menu-item index="0-2" :route="{name: 'missions:list'}">Missions list</el-menu-item>
+            <!-- <el-menu-item index="0-0" :route="{name: 'missions:index'}">Missions dashboard</el-menu-item> -->
+            <el-menu-item index="0-2" :route="{name: 'missions:list'}">Liste des Missions</el-menu-item>
+            <el-menu-item index="0-1" :route="{name: 'missions:create'}">Nouvelle Mission</el-menu-item>
         </el-submenu>
 
     </el-menu>

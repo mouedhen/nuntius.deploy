@@ -76,6 +76,21 @@
                     .catch(errors => {
                         this.hasLoginError = true
                     });
+            },
+            logout() {
+                this.auth.bearerLogOut()
+                    .then(response => {
+                        this.isLoggedIn = Authentication.isLoggedIn();
+                        this.reinitData();
+                        this.hasLoginError = false
+                    })
+                    .catch(error => {
+                        this.hasLoginError = true
+                    })
+            },
+            loadData() {
+                this.$store.dispatch('login', Authentication.isLoggedIn());
+                this.$store.dispatch('fetchUsers').catch(e => console.log(e));
 
                 this.$store.dispatch('fetchCustomers')
                     .catch(error => {
@@ -93,24 +108,25 @@
                         });
                     });
             },
-            logout() {
-                this.auth.bearerLogOut()
-                    .then(response => {
-                        this.isLoggedIn = Authentication.isLoggedIn();
-                        this.reinitData();
-                        this.hasLoginError = false
-                    })
-                    .catch(error => {
-                        this.hasLoginError = true
-                    })
-            },
-            loadData() {
-                this.$store.dispatch('login', Authentication.isLoggedIn());
-                this.$store.dispatch('fetchUsers').catch(e => console.log(e));
-            },
             reinitData() {
                 this.$store.dispatch('login', Authentication.isLoggedIn());
                 this.$store.dispatch('reinitUsers').catch(e => console.log(e));
+
+                this.$store.dispatch('reinitCustomers')
+                    .catch(error => {
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Error when reading records'
+                        });
+                    });
+
+                this.$store.dispatch('reinitMissions')
+                    .catch(error => {
+                        this.$notify.error({
+                            title: 'Error',
+                            message: 'Error when reading records'
+                        });
+                    });
             }
         }
     }

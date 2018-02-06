@@ -1,15 +1,15 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <missions-side-bar class="noprint" :index="index"></missions-side-bar>
+            <missions-side-bar class="noprint" :index="index"/>
         </el-col>
         <el-col :span="20" class="container scrollableY printcontent">
             <el-breadcrumb separator="/" class="noprint">
-                <el-breadcrumb-item :to="{ name: 'missions:index' }">Missions Management</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ name: 'missions:create' }">Missions List</el-breadcrumb-item>
-                <el-breadcrumb-item>Missions Details</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'missions:index' }">Gestion des Missions</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'missions:list' }">Liste des Mission</el-breadcrumb-item>
+                <el-breadcrumb-item>Détails Mission</el-breadcrumb-item>
             </el-breadcrumb>
-            <missions-details-component :mission="mission"></missions-details-component>
+            <missions-details-component :mission="mission"/>
         </el-col>
     </el-row>
 </template>

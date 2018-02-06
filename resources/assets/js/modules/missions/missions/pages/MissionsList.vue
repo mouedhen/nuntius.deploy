@@ -1,14 +1,14 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <missions-side-bar :index="index"></missions-side-bar>
+            <missions-side-bar :index="index"/>
         </el-col>
         <el-col :span="20" class="container">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ name: 'missions:index' }">Missions Management</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ name: 'missions:create' }">Missions List</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'missions:index' }">Gestion des Missions</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'missions:list' }">Liste des Missions</el-breadcrumb-item>
             </el-breadcrumb>
-            <missions-table :missions="missions"></missions-table>
+            <missions-table :missions="missions" class="margin-top"/>
         </el-col>
     </el-row>
 </template>

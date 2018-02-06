@@ -7,12 +7,16 @@ $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
 
+@import url('https://fonts.googleapis.com/css?family=Cairo');
+
 @import "./login";
 
 html, body {
-  margin: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0;
   min-height: 100vh;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Cairo', sans-serif !important;
 }
 
 .flex-center {
@@ -96,5 +100,9 @@ dt {
 }
 
 .card:hover {
-  // box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+
+.margin-top {
+  margin-top: 24px;
 }

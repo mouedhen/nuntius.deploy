@@ -14,8 +14,8 @@ class AddCounterToMissions extends Migration
     public function up()
     {
         Schema::table('missions', function (Blueprint $table) {
-            $table->time('start_counter')->nullable();
-            $table->time('end_counter')->nullable();
+            $table->integer('start_counter')->nullable();
+            $table->integer('end_counter')->nullable();
         });
     }
 
