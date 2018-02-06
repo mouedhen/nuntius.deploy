@@ -5,8 +5,8 @@
         </el-col>
         <el-col :span="20" class="container scrollableY">
             <el-breadcrumb separator="/">
-                <el-breadcrumb-item :to="{ name: 'customers:index' }">Customers Management</el-breadcrumb-item>
-                <el-breadcrumb-item :to="{ name: 'customers:create' }">Customers create</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'customers:index' }">Gestion des clients</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{ name: 'customers:create' }">Nouveau client</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="container">
                 <customers-form :customer="customer" v-on:submit="submitCustomer"/>
