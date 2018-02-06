@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <customers-side-bar :index="index"></customers-side-bar>
+            <customers-side-bar :index="index"/>
         </el-col>
         <el-col :span="20" class="container scrollableY">
             <el-breadcrumb separator="/">
@@ -9,7 +9,7 @@
                 <el-breadcrumb-item :to="{ name: 'customers:create' }">Customers create</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="container">
-                <customers-form :customer="customer" v-on:submit="submitCustomer"></customers-form>
+                <customers-form :customer="customer" v-on:submit="submitCustomer"/>
             </div>
         </el-col>
     </el-row>
@@ -32,7 +32,7 @@
         },
         methods: {
             submitCustomer(customer) {
-                this.$store.dispatch('saveCustomer', {customer: customer})
+                this.$store.dispatch('saveCustomer', {customer: this.customer})
                     .then((customer) => {
                         this.$message.success('Success, customer' + customer.name + ' created.');
                         this.customer = initialCustomerData()
