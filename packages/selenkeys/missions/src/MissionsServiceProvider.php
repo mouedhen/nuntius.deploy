@@ -8,10 +8,12 @@ namespace Selenkeys\Missions;
 
 
 use Selenkeys\Core\BaseServiceProvider;
+use Selenkeys\Missions\App\Models\Contact;
 use Selenkeys\Missions\App\Models\Customer;
 use Selenkeys\Missions\App\Models\Location;
 use Selenkeys\Missions\App\Models\Mission;
 use Selenkeys\Missions\App\Models\Task;
+use Selenkeys\Missions\App\Observers\ContactAutoLabelObserver;
 use Selenkeys\Missions\App\Observers\CustomerAutoLabelObserver;
 use Selenkeys\Missions\App\Observers\LocationAutoLabelObserver;
 use Selenkeys\Missions\App\Observers\MissionAutoLabelObserver;
@@ -24,8 +26,11 @@ class MissionsServiceProvider extends BaseServiceProvider
     function boot()
     {
         parent::boot();
-        Location::observe(LocationAutoLabelObserver::class);
+
         Customer::observe(CustomerAutoLabelObserver::class);
+        Contact::observe(ContactAutoLabelObserver::class);
+
+        Location::observe(LocationAutoLabelObserver::class);
         Mission::observe(MissionAutoLabelObserver::class);
         Task::observe(TaskAutoLabelObserver::class);
     }

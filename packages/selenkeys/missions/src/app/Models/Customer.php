@@ -16,6 +16,7 @@ use Selenkeys\Core\App\Traits\AutoLabelTrait;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property Mission[] $missions
+ * @property Contact[] $contacts
  */
 class Customer extends Model
 {
@@ -24,6 +25,11 @@ class Customer extends Model
     protected $table = 'customers';
     protected $fillable = ['name', 'cin_passport', 'tax_registration_number', 'phone_number',
         'email', 'category', 'address'];
+
+    public function contacts()
+    {
+        return $this->hasMany(Contact::class);
+    }
 
     public function missions()
     {
