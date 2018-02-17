@@ -50,9 +50,12 @@
             return {
                 rules: {
                     name: [
-                        {required: true, message: 'Please input the name', trigger: 'blur'},
+                        {required: true, message: 'Le nom est obligatoire', trigger: 'blur'},
                         {min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur'}
-                    ]
+                    ],
+                    category: [
+                        {required: true, message: 'La catégorie est obligatoire', trigger: 'blur'},
+                    ],
                 },
             }
         },

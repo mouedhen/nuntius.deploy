@@ -8,12 +8,15 @@ namespace Selenkeys\Missions\App\Http\Controllers\API;
 
 
 use App\Http\Controllers\Controller;
+use App\Traits\API\Helpers\RestTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\Resource;
 use Selenkeys\Missions\App\Models\Contact;
 
 class ContactAPIController extends Controller
 {
+    use RestTrait;
+
     public function index()
     {
         return Resource::collection(Contact::all());
@@ -21,7 +24,7 @@ class ContactAPIController extends Controller
 
     public function show($id)
     {
-        return new Resource(Contact::findORFail($id));
+        return $this->jsonResponse(new Resource(Contact::findORFail($id)));
     }
 
     public function store(Request $request)

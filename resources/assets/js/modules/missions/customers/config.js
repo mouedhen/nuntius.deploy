@@ -12,5 +12,22 @@ export function initialCustomerData() {
         address: null,
         created_at: null,
         updated_at: null,
+        contacts: [],
+        missions: [],
+    }
+}
+
+export function initialContactData() {
+    return {
+        id: -1,
+        label: null,
+        label_id: null,
+        customer_id: -1,
+        name: null,
+        phone_number: null,
+        email: null,
+        address: null,
+        created_at: null,
+        updated_at: null,
     }
 }

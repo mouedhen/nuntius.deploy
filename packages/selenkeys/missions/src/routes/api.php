@@ -14,7 +14,7 @@ Route::group([
         Route::apiResources([
             'customers' => \Selenkeys\Missions\App\Http\Controllers\API\CustomerAPIController::class,
             'contacts' => \Selenkeys\Missions\App\Http\Controllers\API\ContactAPIController::class,
-            
+
             'missions' => \Selenkeys\Missions\App\Http\Controllers\API\MissionAPIController::class,
             'tasks' => \Selenkeys\Missions\App\Http\Controllers\API\TaskAPIController::class,
         ], [

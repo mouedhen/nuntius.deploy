@@ -35,7 +35,8 @@
                 this.$store.dispatch('saveCustomer', {customer: this.customer})
                     .then((customer) => {
                         this.$message.success('Success, customer' + customer.name + ' created.');
-                        this.customer = initialCustomerData()
+                        this.customer = initialCustomerData();
+                        this.$router.push({name: 'customers:details', params: {id: customer.id}})
                     })
                     .catch(error => {
                         this.$message.error('Error, Record already exit!');

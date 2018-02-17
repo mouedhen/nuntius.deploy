@@ -7,6 +7,7 @@ import auth from './modules/auth'
 import users from './modules/users/users'
 
 import customers from './modules/missions/customers'
+import contacts from './modules/missions/contacts'
 import missions from './modules/missions/missions'
 import tasks from './modules/missions/tasks'
 
@@ -16,6 +17,8 @@ export default new Vuex.Store({
         users,
 
         customers,
+        contacts,
+
         missions,
         tasks,
     },

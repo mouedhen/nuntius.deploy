@@ -8,12 +8,16 @@ namespace Selenkeys\Missions\App\Http\Controllers\API;
 
 
 use App\Http\Controllers\Controller;
+use App\Traits\API\Helpers\RestTrait;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\Resource;
+use Selenkeys\Missions\App\Http\Resources\CustomerResource;
 use Selenkeys\Missions\App\Models\Customer;
 
 class CustomerAPIController extends Controller
 {
+    use RestTrait;
+
     public function index()
     {
         return Resource::collection(Customer::all());
@@ -21,7 +25,7 @@ class CustomerAPIController extends Controller
 
     public function show($id)
     {
-        return new Resource(Customer::findORFail($id));
+        return $this->jsonResponse(new CustomerResource(Customer::findORFail($id)));
     }
 
     public function store(Request $request)

@@ -11,9 +11,9 @@
             <template slot="title">
                 <span>Customers management</span>
             </template>
-            <el-menu-item index="0-0" :route="{name: 'customers:index'}">Customers dashboard</el-menu-item>
-            <el-menu-item index="0-1" :route="{name: 'customers:create'}">Customers create</el-menu-item>
-            <el-menu-item index="0-2" :route="{name: 'customers:list'}">Customers list</el-menu-item>
+            <el-menu-item index="0-0" :route="{name: 'customers:index'}">Tableau de bord</el-menu-item>
+            <el-menu-item index="0-1" :route="{name: 'customers:create'}">Nouveau client</el-menu-item>
+            <el-menu-item index="0-2" :route="{name: 'customers:list'}">Liste des clients</el-menu-item>
         </el-submenu>
 
     </el-menu>

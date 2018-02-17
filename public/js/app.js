@@ -11901,12 +11901,14 @@ exports.default = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__modules_auth__ = __webpack_require__(775);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_users_users__ = __webpack_require__(778);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers__ = __webpack_require__(783);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_missions__ = __webpack_require__(786);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_tasks__ = __webpack_require__(789);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_contacts__ = __webpack_require__(988);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_missions__ = __webpack_require__(786);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_missions_tasks__ = __webpack_require__(789);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["default"]);
+
 
 
 
@@ -11921,8 +11923,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         users: __WEBPACK_IMPORTED_MODULE_3__modules_users_users__["a" /* default */],
 
         customers: __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers__["a" /* default */],
-        missions: __WEBPACK_IMPORTED_MODULE_5__modules_missions_missions__["a" /* default */],
-        tasks: __WEBPACK_IMPORTED_MODULE_6__modules_missions_tasks__["a" /* default */]
+        contacts: __WEBPACK_IMPORTED_MODULE_5__modules_missions_contacts__["a" /* default */],
+
+        missions: __WEBPACK_IMPORTED_MODULE_6__modules_missions_missions__["a" /* default */],
+        tasks: __WEBPACK_IMPORTED_MODULE_7__modules_missions_tasks__["a" /* default */]
     },
     strict: true
 }));
@@ -13146,12 +13150,12 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reinitUsers", function() { return reinitUsers; });
-/* harmony export (immutable) */ __webpack_exports__["fetchCustomers"] = fetchCustomers;
-/* harmony export (immutable) */ __webpack_exports__["fetchCustomer"] = fetchCustomer;
-/* harmony export (immutable) */ __webpack_exports__["createCustomer"] = createCustomer;
-/* harmony export (immutable) */ __webpack_exports__["updateCustomer"] = updateCustomer;
-/* harmony export (immutable) */ __webpack_exports__["deleteCustomer"] = deleteCustomer;
-/* harmony export (immutable) */ __webpack_exports__["saveCustomer"] = saveCustomer;
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomers", function() { return fetchCustomers; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchCustomer", function() { return fetchCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createCustomer", function() { return createCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateCustomer", function() { return updateCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteCustomer", function() { return deleteCustomer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveCustomer", function() { return saveCustomer; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(225);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(58);
@@ -13190,95 +13194,198 @@ var reinitUsers = function () {
     };
 }();
 
-function fetchCustomers(_ref3) {
-    var commit = _ref3.commit;
+var fetchCustomers = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref3) {
+        var commit = _ref3.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        return _context2.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers'
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_CUSTOMERS */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
 
-    return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-        method: 'GET',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers'
-    }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_CUSTOMERS */], response.data.data);
-        return response.data.data;
-    }).catch(function (error) {
-        throw error;
-    });
-}
+                    case 1:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
 
-function fetchCustomer(_ref4, _ref5) {
-    var commit = _ref4.commit;
-    var customerID = _ref5.customerID;
+    return function fetchCustomers(_x2) {
+        return _ref4.apply(this, arguments);
+    };
+}();
 
-    return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-        method: 'GET',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/' + customerID
-    }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["c" /* FETCH_CUSTOMER */], response.data.data);
-        return response.data.data;
-    }).catch(function (error) {
-        throw error;
-    });
-}
+var fetchCustomer = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var customerID = _ref6.customerID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        return _context3.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/' + customerID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["c" /* FETCH_CUSTOMER */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
 
-function createCustomer(_ref6, _ref7) {
-    var commit = _ref6.commit;
-    var customer = _ref7.customer;
+                    case 1:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
 
-    return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-        method: 'POST',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers',
-        data: customer
-    }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_CUSTOMER */], response.data.data);
-        return response.data.data;
-    }).catch(function (error) {
-        throw error;
-    });
-}
+    return function fetchCustomer(_x3, _x4) {
+        return _ref7.apply(this, arguments);
+    };
+}();
 
-function updateCustomer(_ref8, _ref9) {
-    var commit = _ref8.commit;
-    var customer = _ref9.customer;
+var createCustomer = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref8, _ref9) {
+        var commit = _ref8.commit;
+        var customer = _ref9.customer;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        return _context4.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'POST',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers',
+                            data: customer
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_CUSTOMER */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
 
-    return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-        method: 'PUT',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/' + customer.id,
-        data: customer
-    }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["f" /* UPDATE_CUSTOMER */], response.data.data);
-        return response.data.data;
-    }).catch(function (error) {
-        throw error;
-    });
-}
+                    case 1:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this);
+    }));
 
-function deleteCustomer(_ref10, _ref11) {
-    var commit = _ref10.commit;
-    var customerID = _ref11.customerID;
+    return function createCustomer(_x5, _x6) {
+        return _ref10.apply(this, arguments);
+    };
+}();
 
-    return __WEBPACK_IMPORTED_MODULE_1_axios___default()({
-        method: 'DELETE',
-        url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/' + customerID
-    }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["b" /* DELETE_CUSTOMER */], customerID);
-        return response.data.data;
-    }).catch(function (error) {
-        throw error;
-    });
-}
+var updateCustomer = function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var customer = _ref12.customer;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        return _context5.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'PUT',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/' + customer.id,
+                            data: customer
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["f" /* UPDATE_CUSTOMER */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
 
-function saveCustomer(_ref12, _ref13) {
-    var commit = _ref12.commit,
-        state = _ref12.state;
-    var customer = _ref13.customer;
+                    case 1:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, this);
+    }));
 
-    var index = state.all.findIndex(function (x) {
-        return x.id === customer.id;
-    });
-    if (index !== -1) {
-        return updateCustomer({ commit: commit }, { customer: customer });
-    }
-    return createCustomer({ commit: commit }, { customer: customer });
-}
+    return function updateCustomer(_x7, _x8) {
+        return _ref13.apply(this, arguments);
+    };
+}();
+
+var deleteCustomer = function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(_ref14, _ref15) {
+        var commit = _ref14.commit;
+        var customerID = _ref15.customerID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        return _context6.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'DELETE',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/customers/' + customerID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["b" /* DELETE_CUSTOMER */], customerID);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, this);
+    }));
+
+    return function deleteCustomer(_x9, _x10) {
+        return _ref16.apply(this, arguments);
+    };
+}();
+
+var saveCustomer = function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(_ref17, _ref18) {
+        var commit = _ref17.commit,
+            state = _ref17.state;
+        var customer = _ref18.customer;
+        var index;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+            while (1) {
+                switch (_context7.prev = _context7.next) {
+                    case 0:
+                        index = state.all.findIndex(function (x) {
+                            return x.id === customer.id;
+                        });
+
+                        if (!(index !== -1)) {
+                            _context7.next = 3;
+                            break;
+                        }
+
+                        return _context7.abrupt('return', updateCustomer({ commit: commit }, { customer: customer }));
+
+                    case 3:
+                        return _context7.abrupt('return', createCustomer({ commit: commit }, { customer: customer }));
+
+                    case 4:
+                    case 'end':
+                        return _context7.stop();
+                }
+            }
+        }, _callee7, this);
+    }));
+
+    return function saveCustomer(_x11, _x12) {
+        return _ref19.apply(this, arguments);
+    };
+}();
 
 /***/ }),
 /* 785 */
@@ -15684,19 +15791,19 @@ var render = function() {
           _c(
             "el-menu-item",
             { attrs: { index: "0-0", route: { name: "customers:index" } } },
-            [_vm._v("Customers dashboard")]
+            [_vm._v("Tableau de bord")]
           ),
           _vm._v(" "),
           _c(
             "el-menu-item",
             { attrs: { index: "0-1", route: { name: "customers:create" } } },
-            [_vm._v("Customers create")]
+            [_vm._v("Nouveau client")]
           ),
           _vm._v(" "),
           _c(
             "el-menu-item",
             { attrs: { index: "0-2", route: { name: "customers:list" } } },
-            [_vm._v("Customers list")]
+            [_vm._v("Liste des clients")]
           )
         ],
         2
@@ -15839,7 +15946,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             index: '0-1',
-            customer: Object(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* initialCustomerData */])()
+            customer: Object(__WEBPACK_IMPORTED_MODULE_3__config__["b" /* initialCustomerData */])()
         };
     },
 
@@ -15849,7 +15956,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
             this.$store.dispatch('saveCustomer', { customer: this.customer }).then(function (customer) {
                 _this.$message.success('Success, customer' + customer.name + ' created.');
-                _this.customer = Object(__WEBPACK_IMPORTED_MODULE_3__config__["a" /* initialCustomerData */])();
+                _this.customer = Object(__WEBPACK_IMPORTED_MODULE_3__config__["b" /* initialCustomerData */])();
+                _this.$router.push({ name: 'customers:details', params: { id: customer.id } });
             }).catch(function (error) {
                 _this.$message.error('Error, Record already exit!');
             });
@@ -15963,7 +16071,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             rules: {
-                name: [{ required: true, message: 'Please input the name', trigger: 'blur' }, { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' }]
+                name: [{ required: true, message: 'Le nom est obligatoire', trigger: 'blur' }, { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' }],
+                category: [{ required: true, message: 'La catégorie est obligatoire', trigger: 'blur' }]
             }
         };
     },
@@ -16198,7 +16307,8 @@ if (false) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = initialCustomerData;
+/* harmony export (immutable) */ __webpack_exports__["b"] = initialCustomerData;
+/* harmony export (immutable) */ __webpack_exports__["a"] = initialContactData;
 function initialCustomerData() {
     return {
         id: -1,
@@ -16210,6 +16320,23 @@ function initialCustomerData() {
         phone_number: null,
         email: null,
         category: null,
+        address: null,
+        created_at: null,
+        updated_at: null,
+        contacts: [],
+        missions: []
+    };
+}
+
+function initialContactData() {
+    return {
+        id: -1,
+        label: null,
+        label_id: null,
+        customer_id: -1,
+        name: null,
+        phone_number: null,
+        email: null,
         address: null,
         created_at: null,
         updated_at: null
@@ -16658,6 +16785,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_ui__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CustomersSideBar_vue__ = __webpack_require__(106);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_CustomersSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_CustomersSideBar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ContactsForm__ = __webpack_require__(991);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ContactsForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ContactsForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ContactsTable__ = __webpack_require__(994);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ContactsTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ContactsTable__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__(834);
 //
 //
 //
@@ -16669,16 +16801,106 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { ElRow: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Col"], CustomersSideBar: __WEBPACK_IMPORTED_MODULE_1__components_CustomersSideBar_vue___default.a },
+    components: { ElRow: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Col"], CustomersSideBar: __WEBPACK_IMPORTED_MODULE_1__components_CustomersSideBar_vue___default.a, ContactsForm: __WEBPACK_IMPORTED_MODULE_2__components_ContactsForm___default.a, ContactsTable: __WEBPACK_IMPORTED_MODULE_3__components_ContactsTable___default.a },
     data: function data() {
         return {
-            index: '0-3'
+            index: '0-3',
+            dialogVisible: false,
+            customer: Object(__WEBPACK_IMPORTED_MODULE_4__config__["b" /* initialCustomerData */])(),
+            contact: Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialContactData */])(),
+            contacts: []
         };
+    },
+    mounted: function mounted() {
+        var _this = this;
+
+        this.$store.dispatch('fetchCustomer', { customerID: this.$route.params.id }).then(function (customer) {
+            _this.customer = customer;
+            _this.contacts = customer.contacts;
+        });
+    },
+
+    methods: {
+        handleClose: function handleClose() {
+            this.contact = Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialContactData */])();
+        },
+        addContact: function addContact() {
+            var _this2 = this;
+
+            this.contact.customer_id = this.$route.params.id;
+            this.$store.dispatch('saveContact', { contact: this.contact }).then(function (contact) {
+                _this2.contact = Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialContactData */])();
+                _this2.$store.dispatch('fetchCustomer', { customerID: _this2.$route.params.id }).then(function (customer) {
+                    _this2.customer = customer;
+                    _this2.contacts = customer.contacts;
+                });
+
+                _this2.dialogVisible = false;
+            });
+        },
+        loadData: function loadData() {
+            var _this3 = this;
+
+            this.$store.dispatch('fetchCustomer', { customerID: this.$route.params.id }).then(function (customer) {
+                _this3.customer = customer;
+                _this3.contacts = customer.contacts;
+            });
+        }
+    },
+    computed: {
+        contactsLength: function contactsLength() {
+            if (this.customer.contacts === undefined) return 0;
+            return this.customer.contacts.length;
+        }
     }
 });
 
@@ -16700,9 +16922,144 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("el-col", { staticClass: "container", attrs: { span: 20 } }, [
-        _vm._v("\n        customer details\n    ")
-      ])
+      _c(
+        "el-col",
+        { staticClass: "container", attrs: { span: 20 } },
+        [
+          _c("el-card", { staticClass: "box-card" }, [
+            _c("div", [
+              _c("h2", [_vm._v(_vm._s(_vm.customer.name))]),
+              _vm._v(" "),
+              _c("p", [_vm._v(_vm._s(_vm.customer.label))]),
+              _vm._v(" "),
+              _c("small", [_vm._v(_vm._s(_vm.customer.category))]),
+              _vm._v(" "),
+              _c("div", { staticStyle: { "text-align": "right" } }, [
+                _vm.customer.tax_registration_number
+                  ? _c("div", [
+                      _c("b", [_vm._v("Matricule Fiscal : ")]),
+                      _vm._v(
+                        _vm._s(_vm.customer.tax_registration_number) +
+                          "\n                    "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.customer.cin_passport
+                  ? _c("div", [
+                      _c("b", [_vm._v("CIN / Passport : ")]),
+                      _vm._v(_vm._s(_vm.customer.cin_passport))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.customer.phone_number
+                  ? _c("div", [
+                      _c("b", [_vm._v("Téléphone : ")]),
+                      _vm._v(_vm._s(_vm.customer.phone_number))
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.customer.address
+                  ? _c("div", [
+                      _c("b", [_vm._v("Adresse : ")]),
+                      _vm._v(_vm._s(_vm.customer.address))
+                    ])
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", [
+            _c(
+              "div",
+              { staticStyle: { "text-align": "right", "margin-top": "24px" } },
+              [
+                _c(
+                  "el-button",
+                  {
+                    attrs: { type: "primary" },
+                    on: {
+                      click: function($event) {
+                        _vm.dialogVisible = true
+                      }
+                    }
+                  },
+                  [_vm._v("Ajouter contacts")]
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
+              [
+                _vm.contactsLength === 0
+                  ? _c("h3", { staticStyle: { "text-align": "center" } }, [
+                      _vm._v("Ancun contact pour ce client")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("contacts-table", { attrs: { contacts: _vm.contacts } })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "el-dialog",
+            {
+              attrs: {
+                title: "Ajouter contact",
+                visible: _vm.dialogVisible,
+                width: "60%",
+                "before-close": _vm.handleClose
+              },
+              on: {
+                "update:visible": function($event) {
+                  _vm.dialogVisible = $event
+                }
+              }
+            },
+            [
+              _c("contacts-form", { attrs: { contact: _vm.contact } }),
+              _vm._v(" "),
+              _c(
+                "span",
+                {
+                  staticClass: "dialog-footer",
+                  attrs: { slot: "footer" },
+                  slot: "footer"
+                },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      on: {
+                        click: function($event) {
+                          _vm.dialogVisible = false
+                        }
+                      }
+                    },
+                    [_vm._v("Annuler")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary" },
+                      on: { click: _vm.addContact }
+                    },
+                    [_vm._v("Confirmer")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -23081,6 +23438,700 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 975 */,
+/* 976 */,
+/* 977 */,
+/* 978 */,
+/* 979 */,
+/* 980 */,
+/* 981 */,
+/* 982 */,
+/* 983 */,
+/* 984 */,
+/* 985 */,
+/* 986 */,
+/* 987 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return FETCH_CONTACTS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FETCH_CONTACT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CREATE_CONTACT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return UPDATE_CONTACT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DELETE_CONTACT; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REINIT_CONTACTS; });
+var FETCH_CONTACTS = 'missions/contacts/FETCH_CONTACTS';
+var FETCH_CONTACT = 'missions/contacts/FETCH_CONTACT';
+var CREATE_CONTACT = 'missions/contacts/CREATE_CONTACT';
+var UPDATE_CONTACT = 'missions/contacts/UPDATE_CONTACT';
+var DELETE_CONTACT = 'missions/contacts/DELETE_CONTACT';
+
+var REINIT_CONTACTS = 'missions/contacts/REINIT_CONTACTS';
+
+/***/ }),
+/* 988 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions__ = __webpack_require__(989);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getters__ = __webpack_require__(990);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutation_types__ = __webpack_require__(987);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var initialState = {
+    all: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["e" /* REINIT_CONTACTS */], function (state) {
+    state.all = initialState.all;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_CONTACTS */], function (state, contacts) {
+    state.all = contacts;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["c" /* FETCH_CONTACT */], function (state, contact) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === contact.id;
+    });
+    if (index === -1) {
+        state.all.push(contact);
+    } else {
+        state.all.splice(index, 1, contact);
+    }
+    state.selectedCustomer = contact;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_CONTACT */], function (state, contact) {
+    state.all.push(contact);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["f" /* UPDATE_CONTACT */], function (state, contact) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === contact.id;
+    });
+    if (index !== -1) {
+        state.all.splice(index, 1, contact);
+    }
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["b" /* DELETE_CONTACT */], function (state, contactID) {
+    state.all = state.all.filter(function (x) {
+        return x.id !== contactID;
+    });
+}), _mutations);
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: _extends({}, initialState),
+    actions: __WEBPACK_IMPORTED_MODULE_0__actions__,
+    getters: __WEBPACK_IMPORTED_MODULE_1__getters__,
+    mutations: mutations
+});
+
+/***/ }),
+/* 989 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reinitContacts", function() { return reinitContacts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchContacts", function() { return fetchContacts; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchContact", function() { return fetchContact; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createContact", function() { return createContact; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateContact", function() { return updateContact; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteContact", function() { return deleteContact; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveContact", function() { return saveContact; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(225);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(77);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mutation_types__ = __webpack_require__(987);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+
+
+
+var reinitContacts = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
+        var commit = _ref.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["e" /* REINIT_CONTACTS */], []);
+
+                    case 1:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function reinitContacts(_x) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+var fetchContacts = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref3) {
+        var commit = _ref3.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        return _context2.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/contacts'
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_CONTACTS */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
+
+    return function fetchContacts(_x2) {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
+var fetchContact = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var contactID = _ref6.contactID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        return _context3.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/contacts/' + contactID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["c" /* FETCH_CONTACT */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function fetchContact(_x3, _x4) {
+        return _ref7.apply(this, arguments);
+    };
+}();
+
+var createContact = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref8, _ref9) {
+        var commit = _ref8.commit;
+        var contact = _ref9.contact;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        return _context4.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'POST',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/contacts',
+                            data: contact
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_CONTACT */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this);
+    }));
+
+    return function createContact(_x5, _x6) {
+        return _ref10.apply(this, arguments);
+    };
+}();
+
+var updateContact = function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var contact = _ref12.contact;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        return _context5.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'PUT',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/contacts/' + contact.id,
+                            data: contact
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["f" /* UPDATE_CONTACT */], response.data.data);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, this);
+    }));
+
+    return function updateContact(_x7, _x8) {
+        return _ref13.apply(this, arguments);
+    };
+}();
+
+var deleteContact = function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(_ref14, _ref15) {
+        var commit = _ref14.commit;
+        var contactID = _ref15.contactID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        return _context6.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'DELETE',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/contacts/' + contactID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["b" /* DELETE_CONTACT */], contactID);
+                            return response.data.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, this);
+    }));
+
+    return function deleteContact(_x9, _x10) {
+        return _ref16.apply(this, arguments);
+    };
+}();
+
+var saveContact = function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(_ref17, _ref18) {
+        var commit = _ref17.commit,
+            state = _ref17.state;
+        var contact = _ref18.contact;
+        var index;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+            while (1) {
+                switch (_context7.prev = _context7.next) {
+                    case 0:
+                        index = state.all.findIndex(function (x) {
+                            return x.id === contact.id;
+                        });
+
+                        if (!(index !== -1)) {
+                            _context7.next = 3;
+                            break;
+                        }
+
+                        return _context7.abrupt('return', updateContact({ commit: commit }, { contact: contact }));
+
+                    case 3:
+                        return _context7.abrupt('return', createContact({ commit: commit }, { contact: contact }));
+
+                    case 4:
+                    case 'end':
+                        return _context7.stop();
+                }
+            }
+        }, _callee7, this);
+    }));
+
+    return function saveContact(_x11, _x12) {
+        return _ref19.apply(this, arguments);
+    };
+}();
+
+/***/ }),
+/* 990 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getContacts", function() { return getContacts; });
+var getContacts = function getContacts(state) {
+  return state.all;
+};
+
+/***/ }),
+/* 991 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(992)
+/* template */
+var __vue_template__ = __webpack_require__(993)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/customers/components/ContactsForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-20668df0", Component.options)
+  } else {
+    hotAPI.reload("data-v-20668df0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 992 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['contact'],
+    data: function data() {
+        return {
+            rules: {
+                name: [{ required: true, message: 'Le nom est obligatoire', trigger: 'blur' }, { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        onSubmit: function onSubmit(formName) {
+            var _this = this;
+
+            this.$refs[formName].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', _this.contact);
+                    return true;
+                } else {
+                    _this.$message.error('Errors, please check your form input.');
+                    return false;
+                }
+            });
+        },
+        resetForm: function resetForm(formName) {
+            this.$refs[formName].resetFields();
+        }
+    }
+});
+
+/***/ }),
+/* 993 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-form",
+    { ref: "contactForm", attrs: { model: _vm.contact, rules: _vm.rules } },
+    [
+      _c(
+        "el-form-item",
+        { attrs: { label: "Nom", prop: "name" } },
+        [
+          _c("el-input", {
+            attrs: { type: "text" },
+            model: {
+              value: _vm.contact.name,
+              callback: function($$v) {
+                _vm.$set(_vm.contact, "name", $$v)
+              },
+              expression: "contact.name"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        { attrs: { label: "Email", prop: "email" } },
+        [
+          _c("el-input", {
+            attrs: { type: "email" },
+            model: {
+              value: _vm.contact.email,
+              callback: function($$v) {
+                _vm.$set(_vm.contact, "email", $$v)
+              },
+              expression: "contact.email"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        { attrs: { label: "Numéro de téléphone", prop: "phone_number" } },
+        [
+          _c("el-input", {
+            attrs: { type: "text" },
+            model: {
+              value: _vm.contact.phone_number,
+              callback: function($$v) {
+                _vm.$set(_vm.contact, "phone_number", $$v)
+              },
+              expression: "contact.phone_number"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        { attrs: { label: "Adresse postale", prop: "address" } },
+        [
+          _c("el-input", {
+            attrs: { type: "textarea" },
+            model: {
+              value: _vm.contact.address,
+              callback: function($$v) {
+                _vm.$set(_vm.contact, "address", $$v)
+              },
+              expression: "contact.address"
+            }
+          })
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-20668df0", module.exports)
+  }
+}
+
+/***/ }),
+/* 994 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(4)
+/* script */
+var __vue_script__ = __webpack_require__(995)
+/* template */
+var __vue_template__ = __webpack_require__(996)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/customers/components/ContactsTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-2a05d13a", Component.options)
+  } else {
+    hotAPI.reload("data-v-2a05d13a", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 995 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['contacts'],
+    data: function data() {
+        var _this = this;
+
+        return {
+            titles: [{ prop: 'name', label: 'Nom' }, { prop: 'email', label: 'Email' }, { prop: 'phone_number', label: 'Numéro de téléphone' }, { prop: 'address', label: 'Adresse' }],
+            tableProps: {
+                defaultSort: {
+                    prop: 'name'
+                }
+            },
+            checkboxFilterDef: {
+                colProps: {
+                    span: 19
+                }
+            },
+            actionColDef: {
+                label: 'Actions',
+                tableColProps: {
+                    align: 'center'
+                },
+                def: [{
+                    name: 'Details',
+                    handler: function handler(row) {
+                        // this.$router.push({name: 'contacts:details', params: {id: row.id}})
+                    }
+                }, {
+                    name: 'Delete',
+                    handler: function handler(row) {
+                        _this.$store.dispatch('deleteCustomer', { contactID: row.id }).then(function () {
+                            _this.fetchCustomers();
+                        });
+                    }
+                }]
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 996 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "data-tables",
+    {
+      attrs: {
+        data: _vm.contacts,
+        "table-props": _vm.tableProps,
+        "checkbox-filter-def": _vm.checkboxFilterDef,
+        "action-col-def": _vm.actionColDef
+      }
+    },
+    _vm._l(_vm.titles, function(title) {
+      return _c("el-table-column", {
+        key: title.prop,
+        attrs: { prop: title.prop, label: title.label, sortable: "custom" }
+      })
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-2a05d13a", module.exports)
+  }
+}
 
 /***/ })
 ],[474]);

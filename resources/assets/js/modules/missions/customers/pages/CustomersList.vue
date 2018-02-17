@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <customers-side-bar :index="index"></customers-side-bar>
+            <customers-side-bar :index="index"/>
         </el-col>
         <el-col :span="20" class="container scrollableY">
             <el-breadcrumb separator="/">
@@ -9,14 +9,14 @@
                 <el-breadcrumb-item :to="{ name: 'customers:create' }">Customers list</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="container">
-                <customers-table :customers="customers"></customers-table>
+                <customers-table :customers="customers"/>
             </div>
         </el-col>
     </el-row>
 </template>
 
 <script>
-    import {mapGetters, mapActions} from 'vuex'
+    import {mapGetters} from 'vuex'
     import {Row as ElRow, Col as ElCol} from 'element-ui'
     import CustomersSideBar from './../components/CustomersSideBar.vue'
     import CustomersTable from './../components/CustomersTable.vue'

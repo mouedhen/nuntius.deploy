@@ -18,7 +18,7 @@ class Contact extends Model
     use Notifiable, AutoLabelTrait;
 
     protected $table = 'contacts';
-    protected $fillable = ['name', 'phone_number', 'email', 'address'];
+    protected $fillable = ['name', 'phone_number', 'email', 'address', 'customer_id'];
 
     public function customer()
     {

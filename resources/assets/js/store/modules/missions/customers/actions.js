@@ -15,7 +15,7 @@ export async function reinitUsers({commit}) {
     commit(REINIT_CUSTOMERS, [])
 }
 
-export function fetchCustomers({commit}) {
+export async function fetchCustomers({commit}) {
     return axios(
         {
             method: 'GET',
@@ -30,22 +30,22 @@ export function fetchCustomers({commit}) {
         })
 }
 
-export function fetchCustomer({commit}, {customerID}) {
+export async function fetchCustomer({commit}, {customerID}) {
     return axios(
         {
             method: 'GET',
             url: apiUrl + '/customers/' + customerID,
         })
         .then(response => {
-            commit(FETCH_CUSTOMER, response.data.data);
-            return response.data.data
+            commit(FETCH_CUSTOMER, response.data);
+            return response.data
         })
         .catch(error => {
             throw error
         })
 }
 
-export function createCustomer({commit}, {customer}) {
+export async function createCustomer({commit}, {customer}) {
     return axios(
         {
             method: 'POST',
@@ -61,7 +61,7 @@ export function createCustomer({commit}, {customer}) {
         })
 }
 
-export function updateCustomer({commit}, {customer}) {
+export async function updateCustomer({commit}, {customer}) {
     return axios(
         {
             method: 'PUT',
@@ -77,7 +77,7 @@ export function updateCustomer({commit}, {customer}) {
         })
 }
 
-export function deleteCustomer({commit}, { customerID }) {
+export async function deleteCustomer({commit}, { customerID }) {
     return axios(
         {
             method: 'DELETE',
@@ -92,7 +92,7 @@ export function deleteCustomer({commit}, { customerID }) {
         })
 }
 
-export function saveCustomer({commit, state}, { customer }) {
+export async function saveCustomer({commit, state}, { customer }) {
     const index = state.all.findIndex((x) => x.id === customer.id);
     if (index !== -1 ) {
         return updateCustomer({commit}, {customer})
