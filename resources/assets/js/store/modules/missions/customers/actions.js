@@ -11,7 +11,7 @@ import {
     DELETE_CUSTOMER
 } from './mutation-types'
 
-export async function reinitUsers({commit}) {
+export async function reinitCustomers({commit}) {
     commit(REINIT_CUSTOMERS, [])
 }
 

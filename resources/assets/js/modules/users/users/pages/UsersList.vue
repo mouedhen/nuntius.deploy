@@ -9,7 +9,7 @@
                 </el-breadcrumb-item>
                 <el-breadcrumb-item>Liste des utilisateurs</el-breadcrumb-item>
             </el-breadcrumb>
-            <user-table :users="users"/>
+            <user-table class="margin-top" :users="users"/>
         </el-main>
     </el-container>
 </template>
@@ -34,7 +34,6 @@
                 users: 'getUsers',
             }),
         },
-        /*
         mounted() {
             if (Authentication.isLoggedIn()) {
                 this.$store.dispatch('fetchUsers')
@@ -56,6 +55,5 @@
                 });
             next()
         }
-        */
     }
 </script>

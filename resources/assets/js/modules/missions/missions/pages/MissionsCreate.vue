@@ -9,23 +9,23 @@
                 <el-breadcrumb-item :to="{ name: 'missions:create' }">Nouvelle Mission</el-breadcrumb-item>
             </el-breadcrumb>
             <div class="container">
-                <missions-form :mission="mission" :customers="customers" v-on:submit="submitMission"/>
+                <missions-plan-form :mission="mission" :customers="customers" v-on:submit="submitMission"/>
             </div>
         </el-col>
     </el-row>
 </template>
 
 <script>
-    import moment from 'moment'
-    import {mapGetters, mapActions} from 'vuex'
-    import {Row as ElRow, Col as ElCol} from 'element-ui'
+    import {mapGetters} from 'vuex'
+
     import MissionsSideBar from './../components/MissionsSideBar.vue'
     import MissionsForm from './../components/MissionsForm.vue'
+    import MissionsPlanForm from './../components/MissionsPlanForm.vue'
 
     import {initialMissionData} from './../config'
 
     export default {
-        components: {ElRow, ElCol, MissionsSideBar, MissionsForm},
+        components: {MissionsSideBar, MissionsForm, MissionsPlanForm},
         data() {
             return {
                 index: '0-1',
@@ -39,10 +39,6 @@
         },
         methods: {
             submitMission(mission) {
-                // let start_counter = this.mission.start_counter;
-                // let end_counter = this.mission.end_counter;
-                // this.mission.start_counter = moment.duration(this.mission.start_counter, 'minutes').asMinutes();
-                // this.mission.end_counter = moment.duration(this.mission.end_counter, 'minutes').asMinutes();
                 this.$store.dispatch('saveMission', {mission: mission})
                     .then((mission) => {
                         this.$message.success('Success, mission' + mission.name + ' created.');
@@ -56,6 +52,25 @@
                         this.mission.end_counter = end_counter;
                     })
             }
+        },
+        mounted() {
+            this.$store.dispatch('fetchCustomers')
+                .catch(error => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Error when reading records'
+                    });
+                });
+        },
+        beforeRouteLeave(to, from, next) {
+            this.$store.dispatch('reinitCustomers')
+                .catch(error => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Error when reading records'
+                    });
+                });
+            next()
         }
     }
 </script>

@@ -38,7 +38,7 @@
         },
         methods: {
             logout() {
-                Authentication.bearerLogOut().then(() => {
+                (new Authentication).bearerLogOut().then(() => {
                     this.$store.dispatch('logout');
                     this.$router.push({name: 'auth:login'});
                 });

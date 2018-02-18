@@ -1,12 +1,14 @@
 {
-    "name": "laravel/laravel",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "name": "selenkeys/nuntius",
+    "description": "A reporting application for agricultural services' providers.",
+    "keywords": ["reporting", "agriculture"],
     "license": "MIT",
     "type": "project",
+    "version": "0.0.1-alpha",
     "require": {
         "php": ">=7.1.0",
         "barryvdh/laravel-cors": "^0.11.0",
+        "caouecs/laravel-lang": "^3.0",
         "fideloper/proxy": "~3.3.4",
         "laravel/framework": "5.5.32",
         "laravel/passport": "^4.0",

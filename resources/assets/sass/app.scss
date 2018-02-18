@@ -1,12 +1,7 @@
-// @import "vendor/base";
-/* theme color */
-$--color-primary: #E65100;
-
-/* icon font path, required */
+$--color-primary: #27ae60;
 $--font-path: '~element-ui/lib/theme-chalk/fonts';
 
 @import "~element-ui/packages/theme-chalk/src/index";
-
 @import url('https://fonts.googleapis.com/css?family=Cairo');
 
 @import "./login";
@@ -105,4 +100,9 @@ dt {
 
 .margin-top {
   margin-top: 24px;
+}
+
+#map {
+  width: 100%;
+  height: 500px;
 }

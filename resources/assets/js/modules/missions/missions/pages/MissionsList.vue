@@ -31,5 +31,24 @@
                 missions: 'getMissions',
             }),
         },
+        mounted() {
+            this.$store.dispatch('fetchMissions')
+                .catch(error => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Error when reading records'
+                    });
+                });
+        },
+        beforeRouteLeave(to, from, next) {
+            this.$store.dispatch('reinitMissions')
+                .catch(error => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Error when reading records'
+                    });
+                });
+            next()
+        }
     }
 </script>

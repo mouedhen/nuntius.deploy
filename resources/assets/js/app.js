@@ -1,16 +1,5 @@
-import 'babel-polyfill'
-import axios from 'axios'
+require('./app/boostrap');
 
-window.axios = axios;
-
-axios.defaults.headers.common = {
-    'X-CSRF-TOKEN': window.Laravel.csrfToken,
-    'X-Requested-With': 'XMLHttpRequest',
-    'Content-Type': 'application/json',
-    'Authorization': Cookies.get('token'),
-};
-
-import * as Cookies from 'tiny-cookie'
 import Vue from 'vue'
 
 window.Vue = Vue;
@@ -24,7 +13,7 @@ Vue.use(VueResource);
 Vue.use(Vuex);
 
 import ElementUI from 'element-ui'
-import locale from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale/lang/fr'
 import DataTables from 'vue-data-tables'
 
 Vue.use(ElementUI, { locale });
@@ -33,9 +22,10 @@ Vue.use(DataTables);
 import store from './store'
 import router from './routes'
 import App from './components/App.vue'
+// import App from './app/views/shared/App'
 
 Vue.component('app', App);
-const app = new Vue({
+new Vue({
     router,
     store
 }).$mount('#app');

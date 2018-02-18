@@ -5,7 +5,6 @@ export function initialMissionData() {
         estimated_end_date: null,
         service_type: 'ground_work',
         customer_id: null,
-        location_id: null,
         fuel_unit_price: null,
         start_counter: null,
         end_counter: null,

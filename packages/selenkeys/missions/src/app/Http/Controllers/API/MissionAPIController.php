@@ -34,13 +34,10 @@ class MissionAPIController extends Controller
     {
         $params = [
             'estimated_start_date' => new Carbon($request->get('estimated_start_date')),
-            'estimated_end_date' => new Carbon($request->get('estimated_end_date')),
-            'service_type' => $request->get('service_type'),
+            'step' => 'plan',
             'customer_id' => $request->get('customer_id'),
-            'location_id' => $request->get('location_id'),
             'fuel_unit_price' => $request->get('fuel_unit_price'),
             'start_counter' => $request->get('start_counter'),
-            'end_counter' => $request->get('end_counter'),
         ];
         $mission = Mission::create($params);
         return new MissionResource($mission);

@@ -29,43 +29,9 @@
         methods: {
             loadData() {
                 this.$store.dispatch('login', Authentication.isLoggedIn());
-                this.$store.dispatch('fetchUsers').catch(e => console.log(e));
-
-                this.$store.dispatch('fetchCustomers')
-                    .catch(error => {
-                        this.$notify.error({
-                            title: 'Error',
-                            message: 'Error when reading records'
-                        });
-                    });
-
-                this.$store.dispatch('fetchMissions')
-                    .catch(error => {
-                        this.$notify.error({
-                            title: 'Error',
-                            message: 'Error when reading records'
-                        });
-                    });
             },
             reinitData() {
                 this.$store.dispatch('login', Authentication.isLoggedIn());
-                this.$store.dispatch('reinitUsers').catch(e => console.log(e));
-
-                this.$store.dispatch('reinitCustomers')
-                    .catch(error => {
-                        this.$notify.error({
-                            title: 'Error',
-                            message: 'Error when reading records'
-                        });
-                    });
-
-                this.$store.dispatch('reinitMissions')
-                    .catch(error => {
-                        this.$notify.error({
-                            title: 'Error',
-                            message: 'Error when reading records'
-                        });
-                    });
             }
         }
     }

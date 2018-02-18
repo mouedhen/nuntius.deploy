@@ -1,4 +1,6 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const LiveReloadPlugin = require('webpack-livereload-plugin');
 
 mix
@@ -10,6 +12,7 @@ mix
         'axios',
         'chart.js',
         'element-ui',
+        'inputmask',
         'moment',
         'moment-duration-format',
         'moment-timezone',
@@ -24,6 +27,7 @@ mix
     .webpackConfig({
         plugins: [
             new LiveReloadPlugin(),
+            new HTMLWebpackPlugin(),
         ]
     })
     .disableNotifications();

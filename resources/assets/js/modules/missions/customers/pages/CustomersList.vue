@@ -8,7 +8,7 @@
                 <el-breadcrumb-item :to="{ name: 'customers:index' }">Customers Management</el-breadcrumb-item>
                 <el-breadcrumb-item :to="{ name: 'customers:create' }">Customers list</el-breadcrumb-item>
             </el-breadcrumb>
-            <div class="container">
+            <div class="container" style="margin-top: 30px">
                 <customers-table :customers="customers"/>
             </div>
         </el-col>
@@ -33,5 +33,24 @@
                 customers: 'getCustomers',
             }),
         },
+        mounted() {
+            this.$store.dispatch('fetchCustomers')
+                .catch(error => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Error when reading records'
+                    });
+                });
+        },
+        beforeRouteLeave(to, from, next) {
+            this.$store.dispatch('reinitCustomers')
+                .catch(error => {
+                    this.$notify.error({
+                        title: 'Error',
+                        message: 'Error when reading records'
+                    });
+                });
+            next()
+        }
     }
 </script>

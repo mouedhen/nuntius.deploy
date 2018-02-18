@@ -22,11 +22,12 @@ export default class Authentication {
         })
     }
 
-    static bearerLogOut() {
+    bearerLogOut() {
         return new Promise((resolve, reject) => {
             axios.post('/api/v1/logout')
                 .then(response => {
-                    Cookies.remove('token');
+                    if (Cookies.get('token') !== undefined)
+                        Cookies.remove('token');
                     resolve(response);
                 })
                 .catch(errors => {
