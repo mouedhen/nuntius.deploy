@@ -9,6 +9,8 @@ import users from './modules/users/users'
 import customers from './modules/missions/customers'
 import contacts from './modules/missions/contacts'
 import conductors from './modules/missions/conductors'
+import tractors from './modules/missions/tractors'
+import tools from './modules/missions/tools'
 
 import missions from './modules/missions/missions'
 import tasks from './modules/missions/tasks'
@@ -21,6 +23,8 @@ export default new Vuex.Store({
         customers,
         contacts,
         conductors,
+        tractors,
+        tools,
 
         missions,
         tasks,

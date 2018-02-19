@@ -9804,12 +9804,16 @@ exports.default = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers__ = __webpack_require__(784);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_contacts__ = __webpack_require__(787);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_conductors__ = __webpack_require__(1025);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_missions_missions__ = __webpack_require__(790);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_missions_tasks__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_missions_tractors__ = __webpack_require__(1040);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_missions_tools__ = __webpack_require__(1066);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__modules_missions_missions__ = __webpack_require__(790);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__modules_missions_tasks__ = __webpack_require__(793);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["default"]);
+
+
 
 
 
@@ -9829,9 +9833,11 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         customers: __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers__["a" /* default */],
         contacts: __WEBPACK_IMPORTED_MODULE_5__modules_missions_contacts__["a" /* default */],
         conductors: __WEBPACK_IMPORTED_MODULE_6__modules_missions_conductors__["a" /* default */],
+        tractors: __WEBPACK_IMPORTED_MODULE_7__modules_missions_tractors__["a" /* default */],
+        tools: __WEBPACK_IMPORTED_MODULE_8__modules_missions_tools__["a" /* default */],
 
-        missions: __WEBPACK_IMPORTED_MODULE_7__modules_missions_missions__["a" /* default */],
-        tasks: __WEBPACK_IMPORTED_MODULE_8__modules_missions_tasks__["a" /* default */]
+        missions: __WEBPACK_IMPORTED_MODULE_9__modules_missions_missions__["a" /* default */],
+        tasks: __WEBPACK_IMPORTED_MODULE_10__modules_missions_tasks__["a" /* default */]
     },
     strict: true
 }));
@@ -12432,8 +12438,13 @@ function missionDetails() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_users_routes__ = __webpack_require__(908);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers_routes__ = __webpack_require__(933);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_conductors_routes__ = __webpack_require__(1028);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_missions_routes__ = __webpack_require__(960);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_tractors_routes__ = __webpack_require__(1043);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_missions_tools_routes__ = __webpack_require__(1054);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_missions_missions_routes__ = __webpack_require__(960);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+
+
 
 
 
@@ -12458,7 +12469,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["default"]({
         name: 'auth:login',
         component: __WEBPACK_IMPORTED_MODULE_2__components_pages_auth_Login___default.a
 
-    }].concat(_toConsumableArray(__WEBPACK_IMPORTED_MODULE_3__modules_users_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_4__modules_missions_customers_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_5__modules_missions_conductors_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_6__modules_missions_missions_routes__["a" /* routes */]))
+    }].concat(_toConsumableArray(__WEBPACK_IMPORTED_MODULE_3__modules_users_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_4__modules_missions_customers_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_5__modules_missions_conductors_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_6__modules_missions_tractors_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_7__modules_missions_tools_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_8__modules_missions_missions_routes__["a" /* routes */]))
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -16392,6 +16403,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['index'],
@@ -16434,14 +16447,20 @@ var render = function() {
           _vm._v(" "),
           _c(
             "el-menu-item",
-            { attrs: { index: "0-2", route: { name: "missions:list" } } },
-            [_vm._v("Liste des Missions")]
+            { attrs: { index: "0-0", route: { name: "missions:index" } } },
+            [_vm._v("Tableau de bord")]
           ),
           _vm._v(" "),
           _c(
             "el-menu-item",
             { attrs: { index: "0-1", route: { name: "missions:create" } } },
             [_vm._v("Nouvelle Mission")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            { attrs: { index: "0-2", route: { name: "missions:list" } } },
+            [_vm._v("Liste des Missions")]
           )
         ],
         2
@@ -16459,6 +16478,18 @@ var render = function() {
             "el-menu-item",
             { attrs: { index: "1-0", route: { name: "conductors:index" } } },
             [_vm._v("Chauffeurs")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            { attrs: { index: "1-1", route: { name: "tractors:index" } } },
+            [_vm._v("Tracteurs")]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            { attrs: { index: "1-2", route: { name: "tools:index" } } },
+            [_vm._v("Outils")]
           )
         ],
         2
@@ -21612,7 +21643,7 @@ var render = function() {
       _vm.isLoggedIn
         ? _c(
             "el-menu-item",
-            { attrs: { route: { name: "missions:list" }, index: "1" } },
+            { attrs: { route: { name: "missions:index" }, index: "1" } },
             [_vm._v("Missions")]
           )
         : _vm._e(),
@@ -22583,6 +22614,1776 @@ function initialConductorData() {
         tasks: []
     };
 }
+
+/***/ }),
+/* 1039 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return FETCH_TRACTORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FETCH_TRACTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CREATE_TRACTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return UPDATE_TRACTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DELETE_TRACTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REINIT_TRACTORS; });
+var FETCH_TRACTORS = 'missions/tractors/FETCH_TRACTORS';
+var FETCH_TRACTOR = 'missions/tractors/FETCH_TRACTOR';
+var CREATE_TRACTOR = 'missions/tractors/CREATE_TRACTOR';
+var UPDATE_TRACTOR = 'missions/tractors/UPDATE_TRACTOR';
+var DELETE_TRACTOR = 'missions/tractors/DELETE_TRACTOR';
+
+var REINIT_TRACTORS = 'missions/tractors/REINIT_TRACTORS';
+
+/***/ }),
+/* 1040 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions__ = __webpack_require__(1041);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getters__ = __webpack_require__(1042);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutation_types__ = __webpack_require__(1039);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var initialState = {
+    all: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["e" /* REINIT_TRACTORS */], function (state) {
+    state.all = initialState.all;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_TRACTORS */], function (state, tractors) {
+    state.all = tractors;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["c" /* FETCH_TRACTOR */], function (state, tractor) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === tractor.id;
+    });
+    if (index === -1) {
+        state.all.push(tractor);
+    } else {
+        state.all.splice(index, 1, tractor);
+    }
+    state.selectedCustomer = tractor;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_TRACTOR */], function (state, tractor) {
+    state.all.push(tractor);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["f" /* UPDATE_TRACTOR */], function (state, tractor) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === tractor.id;
+    });
+    if (index !== -1) {
+        state.all.splice(index, 1, tractor);
+    }
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["b" /* DELETE_TRACTOR */], function (state, tractorID) {
+    state.all = state.all.filter(function (x) {
+        return x.id !== tractorID;
+    });
+}), _mutations);
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: _extends({}, initialState),
+    actions: __WEBPACK_IMPORTED_MODULE_0__actions__,
+    getters: __WEBPACK_IMPORTED_MODULE_1__getters__,
+    mutations: mutations
+});
+
+/***/ }),
+/* 1041 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reinitTractors", function() { return reinitTractors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTractors", function() { return fetchTractors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTractor", function() { return fetchTractor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTractor", function() { return createTractor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTractor", function() { return updateTractor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTractor", function() { return deleteTractor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveTractor", function() { return saveTractor; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mutation_types__ = __webpack_require__(1039);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+
+
+
+var reinitTractors = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
+        var commit = _ref.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["e" /* REINIT_TRACTORS */], []);
+
+                    case 1:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function reinitTractors(_x) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+var fetchTractors = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref3) {
+        var commit = _ref3.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        return _context2.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tractors'
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_TRACTORS */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
+
+    return function fetchTractors(_x2) {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
+var fetchTractor = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var tractorID = _ref6.tractorID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        return _context3.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tractors/' + tractorID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["c" /* FETCH_TRACTOR */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function fetchTractor(_x3, _x4) {
+        return _ref7.apply(this, arguments);
+    };
+}();
+
+var createTractor = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref8, _ref9) {
+        var commit = _ref8.commit;
+        var tractor = _ref9.tractor;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        return _context4.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'POST',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tractors',
+                            data: tractor
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_TRACTOR */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this);
+    }));
+
+    return function createTractor(_x5, _x6) {
+        return _ref10.apply(this, arguments);
+    };
+}();
+
+var updateTractor = function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var tractor = _ref12.tractor;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        return _context5.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'PUT',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tractors/' + tractor.id,
+                            data: tractor
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["f" /* UPDATE_TRACTOR */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, this);
+    }));
+
+    return function updateTractor(_x7, _x8) {
+        return _ref13.apply(this, arguments);
+    };
+}();
+
+var deleteTractor = function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(_ref14, _ref15) {
+        var commit = _ref14.commit;
+        var tractorID = _ref15.tractorID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        return _context6.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'DELETE',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tractors/' + tractorID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["b" /* DELETE_TRACTOR */], tractorID);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, this);
+    }));
+
+    return function deleteTractor(_x9, _x10) {
+        return _ref16.apply(this, arguments);
+    };
+}();
+
+var saveTractor = function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(_ref17, _ref18) {
+        var commit = _ref17.commit,
+            state = _ref17.state;
+        var tractor = _ref18.tractor;
+        var index;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+            while (1) {
+                switch (_context7.prev = _context7.next) {
+                    case 0:
+                        index = state.all.findIndex(function (x) {
+                            return x.id === tractor.id;
+                        });
+
+                        if (!(index !== -1)) {
+                            _context7.next = 3;
+                            break;
+                        }
+
+                        return _context7.abrupt('return', updateTractor({ commit: commit }, { tractor: tractor }));
+
+                    case 3:
+                        return _context7.abrupt('return', createTractor({ commit: commit }, { tractor: tractor }));
+
+                    case 4:
+                    case 'end':
+                        return _context7.stop();
+                }
+            }
+        }, _callee7, this);
+    }));
+
+    return function saveTractor(_x11, _x12) {
+        return _ref19.apply(this, arguments);
+    };
+}();
+
+/***/ }),
+/* 1042 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTractors", function() { return getTractors; });
+var getTractors = function getTractors(state) {
+  return state.all;
+};
+
+/***/ }),
+/* 1043 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_TractorsIndex_vue__ = __webpack_require__(1044);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_TractorsIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__pages_TractorsIndex_vue__);
+
+
+var routes = [{
+    path: '/tractors',
+    name: 'tractors:index',
+    component: __WEBPACK_IMPORTED_MODULE_0__pages_TractorsIndex_vue___default.a,
+    meta: {}
+}];
+
+/***/ }),
+/* 1044 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1045)
+/* template */
+var __vue_template__ = __webpack_require__(1053)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tractors/pages/TractorsIndex.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d2dbe854", Component.options)
+  } else {
+    hotAPI.reload("data-v-d2dbe854", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1045 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue__ = __webpack_require__(892);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_TractorForm__ = __webpack_require__(1046);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_TractorForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_TractorForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_TractorsList__ = __webpack_require__(1049);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_TractorsList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_TractorsList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__(1052);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { MissionsSideBar: __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue___default.a, TractorForm: __WEBPACK_IMPORTED_MODULE_2__components_TractorForm___default.a, TractorsList: __WEBPACK_IMPORTED_MODULE_3__components_TractorsList___default.a },
+    data: function data() {
+        return {
+            index: '1-1',
+            tractor: Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialData */])()
+        };
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapGetters"])({
+        tractors: 'getTractors'
+    })),
+    mounted: function mounted() {
+        this.$store.dispatch('fetchTractors');
+    },
+
+    methods: {
+        save: function save() {
+            var _this = this;
+
+            this.$store.dispatch('saveTractor', { tractor: this.tractor }).then(function (tractor) {
+                _this.$message.success('Le chauffeur ' + tractor.designation + ' a été ajouter avec succès.');
+                _this.tractor = Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialData */])();
+            }).catch(function (error) {
+                _this.$message.error('Une erreur innattendue est survenue, merci de contacter votre administrateur!');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 1046 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1047)
+/* template */
+var __vue_template__ = __webpack_require__(1048)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tractors/components/TractorForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-71e61de7", Component.options)
+  } else {
+    hotAPI.reload("data-v-71e61de7", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1047 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tractor'],
+    data: function data() {
+        return {
+            rules: {
+                name: [{ required: true, message: 'La désignation est obligatoire', trigger: 'blur' }, { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        onSubmit: function onSubmit(formName) {
+            var _this = this;
+
+            this.$refs['tractorForm'].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', _this.tractor);
+                    return true;
+                } else {
+                    _this.$message.error('Merci de vérifier les données saisies.');
+                    return false;
+                }
+            });
+        },
+        resetForm: function resetForm(formName) {
+            this.$refs['tractorForm'].resetFields();
+        }
+    }
+});
+
+/***/ }),
+/* 1048 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-form",
+    { ref: "tractorForm", attrs: { model: _vm.tractor, rules: _vm.rules } },
+    [
+      _c(
+        "el-form-item",
+        { attrs: { label: "Désignation", prop: "designation" } },
+        [
+          _c("el-input", {
+            attrs: { type: "text" },
+            model: {
+              value: _vm.tractor.designation,
+              callback: function($$v) {
+                _vm.$set(_vm.tractor, "designation", $$v)
+              },
+              expression: "tractor.designation"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        [
+          _c(
+            "el-button",
+            { attrs: { type: "primary" }, on: { click: _vm.onSubmit } },
+            [_vm._v("Sauvegarder")]
+          ),
+          _vm._v(" "),
+          _c("el-button", { on: { click: _vm.resetForm } }, [_vm._v("Annuler")])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-71e61de7", module.exports)
+  }
+}
+
+/***/ }),
+/* 1049 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1050)
+/* template */
+var __vue_template__ = __webpack_require__(1051)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tractors/components/TractorsList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-4e0a9284", Component.options)
+  } else {
+    hotAPI.reload("data-v-4e0a9284", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1050 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tractors'],
+    data: function data() {
+        var _this = this;
+
+        return {
+            titles: [{ prop: 'designation', label: 'Désignation' }],
+            tableProps: {
+                defaultSort: {
+                    prop: 'name'
+                }
+            },
+            actionColDef: {
+                label: 'Actions',
+                width: 250,
+                tableColProps: {
+                    align: 'center'
+                },
+                def: [
+                // {
+                //     name: 'Details',
+                //     handler: row => {
+                //         // this.$router.push({name: 'missions:details', params: {id: row.id}})
+                //     }
+                // },
+                {
+                    name: 'Supprimer',
+                    handler: function handler(row) {
+
+                        _this.$confirm('Etes-vous sûr de vouloir supprimer le tracteur ' + row.designation + '. Continuer?', 'Warning', {
+                            confirmButtonText: 'Valider',
+                            cancelButtonText: 'Annuler',
+                            type: 'warning'
+                        }).then(function () {
+
+                            _this.$store.dispatch('deleteTractor', { tractorID: row.id }).then(function () {
+                                _this.$store.dispatch('fetchConductors');
+                                _this.$message({
+                                    type: 'success',
+                                    message: 'Suppression effectuée avec succès.'
+                                });
+                            }).catch(function () {
+                                _this.$message({
+                                    type: 'error',
+                                    message: 'Une erreur innattendue est survenue, veuillez réessayer.'
+                                });
+                            });
+                        }).catch(function () {
+                            _this.$message({
+                                type: 'info',
+                                message: 'Suppression annulée.'
+                            });
+                        });
+                    }
+                }]
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 1051 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "data-tables",
+    {
+      attrs: {
+        data: _vm.tractors,
+        "table-props": _vm.tableProps,
+        "action-col-def": _vm.actionColDef
+      }
+    },
+    _vm._l(_vm.titles, function(title) {
+      return _c("el-table-column", {
+        key: title.prop,
+        attrs: { prop: title.prop, label: title.label, sortable: "custom" }
+      })
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-4e0a9284", module.exports)
+  }
+}
+
+/***/ }),
+/* 1052 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = initialData;
+function initialData() {
+    return {
+        id: -1,
+        designation: null,
+        created_at: null,
+        updated_at: null,
+        tasks: []
+    };
+}
+
+/***/ }),
+/* 1053 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-row",
+    [
+      _c(
+        "el-col",
+        { attrs: { span: 4 } },
+        [_c("missions-side-bar", { attrs: { index: _vm.index } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-col",
+        { staticClass: "container scrollableY", attrs: { span: 20 } },
+        [
+          _c(
+            "el-breadcrumb",
+            { attrs: { separator: "/" } },
+            [
+              _c(
+                "el-breadcrumb-item",
+                { attrs: { to: { name: "missions:index" } } },
+                [_vm._v("Gestion des missions")]
+              ),
+              _vm._v(" "),
+              _c("el-breadcrumb-item", [_vm._v("Tracteurs")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("h3", [_vm._v("Ajouter un tracteur")]),
+              _vm._v(" "),
+              _c("tractor-form", {
+                attrs: { tractor: _vm.tractor },
+                on: { submit: _vm.save }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("h3", [_vm._v("Liste des tracteurs")]),
+              _vm._v(" "),
+              _c("tractors-list", { attrs: { tractors: _vm.tractors } })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d2dbe854", module.exports)
+  }
+}
+
+/***/ }),
+/* 1054 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_ToolsIndex_vue__ = __webpack_require__(1055);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_ToolsIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__pages_ToolsIndex_vue__);
+
+
+var routes = [{
+    path: '/tools',
+    name: 'tools:index',
+    component: __WEBPACK_IMPORTED_MODULE_0__pages_ToolsIndex_vue___default.a,
+    meta: {}
+}];
+
+/***/ }),
+/* 1055 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1056)
+/* template */
+var __vue_template__ = __webpack_require__(1064)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tools/pages/ToolsIndex.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-7e419cd8", Component.options)
+  } else {
+    hotAPI.reload("data-v-7e419cd8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1056 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue__ = __webpack_require__(892);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ToolForm__ = __webpack_require__(1057);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ToolForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ToolForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ToolsList__ = __webpack_require__(1060);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ToolsList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ToolsList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__(1063);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { MissionsSideBar: __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue___default.a, ToolForm: __WEBPACK_IMPORTED_MODULE_2__components_ToolForm___default.a, ToolsList: __WEBPACK_IMPORTED_MODULE_3__components_ToolsList___default.a },
+    data: function data() {
+        return {
+            index: '1-2',
+            tool: Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialData */])()
+        };
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapGetters"])({
+        tools: 'getTools'
+    })),
+    mounted: function mounted() {
+        this.$store.dispatch('fetchTools');
+    },
+
+    methods: {
+        save: function save() {
+            var _this = this;
+
+            this.$store.dispatch('saveTool', { tool: this.tool }).then(function (tool) {
+                _this.$message.success('L\'outils ' + tool.designation + ' a été ajouter avec succès.');
+                _this.tool = Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialData */])();
+            }).catch(function (error) {
+                _this.$message.error('Une erreur innattendue est survenue, merci de contacter votre administrateur!');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 1057 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1058)
+/* template */
+var __vue_template__ = __webpack_require__(1059)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tools/components/ToolForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-55cb5a53", Component.options)
+  } else {
+    hotAPI.reload("data-v-55cb5a53", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1058 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tool'],
+    data: function data() {
+        return {
+            rules: {
+                name: [{ required: true, message: 'La désignation est obligatoire', trigger: 'blur' }, { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        onSubmit: function onSubmit(formName) {
+            var _this = this;
+
+            this.$refs['toolForm'].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', _this.tool);
+                    return true;
+                } else {
+                    _this.$message.error('Merci de vérifier les données saisies.');
+                    return false;
+                }
+            });
+        },
+        resetForm: function resetForm(formName) {
+            this.$refs['toolForm'].resetFields();
+        }
+    }
+});
+
+/***/ }),
+/* 1059 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-form",
+    { ref: "toolForm", attrs: { model: _vm.tool, rules: _vm.rules } },
+    [
+      _c(
+        "el-form-item",
+        { attrs: { label: "Désignation", prop: "designation" } },
+        [
+          _c("el-input", {
+            attrs: { type: "text" },
+            model: {
+              value: _vm.tool.designation,
+              callback: function($$v) {
+                _vm.$set(_vm.tool, "designation", $$v)
+              },
+              expression: "tool.designation"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        [
+          _c(
+            "el-button",
+            { attrs: { type: "primary" }, on: { click: _vm.onSubmit } },
+            [_vm._v("Sauvegarder")]
+          ),
+          _vm._v(" "),
+          _c("el-button", { on: { click: _vm.resetForm } }, [_vm._v("Annuler")])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-55cb5a53", module.exports)
+  }
+}
+
+/***/ }),
+/* 1060 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1061)
+/* template */
+var __vue_template__ = __webpack_require__(1062)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tools/components/ToolsList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-71bd07d2", Component.options)
+  } else {
+    hotAPI.reload("data-v-71bd07d2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1061 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tools'],
+    data: function data() {
+        var _this = this;
+
+        return {
+            titles: [{ prop: 'designation', label: 'Désignation' }],
+            tableProps: {
+                defaultSort: {
+                    prop: 'name'
+                }
+            },
+            actionColDef: {
+                label: 'Actions',
+                width: 250,
+                tableColProps: {
+                    align: 'center'
+                },
+                def: [
+                // {
+                //     name: 'Details',
+                //     handler: row => {
+                //         // this.$router.push({name: 'missions:details', params: {id: row.id}})
+                //     }
+                // },
+                {
+                    name: 'Supprimer',
+                    handler: function handler(row) {
+
+                        _this.$confirm('Etes-vous sûr de vouloir supprimer le tracteur ' + row.designation + '. Continuer?', 'Warning', {
+                            confirmButtonText: 'Valider',
+                            cancelButtonText: 'Annuler',
+                            type: 'warning'
+                        }).then(function () {
+
+                            _this.$store.dispatch('deleteTool', { toolID: row.id }).then(function () {
+                                _this.$store.dispatch('fetchConductors');
+                                _this.$message({
+                                    type: 'success',
+                                    message: 'Suppression effectuée avec succès.'
+                                });
+                            }).catch(function () {
+                                _this.$message({
+                                    type: 'error',
+                                    message: 'Une erreur innattendue est survenue, veuillez réessayer.'
+                                });
+                            });
+                        }).catch(function () {
+                            _this.$message({
+                                type: 'info',
+                                message: 'Suppression annulée.'
+                            });
+                        });
+                    }
+                }]
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 1062 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "data-tables",
+    {
+      attrs: {
+        data: _vm.tools,
+        "table-props": _vm.tableProps,
+        "action-col-def": _vm.actionColDef
+      }
+    },
+    _vm._l(_vm.titles, function(title) {
+      return _c("el-table-column", {
+        key: title.prop,
+        attrs: { prop: title.prop, label: title.label, sortable: "custom" }
+      })
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-71bd07d2", module.exports)
+  }
+}
+
+/***/ }),
+/* 1063 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = initialData;
+function initialData() {
+    return {
+        id: -1,
+        designation: null,
+        created_at: null,
+        updated_at: null,
+        tasks: []
+    };
+}
+
+/***/ }),
+/* 1064 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-row",
+    [
+      _c(
+        "el-col",
+        { attrs: { span: 4 } },
+        [_c("missions-side-bar", { attrs: { index: _vm.index } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-col",
+        { staticClass: "container scrollableY", attrs: { span: 20 } },
+        [
+          _c(
+            "el-breadcrumb",
+            { attrs: { separator: "/" } },
+            [
+              _c(
+                "el-breadcrumb-item",
+                { attrs: { to: { name: "missions:index" } } },
+                [_vm._v("Gestion des missions")]
+              ),
+              _vm._v(" "),
+              _c("el-breadcrumb-item", [_vm._v("Outils")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("h3", [_vm._v("Ajouter un outil")]),
+              _vm._v(" "),
+              _c("tool-form", {
+                attrs: { tool: _vm.tool },
+                on: { submit: _vm.save }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("h3", [_vm._v("Liste des outils")]),
+              _vm._v(" "),
+              _c("tools-list", { attrs: { tools: _vm.tools } })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-7e419cd8", module.exports)
+  }
+}
+
+/***/ }),
+/* 1065 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return FETCH_TOOLS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FETCH_TOOL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CREATE_TOOL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return UPDATE_TOOL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DELETE_TOOL; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REINIT_TOOLS; });
+var FETCH_TOOLS = 'missions/tools/FETCH_TOOLS';
+var FETCH_TOOL = 'missions/tools/FETCH_TOOL';
+var CREATE_TOOL = 'missions/tools/CREATE_TOOL';
+var UPDATE_TOOL = 'missions/tools/UPDATE_TOOL';
+var DELETE_TOOL = 'missions/tools/DELETE_TOOL';
+
+var REINIT_TOOLS = 'missions/tools/REINIT_TOOLS';
+
+/***/ }),
+/* 1066 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions__ = __webpack_require__(1067);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getters__ = __webpack_require__(1068);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutation_types__ = __webpack_require__(1065);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var initialState = {
+    all: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["e" /* REINIT_TOOLS */], function (state) {
+    state.all = initialState.all;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_TOOLS */], function (state, tools) {
+    state.all = tools;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["c" /* FETCH_TOOL */], function (state, tool) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === tool.id;
+    });
+    if (index === -1) {
+        state.all.push(tool);
+    } else {
+        state.all.splice(index, 1, tool);
+    }
+    state.selectedCustomer = tool;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_TOOL */], function (state, tool) {
+    state.all.push(tool);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["f" /* UPDATE_TOOL */], function (state, tool) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === tool.id;
+    });
+    if (index !== -1) {
+        state.all.splice(index, 1, tool);
+    }
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["b" /* DELETE_TOOL */], function (state, toolID) {
+    state.all = state.all.filter(function (x) {
+        return x.id !== toolID;
+    });
+}), _mutations);
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: _extends({}, initialState),
+    actions: __WEBPACK_IMPORTED_MODULE_0__actions__,
+    getters: __WEBPACK_IMPORTED_MODULE_1__getters__,
+    mutations: mutations
+});
+
+/***/ }),
+/* 1067 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reinitTools", function() { return reinitTools; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTools", function() { return fetchTools; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchTool", function() { return fetchTool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createTool", function() { return createTool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateTool", function() { return updateTool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteTool", function() { return deleteTool; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveTool", function() { return saveTool; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mutation_types__ = __webpack_require__(1065);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+
+
+
+var reinitTools = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
+        var commit = _ref.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["e" /* REINIT_TOOLS */], []);
+
+                    case 1:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function reinitTools(_x) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+var fetchTools = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref3) {
+        var commit = _ref3.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        return _context2.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tools'
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_TOOLS */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
+
+    return function fetchTools(_x2) {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
+var fetchTool = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var toolID = _ref6.toolID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        return _context3.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tools/' + toolID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["c" /* FETCH_TOOL */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function fetchTool(_x3, _x4) {
+        return _ref7.apply(this, arguments);
+    };
+}();
+
+var createTool = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref8, _ref9) {
+        var commit = _ref8.commit;
+        var tool = _ref9.tool;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        return _context4.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'POST',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tools',
+                            data: tool
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_TOOL */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this);
+    }));
+
+    return function createTool(_x5, _x6) {
+        return _ref10.apply(this, arguments);
+    };
+}();
+
+var updateTool = function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var tool = _ref12.tool;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        return _context5.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'PUT',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tools/' + tool.id,
+                            data: tool
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["f" /* UPDATE_TOOL */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, this);
+    }));
+
+    return function updateTool(_x7, _x8) {
+        return _ref13.apply(this, arguments);
+    };
+}();
+
+var deleteTool = function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(_ref14, _ref15) {
+        var commit = _ref14.commit;
+        var toolID = _ref15.toolID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        return _context6.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'DELETE',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/tools/' + toolID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["b" /* DELETE_TOOL */], toolID);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, this);
+    }));
+
+    return function deleteTool(_x9, _x10) {
+        return _ref16.apply(this, arguments);
+    };
+}();
+
+var saveTool = function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(_ref17, _ref18) {
+        var commit = _ref17.commit,
+            state = _ref17.state;
+        var tool = _ref18.tool;
+        var index;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+            while (1) {
+                switch (_context7.prev = _context7.next) {
+                    case 0:
+                        index = state.all.findIndex(function (x) {
+                            return x.id === tool.id;
+                        });
+
+                        if (!(index !== -1)) {
+                            _context7.next = 3;
+                            break;
+                        }
+
+                        return _context7.abrupt('return', updateTool({ commit: commit }, { tool: tool }));
+
+                    case 3:
+                        return _context7.abrupt('return', createTool({ commit: commit }, { tool: tool }));
+
+                    case 4:
+                    case 'end':
+                        return _context7.stop();
+                }
+            }
+        }, _callee7, this);
+    }));
+
+    return function saveTool(_x11, _x12) {
+        return _ref19.apply(this, arguments);
+    };
+}();
+
+/***/ }),
+/* 1068 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getTools", function() { return getTools; });
+var getTools = function getTools(state) {
+  return state.all;
+};
 
 /***/ })
 ],[467]);

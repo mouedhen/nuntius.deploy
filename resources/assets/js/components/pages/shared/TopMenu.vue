@@ -5,7 +5,7 @@
              active-text-color="#222"
              mode="horizontal" :default-active="activeIndex">
         <el-menu-item :route="{name: 'index'}" index="0">NUNTIUS</el-menu-item>
-        <el-menu-item v-if="isLoggedIn" :route="{name: 'missions:list'}" index="1">Missions</el-menu-item>
+        <el-menu-item v-if="isLoggedIn" :route="{name: 'missions:index'}" index="1">Missions</el-menu-item>
         <el-menu-item v-if="isLoggedIn" :route="{name: 'customers:list'}" index="2">Clients</el-menu-item>
         <!-- <el-menu-item v-if="isLoggedIn" :route="{name: 'locations:index'}" index="3">Locations</el-menu-item> -->
 

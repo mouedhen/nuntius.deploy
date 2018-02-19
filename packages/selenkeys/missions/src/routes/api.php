@@ -16,6 +16,8 @@ Route::group([
             'customers' => \Selenkeys\Missions\App\Http\Controllers\API\CustomerAPIController::class,
             'contacts' => \Selenkeys\Missions\App\Http\Controllers\API\ContactAPIController::class,
             'conductors' => \Selenkeys\Missions\App\Http\Controllers\API\ConductorAPIController::class,
+            'tractors' => \Selenkeys\Missions\App\Http\Controllers\API\TractorAPIController::class,
+            'tools' => \Selenkeys\Missions\App\Http\Controllers\API\ToolAPIController::class,
 
             'missions' => \Selenkeys\Missions\App\Http\Controllers\API\MissionAPIController::class,
             'tasks' => \Selenkeys\Missions\App\Http\Controllers\API\TaskAPIController::class,
