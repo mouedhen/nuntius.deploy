@@ -12599,16 +12599,13 @@ module.exports = Component.exports
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export initialTaskData */
+/* harmony export (immutable) */ __webpack_exports__["a"] = initialTaskData;
 function initialTaskData() {
     return {
         id: -1,
         label: null,
         start_date_time: null,
         end_date_time: null,
-        conductor: null,
-        tractor: null,
-        tool: null,
         tool_configuration: null,
         depth_in_cm: null,
         width_in_m: null,
@@ -12617,7 +12614,11 @@ function initialTaskData() {
         average_consumption: null,
         fuel_consumption: null,
         observation: null,
-        mission_id: null
+
+        mission_id: null,
+        conductor_id: null,
+        tractor_id: null,
+        tool_id: null
     };
 }
 
@@ -18396,6 +18397,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -18420,6 +18427,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             mission: Object(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* initialMissionData */])()
         };
     },
+
+    computed: {
+        step: function step() {
+            switch (this.mission.status) {
+                case 'planned':
+                    return 1;
+                // case 'canceled': return 0;
+                case 'validated':
+                    return 2;
+                case 'in_progress':
+                    return 3;
+                case 'finished':
+                    return 4;
+                default:
+                    return 0;
+            }
+        }
+    },
     mounted: function mounted() {
         var _this = this;
 
@@ -18440,6 +18465,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 _this2.mission = mission;
             }).catch(function (error) {
                 _this2.$message.error('Error, can not get records details !');
+            });
+        },
+        reload: function reload() {
+            var _this3 = this;
+
+            this.$store.dispatch('fetchMission', { missionID: this.$route.params.id }).then(function (mission) {
+                _this3.mission = mission;
+            }).catch(function (error) {
+                _this3.$message.error('Error, can not get records details !');
             });
         }
     }
@@ -20450,23 +20484,41 @@ var render = function() {
           _vm._v(" "),
           _c("missions-details-component", { attrs: { mission: _vm.mission } }),
           _vm._v(" "),
-          _c(
-            "el-steps",
-            {
-              staticClass: "margin-top",
-              attrs: { active: 2, "align-center": "" }
-            },
-            [
-              _c("el-step", { attrs: { title: "Planifiée" } }),
-              _vm._v(" "),
-              _c("el-step", { attrs: { title: "Validée" } }),
-              _vm._v(" "),
-              _c("el-step", { attrs: { title: "En cours" } }),
-              _vm._v(" "),
-              _c("el-step", { attrs: { title: "Terminée" } })
-            ],
-            1
-          ),
+          _vm.mission.status !== "canceled"
+            ? _c(
+                "el-steps",
+                {
+                  staticClass: "margin-top",
+                  attrs: { active: _vm.step, "align-center": "" }
+                },
+                [
+                  _c("el-step", { attrs: { title: "Planifiée" } }),
+                  _vm._v(" "),
+                  _c("el-step", { attrs: { title: "Validée" } }),
+                  _vm._v(" "),
+                  _c("el-step", { attrs: { title: "En cours" } }),
+                  _vm._v(" "),
+                  _c("el-step", { attrs: { title: "Terminée" } })
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mission.status === "canceled"
+            ? _c(
+                "el-steps",
+                {
+                  staticClass: "margin-top",
+                  attrs: { active: 2, "align-center": "" }
+                },
+                [
+                  _c("el-step", { attrs: { title: "Planifiée" } }),
+                  _vm._v(" "),
+                  _c("el-step", { attrs: { title: "Annulée" } })
+                ],
+                1
+              )
+            : _vm._e(),
           _vm._v(" "),
           _vm.mission.status === "planned"
             ? _c("planned-mission", {
@@ -20491,7 +20543,7 @@ var render = function() {
           _vm.mission.status === "in_progress"
             ? _c("in-progress-mission", {
                 attrs: { mission: _vm.mission },
-                on: { submit: _vm.submit }
+                on: { submit: _vm.submit, newTask: _vm.reload }
               })
             : _vm._e()
         ],
@@ -20514,12 +20566,913 @@ if (false) {
 /***/ }),
 /* 1009 */,
 /* 1010 */,
-/* 1011 */,
-/* 1012 */,
-/* 1013 */,
-/* 1014 */,
-/* 1015 */,
-/* 1016 */,
+/* 1011 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1012)
+/* template */
+var __vue_template__ = __webpack_require__(1013)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tasks/components/TasksForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-78eabd58", Component.options)
+  } else {
+    hotAPI.reload("data-v-78eabd58", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1012 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui__ = __webpack_require__(193);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_element_ui__);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { ElRow: __WEBPACK_IMPORTED_MODULE_1_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_1_element_ui__["Col"] },
+    props: ['task'],
+    data: function data() {
+        return {
+            rules: {}
+        };
+    },
+
+    computed: _extends({
+        now: function now() {
+            return new Date();
+        }
+    }, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapGetters"])({
+        conductors: 'getConductors',
+        tractors: 'getTractors',
+        tools: 'getTools'
+    })),
+    methods: {
+        submitTask: function submitTask(formName) {
+            this.$emit('submit', this.task);
+        },
+        resetForm: function resetForm(formName) {
+            this.$refs[formName].resetFields();
+            this.$emit('cancel', this.task);
+        }
+    },
+    mounted: function mounted() {
+        this.$store.dispatch('fetchConductors');
+        this.$store.dispatch('fetchTractors');
+        this.$store.dispatch('fetchTools');
+    }
+});
+
+/***/ }),
+/* 1013 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "container" },
+    [
+      _c(
+        "el-form",
+        { ref: "taskForm", attrs: { model: _vm.task, rules: _vm.rules } },
+        [
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Date et heure de début",
+                        prop: "start_date_time"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "el-input" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.task.start_date_time,
+                              expression: "task.start_date_time"
+                            }
+                          ],
+                          staticClass: "el-input__inner",
+                          attrs: {
+                            id: "start_date_time",
+                            name: "start_date_time",
+                            type: "datetime-local"
+                          },
+                          domProps: { value: _vm.task.start_date_time },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.task,
+                                "start_date_time",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Date et heure de fin",
+                        prop: "end_date_time"
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "el-input" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.task.end_date_time,
+                              expression: "task.end_date_time"
+                            }
+                          ],
+                          staticClass: "el-input__inner",
+                          attrs: {
+                            id: "end_date_time",
+                            name: "end_date_time",
+                            type: "datetime-local"
+                          },
+                          domProps: { value: _vm.task.end_date_time },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.task,
+                                "end_date_time",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        })
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "Chauffeur", prop: "conductor" } },
+                    [
+                      _c(
+                        "el-select",
+                        {
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            placeholder:
+                              "Veuillez choisir la catégorie du client"
+                          },
+                          model: {
+                            value: _vm.task.conductor_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.task, "conductor_id", $$v)
+                            },
+                            expression: "task.conductor_id"
+                          }
+                        },
+                        _vm._l(_vm.conductors, function(conductors) {
+                          return _c("el-option", {
+                            key: conductors.id,
+                            attrs: {
+                              label: conductors.name,
+                              value: conductors.id
+                            }
+                          })
+                        })
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "Tracteur", prop: "tractor" } },
+                    [
+                      _c(
+                        "el-select",
+                        {
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            placeholder:
+                              "Veuillez choisir la catégorie du client"
+                          },
+                          model: {
+                            value: _vm.task.tractor_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.task, "tractor_id", $$v)
+                            },
+                            expression: "task.tractor_id"
+                          }
+                        },
+                        _vm._l(_vm.tractors, function(tractor) {
+                          return _c("el-option", {
+                            key: tractor.id,
+                            attrs: {
+                              label: tractor.designation,
+                              value: tractor.id
+                            }
+                          })
+                        })
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "Outil", prop: "tool" } },
+                    [
+                      _c(
+                        "el-select",
+                        {
+                          staticStyle: { width: "100%" },
+                          attrs: {
+                            placeholder:
+                              "Veuillez choisir la catégorie du client"
+                          },
+                          model: {
+                            value: _vm.task.tool_id,
+                            callback: function($$v) {
+                              _vm.$set(_vm.task, "tool_id", $$v)
+                            },
+                            expression: "task.tool_id"
+                          }
+                        },
+                        _vm._l(_vm.tools, function(tool) {
+                          return _c("el-option", {
+                            key: tool.id,
+                            attrs: { label: tool.designation, value: tool.id }
+                          })
+                        })
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Configuration de l'outil",
+                        prop: "tool_configuration"
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.tool_configuration,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "tool_configuration", $$v)
+                          },
+                          expression: "task.tool_configuration"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: { label: "Profondeur en CM", prop: "depth_in_cm" }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.depth_in_cm,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "depth_in_cm", $$v)
+                          },
+                          expression: "task.depth_in_cm"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    { attrs: { label: "Largeur en M", prop: "width_in_m" } },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.width_in_m,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "width_in_m", $$v)
+                          },
+                          expression: "task.width_in_m"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: { label: "Vitesse moyenne", prop: "average_speed" }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.average_speed,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "average_speed", $$v)
+                          },
+                          expression: "task.average_speed"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: { label: "Surface travaillé", prop: "worked_area" }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.worked_area,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "worked_area", $$v)
+                          },
+                          expression: "task.worked_area"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-row",
+            { attrs: { gutter: 20 } },
+            [
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Consommation moyenne",
+                        prop: "average_consumption"
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.average_consumption,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "average_consumption", $$v)
+                          },
+                          expression: "task.average_consumption"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-col",
+                { attrs: { span: 12 } },
+                [
+                  _c(
+                    "el-form-item",
+                    {
+                      attrs: {
+                        label: "Consommation en carburant",
+                        prop: "fuel_consumption"
+                      }
+                    },
+                    [
+                      _c("el-input", {
+                        attrs: { type: "number", min: 0 },
+                        model: {
+                          value: _vm.task.fuel_consumption,
+                          callback: function($$v) {
+                            _vm.$set(_vm.task, "fuel_consumption", $$v)
+                          },
+                          expression: "task.fuel_consumption"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Observation", prop: "observation" } },
+            [
+              _c("el-input", {
+                attrs: { type: "textarea" },
+                model: {
+                  value: _vm.task.observation,
+                  callback: function($$v) {
+                    _vm.$set(_vm.task, "observation", $$v)
+                  },
+                  expression: "task.observation"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submitTask("groundWorkTaskForm")
+                    }
+                  }
+                },
+                [_vm._v("Ajouter")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.resetForm("groundWorkTaskForm")
+                    }
+                  }
+                },
+                [_vm._v("Annuler")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-78eabd58", module.exports)
+  }
+}
+
+/***/ }),
+/* 1014 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1015)
+/* template */
+var __vue_template__ = __webpack_require__(1016)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/tasks/components/TasksTable.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-76af522c", Component.options)
+  } else {
+    hotAPI.reload("data-v-76af522c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1015 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['tasks'],
+    computed: {
+        tableTasks: function tableTasks() {
+            return this.tasks.map(function (task) {
+                task.work_time = Object(__WEBPACK_IMPORTED_MODULE_0_moment__["duration"])(new Date(task.end_date_time) - new Date(task.start_date_time)).humanize();
+                return task;
+            });
+        }
+    },
+    mounted: function mounted() {
+        console.log(this.tasks);
+    }
+});
+
+/***/ }),
+/* 1016 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-table",
+    { staticStyle: { width: "100%" }, attrs: { data: _vm.tableTasks } },
+    [
+      _c("el-table-column", {
+        attrs: { prop: "conductor.name", label: "Conductor" }
+      }),
+      _vm._v(" "),
+      _c("el-table-column", {
+        attrs: { prop: "tractor.designation", label: "Tractor" }
+      }),
+      _vm._v(" "),
+      _c("el-table-column", {
+        attrs: { prop: "tool.designation", label: "Tool" }
+      }),
+      _vm._v(" "),
+      _c("el-table-column", {
+        attrs: { prop: "work_time", label: "Work time" }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-76af522c", module.exports)
+  }
+}
+
+/***/ }),
 /* 1017 */,
 /* 1018 */
 /***/ (function(module, exports, __webpack_require__) {
@@ -24025,6 +24978,11 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask__ = __webpack_require__(852);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inputmask__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tasks_config__ = __webpack_require__(901);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm__ = __webpack_require__(1011);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable__ = __webpack_require__(1014);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable__);
 //
 //
 //
@@ -24060,12 +25018,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['mission'],
+    components: { TasksForm: __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm___default.a, TasksTable: __WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable___default.a },
     data: function data() {
         return {
+            tasksDialogVisible: false,
+            task: Object(__WEBPACK_IMPORTED_MODULE_1__tasks_config__["a" /* initialTaskData */])(),
             rules: {
                 end_counter: [{ required: true, message: 'Le compteur retour est obligatoire', trigger: 'blur' }],
                 end_date: [{ required: true, message: 'La date de fin est obligatoire', trigger: 'blur' }]
@@ -24086,6 +25062,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     return false;
                 }
             });
+        },
+        handleCloseTasksDialog: function handleCloseTasksDialog(done) {
+            this.task = Object(__WEBPACK_IMPORTED_MODULE_1__tasks_config__["a" /* initialTaskData */])();
+            done();
+        },
+        submitTask: function submitTask() {
+            this.task.mission_id = this.mission.id;
+            this.$store.dispatch('saveTask', { task: this.task });
+            this.asksDialogVisible = false;
+            this.$emit('newTask');
+        },
+        cancelTask: function cancelTask() {
+            this.task = Object(__WEBPACK_IMPORTED_MODULE_1__tasks_config__["a" /* initialTaskData */])();
+            this.asksDialogVisible = false;
         }
     },
     mounted: function mounted() {
@@ -24175,19 +25165,14 @@ var render = function() {
               _c(
                 "el-button",
                 {
-                  attrs: { type: "primary" },
-                  on: { click: function($event) {} }
+                  attrs: { type: "default" },
+                  on: {
+                    click: function($event) {
+                      _vm.tasksDialogVisible = true
+                    }
+                  }
                 },
                 [_vm._v("Nouvelle tâche")]
-              ),
-              _vm._v(" "),
-              _c(
-                "el-button",
-                {
-                  attrs: { type: "default" },
-                  on: { click: function($event) {} }
-                },
-                [_vm._v("Nouveaux transport")]
               ),
               _vm._v(" "),
               _c(
@@ -24205,6 +25190,33 @@ var render = function() {
             ],
             1
           )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("tasks-table", { attrs: { tasks: _vm.mission.tasks } }),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          staticStyle: { "text-align": "left" },
+          attrs: {
+            title: "Nouvelle tâche",
+            visible: _vm.tasksDialogVisible,
+            width: "70%",
+            "before-close": _vm.handleCloseTasksDialog
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.tasksDialogVisible = $event
+            }
+          }
+        },
+        [
+          _c("tasks-form", {
+            attrs: { task: _vm.task },
+            on: { submit: _vm.submitTask, cancel: _vm.cancelTask }
+          })
         ],
         1
       )

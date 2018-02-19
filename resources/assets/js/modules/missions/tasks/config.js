@@ -4,9 +4,6 @@ export function initialTaskData() {
         label: null,
         start_date_time: null,
         end_date_time: null,
-        conductor: null,
-        tractor: null,
-        tool: null,
         tool_configuration: null,
         depth_in_cm: null,
         width_in_m: null,
@@ -15,6 +12,10 @@ export function initialTaskData() {
         average_consumption: null,
         fuel_consumption: null,
         observation: null,
+
         mission_id: null,
+        conductor_id: null,
+        tractor_id: null,
+        tool_id: null,
     }
 }

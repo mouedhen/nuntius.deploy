@@ -3,17 +3,17 @@
             :data="tableTasks"
             style="width: 100%">
         <el-table-column
-                prop="conductor"
+                prop="conductor.name"
                 label="Conductor">
         </el-table-column>
 
         <el-table-column
-                prop="tractor"
+                prop="tractor.designation"
                 label="Tractor">
         </el-table-column>
 
         <el-table-column
-                prop="tool"
+                prop="tool.designation"
                 label="Tool">
         </el-table-column>
 
@@ -36,6 +36,9 @@
                     return task
                 })
             }
+        },
+        mounted() {
+            console.log(this.tasks)
         }
     }
 </script>

@@ -29,7 +29,7 @@ class MissionResource extends Resource
             'fuel_unit_price' => $this->fuel_unit_price,
             'end_date' => $this->end_date,
             'end_counter' => $this->end_counter,
-            'tasks' => $this->tasks,
+            'tasks' => TaskResource::collection($this->tasks),
             'transports' => $this->transports,
         ];
     }

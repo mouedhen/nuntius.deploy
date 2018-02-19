@@ -22,23 +22,41 @@
 
             <el-form-item style="text-align: right">
 
-                <el-button type="primary" @click="">Nouvelle tâche</el-button>
-                <el-button type="default" @click="">Nouveaux transport</el-button>
+                <el-button type="default" @click="tasksDialogVisible = true">Nouvelle tâche</el-button>
+                <!-- <el-button type="default" @click="">Nouveaux transport</el-button> -->
                 <el-button type="warning" @click="submit('endMissionForm')">Terminer la mission</el-button>
 
             </el-form-item>
 
         </el-form>
 
+        <tasks-table :tasks="mission.tasks"/>
+
+        <el-dialog
+                style="text-align: left"
+                title="Nouvelle tâche"
+                :visible.sync="tasksDialogVisible"
+                width="70%"
+                :before-close="handleCloseTasksDialog">
+            <tasks-form :task="task" @submit="submitTask" @cancel="cancelTask" />
+        </el-dialog>
+
     </div>
 </template>
 
 <script>
     import Inputmask from "inputmask";
+    import {initialTaskData} from '../../tasks/config'
+    import TasksForm from '../../tasks/components/TasksForm'
+    import TasksTable from '../../tasks/components/TasksTable'
+
     export default {
         props: ['mission'],
+        components: {TasksForm, TasksTable},
         data() {
             return {
+                tasksDialogVisible: false,
+                task: initialTaskData(),
                 rules: {
                     end_counter: [
                         {required: true, message: 'Le compteur retour est obligatoire', trigger: 'blur'},
@@ -61,6 +79,20 @@
                     }
                 })
             },
+            handleCloseTasksDialog(done) {
+                this.task = initialTaskData();
+                done()
+            },
+            submitTask() {
+                this.task.mission_id = this.mission.id;
+                this.$store.dispatch('saveTask', {task: this.task});
+                this.asksDialogVisible = false;
+                this.$emit('newTask')
+            },
+            cancelTask() {
+                this.task = initialTaskData();
+                this.asksDialogVisible = false;
+            }
         },
         mounted() {
             Inputmask().mask(document.querySelectorAll("input"));

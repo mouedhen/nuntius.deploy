@@ -12,16 +12,22 @@
 
             <missions-details-component :mission="mission" />
 
-            <el-steps class="margin-top" :active="2" align-center>
+            <el-steps v-if="mission.status !== 'canceled'" class="margin-top" :active="step" align-center>
                 <el-step title="Planifiée"/>
                 <el-step title="Validée"/>
                 <el-step title="En cours"/>
                 <el-step title="Terminée"/>
             </el-steps>
+
+            <el-steps v-if="mission.status === 'canceled'" class="margin-top" :active="2" align-center>
+                <el-step title="Planifiée"/>
+                <el-step title="Annulée"/>
+            </el-steps>
+
             <planned-mission v-if="mission.status === 'planned'" class="margin-top" style="text-align: right" @submit="submit" :mission="mission"/>
             <canceled-mission v-if="mission.status === 'canceled'" :mission="mission"/>
             <validated-mission v-if="mission.status === 'validated'" :mission="mission" @submit="submit" />
-            <in-progress-mission v-if="mission.status === 'in_progress'" @submit="submit" :mission="mission" />
+            <in-progress-mission v-if="mission.status === 'in_progress'" @submit="submit" :mission="mission" @newTask="reload" />
         </el-col>
     </el-row>
 </template>
@@ -50,6 +56,18 @@
                 mission: initialMissionData(),
             }
         },
+        computed: {
+            step: function () {
+                switch(this.mission.status) {
+                    case 'planned': return 1;
+                    // case 'canceled': return 0;
+                    case 'validated': return 2;
+                    case 'in_progress': return 3;
+                    case 'finished': return 4;
+                    default: return 0
+                }
+            }
+        },
         mounted() {
             this.$store.dispatch('fetchMission', {missionID: this.$route.params.id})
                 .then(mission => {
@@ -69,6 +87,14 @@
                     this.$message.error('Error, can not get records details !');
                 })
 
+            },
+            reload() {
+                this.$store.dispatch('fetchMission', {missionID: this.$route.params.id})
+                    .then(mission => {
+                        this.mission = mission;
+                    }).catch(error => {
+                    this.$message.error('Error, can not get records details !');
+                })
             }
         }
     }

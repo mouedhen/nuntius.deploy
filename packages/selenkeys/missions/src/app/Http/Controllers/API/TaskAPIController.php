@@ -20,9 +20,9 @@ class TaskAPIController extends Controller
         $params = [
             'start_date_time' => new Carbon($request->get('start_date_time')),
             'end_date_time' => new Carbon($request->get('end_date_time')),
-            'conductor' => $request->get('conductor'),
-            'tractor' => $request->get('tractor'),
-            'tool' => $request->get('tool'),
+            'conductor_id' => $request->get('conductor_id'),
+            'tractor_id' => $request->get('tractor_id'),
+            'tool_id' => $request->get('tool_id'),
             'tool_configuration' => $request->get('tool_configuration'),
             'depth_in_cm' => $request->get('depth_in_cm'),
             'width_in_m' => $request->get('width_in_m'),

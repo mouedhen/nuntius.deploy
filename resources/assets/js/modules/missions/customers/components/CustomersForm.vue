@@ -1,20 +1,20 @@
 <template>
     <el-form :model="customer" :rules="rules" ref="customerForm">
         <el-form-item label="Nom" prop="name">
-            <el-input type="text" v-model="customer.name"></el-input>
+            <el-input type="text" v-model="customer.name"/>
         </el-form-item>
 
         <el-form-item label="Catégorie" prop="category">
             <el-select v-model="customer.category"
                        style="width: 100%"
                        placeholder="Veuillez choisir la catégorie du client">
-                <el-option label="Company" value="company"></el-option>
-                <el-option label="Particular" value="particular"></el-option>
+                <el-option label="Company" value="company"/>
+                <el-option label="Particular" value="particular"/>
             </el-select>
         </el-form-item>
 
         <el-form-item label="CIN / Passeport" prop="cin_passport" v-if="customer.category === 'particular'">
-            <el-input type="url" v-model="customer.cin_passport"></el-input>
+            <el-input type="url" v-model="customer.cin_passport"/>
         </el-form-item>
 
         <el-form-item label="Matricule fiscal" prop="tax_registration_number" v-if="customer.category === 'company'">
