@@ -2,7 +2,7 @@
     <el-menu :router="true"
              background-color="#F5F5F5"
              text-color="#222222"
-             class="full-height"
+             class="viewport-height"
              @select="navigateEvent"
              :default-active="index"
              :default-openeds="['0']">

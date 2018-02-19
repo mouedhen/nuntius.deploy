@@ -16,6 +16,13 @@
             <el-menu-item index="0-1" :route="{name: 'missions:create'}">Nouvelle Mission</el-menu-item>
         </el-submenu>
 
+        <el-submenu index="1" >
+            <template slot="title">
+                <span>Configuration</span>
+            </template>
+            <el-menu-item index="1-0" :route="{name: 'conductors:index'}">Chauffeurs</el-menu-item>
+        </el-submenu>
+
     </el-menu>
 </template>
 

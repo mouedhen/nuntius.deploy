@@ -24,17 +24,26 @@ class Mission extends Model
     use Notifiable, AutoLabelTrait;
 
     protected $table = 'missions';
-    protected $fillable = ['estimated_start_date', 'estimated_end_date',
-        'customer_id', 'step', 'fuel_unit_price', 'start_counter', 'end_counter'];
+    protected $fillable = [
+        'estimated_start_date', 'estimated_end_date',
+        'start_date', 'end_date',
+        'start_counter', 'end_counter',
+        'status', 'fuel_unit_price',
+        'customer_id', 'location_id'];
 
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function missions_delays_logs()
+    public function location()
     {
-        return $this->hasMany(MissionDelayLog::class);
+        return $this->belongsTo(Location::class);
+    }
+
+    public function transports()
+    {
+        return $this->hasMany(Transport::class);
     }
 
     public function tasks()

@@ -9803,12 +9803,15 @@ exports.default = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_users_users__ = __webpack_require__(779);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers__ = __webpack_require__(784);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_contacts__ = __webpack_require__(787);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_missions__ = __webpack_require__(790);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_missions_tasks__ = __webpack_require__(793);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_conductors__ = __webpack_require__(1025);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__modules_missions_missions__ = __webpack_require__(790);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__modules_missions_tasks__ = __webpack_require__(793);
 
 
 
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex__["default"]);
+
+
 
 
 
@@ -9825,9 +9828,10 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
 
         customers: __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers__["a" /* default */],
         contacts: __WEBPACK_IMPORTED_MODULE_5__modules_missions_contacts__["a" /* default */],
+        conductors: __WEBPACK_IMPORTED_MODULE_6__modules_missions_conductors__["a" /* default */],
 
-        missions: __WEBPACK_IMPORTED_MODULE_6__modules_missions_missions__["a" /* default */],
-        tasks: __WEBPACK_IMPORTED_MODULE_7__modules_missions_tasks__["a" /* default */]
+        missions: __WEBPACK_IMPORTED_MODULE_7__modules_missions_missions__["a" /* default */],
+        tasks: __WEBPACK_IMPORTED_MODULE_8__modules_missions_tasks__["a" /* default */]
     },
     strict: true
 }));
@@ -12427,8 +12431,10 @@ function missionDetails() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_pages_auth_Login___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_pages_auth_Login__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__modules_users_routes__ = __webpack_require__(908);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__modules_missions_customers_routes__ = __webpack_require__(933);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_missions_routes__ = __webpack_require__(960);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__modules_missions_conductors_routes__ = __webpack_require__(1028);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__modules_missions_missions_routes__ = __webpack_require__(960);
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 
 
 
@@ -12452,7 +12458,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_0_vue_router__["default"]({
         name: 'auth:login',
         component: __WEBPACK_IMPORTED_MODULE_2__components_pages_auth_Login___default.a
 
-    }].concat(_toConsumableArray(__WEBPACK_IMPORTED_MODULE_3__modules_users_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_4__modules_missions_customers_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_5__modules_missions_missions_routes__["a" /* routes */]))
+    }].concat(_toConsumableArray(__WEBPACK_IMPORTED_MODULE_3__modules_users_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_4__modules_missions_customers_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_5__modules_missions_conductors_routes__["a" /* routes */]), _toConsumableArray(__WEBPACK_IMPORTED_MODULE_6__modules_missions_missions_routes__["a" /* routes */]))
 });
 
 /* harmony default export */ __webpack_exports__["a"] = (router);
@@ -13238,7 +13244,7 @@ var render = function() {
   return _c(
     "el-menu",
     {
-      staticClass: "full-height",
+      staticClass: "viewport-height",
       attrs: {
         router: true,
         "background-color": "#F5F5F5",
@@ -16379,6 +16385,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: ['index'],
@@ -16429,6 +16442,23 @@ var render = function() {
             "el-menu-item",
             { attrs: { index: "0-1", route: { name: "missions:create" } } },
             [_vm._v("Nouvelle Mission")]
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "el-submenu",
+        { attrs: { index: "1" } },
+        [
+          _c("template", { slot: "title" }, [
+            _c("span", [_vm._v("Configuration")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "el-menu-item",
+            { attrs: { index: "1-0", route: { name: "conductors:index" } } },
+            [_vm._v("Chauffeurs")]
           )
         ],
         2
@@ -21667,6 +21697,891 @@ if (false) {
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-8142f38c", module.exports)
   }
+}
+
+/***/ }),
+/* 1024 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return FETCH_CONDUCTORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return FETCH_CONDUCTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return CREATE_CONDUCTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return UPDATE_CONDUCTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return DELETE_CONDUCTOR; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return REINIT_CONDUCTORS; });
+var FETCH_CONDUCTORS = 'missions/conductors/FETCH_CONDUCTORS';
+var FETCH_CONDUCTOR = 'missions/conductors/FETCH_CONDUCTOR';
+var CREATE_CONDUCTOR = 'missions/conductors/CREATE_CONDUCTOR';
+var UPDATE_CONDUCTOR = 'missions/conductors/UPDATE_CONDUCTOR';
+var DELETE_CONDUCTOR = 'missions/conductors/DELETE_CONDUCTOR';
+
+var REINIT_CONDUCTORS = 'missions/conductors/REINIT_CONDUCTORS';
+
+/***/ }),
+/* 1025 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__actions__ = __webpack_require__(1026);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__getters__ = __webpack_require__(1027);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__mutation_types__ = __webpack_require__(1024);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _mutations;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+var initialState = {
+    all: []
+};
+
+var mutations = (_mutations = {}, _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["e" /* REINIT_CONDUCTORS */], function (state) {
+    state.all = initialState.all;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_CONDUCTORS */], function (state, conductors) {
+    state.all = conductors;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["c" /* FETCH_CONDUCTOR */], function (state, conductor) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === conductor.id;
+    });
+    if (index === -1) {
+        state.all.push(conductor);
+    } else {
+        state.all.splice(index, 1, conductor);
+    }
+    state.selectedCustomer = conductor;
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_CONDUCTOR */], function (state, conductor) {
+    state.all.push(conductor);
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["f" /* UPDATE_CONDUCTOR */], function (state, conductor) {
+    var index = state.all.findIndex(function (x) {
+        return x.id === conductor.id;
+    });
+    if (index !== -1) {
+        state.all.splice(index, 1, conductor);
+    }
+}), _defineProperty(_mutations, __WEBPACK_IMPORTED_MODULE_2__mutation_types__["b" /* DELETE_CONDUCTOR */], function (state, conductorID) {
+    state.all = state.all.filter(function (x) {
+        return x.id !== conductorID;
+    });
+}), _mutations);
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+    state: _extends({}, initialState),
+    actions: __WEBPACK_IMPORTED_MODULE_0__actions__,
+    getters: __WEBPACK_IMPORTED_MODULE_1__getters__,
+    mutations: mutations
+});
+
+/***/ }),
+/* 1026 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "reinitConductors", function() { return reinitConductors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchConductors", function() { return fetchConductors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchConductor", function() { return fetchConductor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createConductor", function() { return createConductor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateConductor", function() { return updateConductor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteConductor", function() { return deleteConductor; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "saveConductor", function() { return saveConductor; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__ = __webpack_require__(98);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios__ = __webpack_require__(38);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_axios___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_axios__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(73);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__mutation_types__ = __webpack_require__(1024);
+
+
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
+
+
+
+
+
+
+
+var reinitConductors = function () {
+    var _ref2 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee(_ref) {
+        var commit = _ref.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee$(_context) {
+            while (1) {
+                switch (_context.prev = _context.next) {
+                    case 0:
+                        commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["e" /* REINIT_CONDUCTORS */], []);
+
+                    case 1:
+                    case 'end':
+                        return _context.stop();
+                }
+            }
+        }, _callee, this);
+    }));
+
+    return function reinitConductors(_x) {
+        return _ref2.apply(this, arguments);
+    };
+}();
+
+var fetchConductors = function () {
+    var _ref4 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee2(_ref3) {
+        var commit = _ref3.commit;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee2$(_context2) {
+            while (1) {
+                switch (_context2.prev = _context2.next) {
+                    case 0:
+                        return _context2.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/conductors'
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["d" /* FETCH_CONDUCTORS */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context2.stop();
+                }
+            }
+        }, _callee2, this);
+    }));
+
+    return function fetchConductors(_x2) {
+        return _ref4.apply(this, arguments);
+    };
+}();
+
+var fetchConductor = function () {
+    var _ref7 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee3(_ref5, _ref6) {
+        var commit = _ref5.commit;
+        var conductorID = _ref6.conductorID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee3$(_context3) {
+            while (1) {
+                switch (_context3.prev = _context3.next) {
+                    case 0:
+                        return _context3.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'GET',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/conductors/' + conductorID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["c" /* FETCH_CONDUCTOR */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context3.stop();
+                }
+            }
+        }, _callee3, this);
+    }));
+
+    return function fetchConductor(_x3, _x4) {
+        return _ref7.apply(this, arguments);
+    };
+}();
+
+var createConductor = function () {
+    var _ref10 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee4(_ref8, _ref9) {
+        var commit = _ref8.commit;
+        var conductor = _ref9.conductor;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee4$(_context4) {
+            while (1) {
+                switch (_context4.prev = _context4.next) {
+                    case 0:
+                        return _context4.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'POST',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/conductors',
+                            data: conductor
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["a" /* CREATE_CONDUCTOR */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context4.stop();
+                }
+            }
+        }, _callee4, this);
+    }));
+
+    return function createConductor(_x5, _x6) {
+        return _ref10.apply(this, arguments);
+    };
+}();
+
+var updateConductor = function () {
+    var _ref13 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee5(_ref11, _ref12) {
+        var commit = _ref11.commit;
+        var conductor = _ref12.conductor;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee5$(_context5) {
+            while (1) {
+                switch (_context5.prev = _context5.next) {
+                    case 0:
+                        return _context5.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'PUT',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/conductors/' + conductor.id,
+                            data: conductor
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["f" /* UPDATE_CONDUCTOR */], response.data);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context5.stop();
+                }
+            }
+        }, _callee5, this);
+    }));
+
+    return function updateConductor(_x7, _x8) {
+        return _ref13.apply(this, arguments);
+    };
+}();
+
+var deleteConductor = function () {
+    var _ref16 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee6(_ref14, _ref15) {
+        var commit = _ref14.commit;
+        var conductorID = _ref15.conductorID;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee6$(_context6) {
+            while (1) {
+                switch (_context6.prev = _context6.next) {
+                    case 0:
+                        return _context6.abrupt('return', __WEBPACK_IMPORTED_MODULE_1_axios___default()({
+                            method: 'DELETE',
+                            url: __WEBPACK_IMPORTED_MODULE_2__config__["a" /* apiDomain */] + '/conductors/' + conductorID
+                        }).then(function (response) {
+                            commit(__WEBPACK_IMPORTED_MODULE_3__mutation_types__["b" /* DELETE_CONDUCTOR */], conductorID);
+                            return response.data;
+                        }).catch(function (error) {
+                            throw error;
+                        }));
+
+                    case 1:
+                    case 'end':
+                        return _context6.stop();
+                }
+            }
+        }, _callee6, this);
+    }));
+
+    return function deleteConductor(_x9, _x10) {
+        return _ref16.apply(this, arguments);
+    };
+}();
+
+var saveConductor = function () {
+    var _ref19 = _asyncToGenerator( /*#__PURE__*/__WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.mark(function _callee7(_ref17, _ref18) {
+        var commit = _ref17.commit,
+            state = _ref17.state;
+        var conductor = _ref18.conductor;
+        var index;
+        return __WEBPACK_IMPORTED_MODULE_0_babel_runtime_regenerator___default.a.wrap(function _callee7$(_context7) {
+            while (1) {
+                switch (_context7.prev = _context7.next) {
+                    case 0:
+                        index = state.all.findIndex(function (x) {
+                            return x.id === conductor.id;
+                        });
+
+                        if (!(index !== -1)) {
+                            _context7.next = 3;
+                            break;
+                        }
+
+                        return _context7.abrupt('return', updateConductor({ commit: commit }, { conductor: conductor }));
+
+                    case 3:
+                        return _context7.abrupt('return', createConductor({ commit: commit }, { conductor: conductor }));
+
+                    case 4:
+                    case 'end':
+                        return _context7.stop();
+                }
+            }
+        }, _callee7, this);
+    }));
+
+    return function saveConductor(_x11, _x12) {
+        return _ref19.apply(this, arguments);
+    };
+}();
+
+/***/ }),
+/* 1027 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getConductors", function() { return getConductors; });
+var getConductors = function getConductors(state) {
+  return state.all;
+};
+
+/***/ }),
+/* 1028 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return routes; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_ConductorsIndex_vue__ = __webpack_require__(1029);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__pages_ConductorsIndex_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__pages_ConductorsIndex_vue__);
+
+
+var routes = [{
+    path: '/conductors',
+    name: 'conductors:index',
+    component: __WEBPACK_IMPORTED_MODULE_0__pages_ConductorsIndex_vue___default.a,
+    meta: {}
+}];
+
+/***/ }),
+/* 1029 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1030)
+/* template */
+var __vue_template__ = __webpack_require__(1031)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/conductors/pages/ConductorsIndex.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0f520656", Component.options)
+  } else {
+    hotAPI.reload("data-v-0f520656", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1030 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vuex__ = __webpack_require__(130);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue__ = __webpack_require__(892);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ConductorForm__ = __webpack_require__(1032);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_ConductorForm___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_ConductorForm__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ConductorsList__ = __webpack_require__(1035);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_ConductorsList___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_ConductorsList__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__config__ = __webpack_require__(1038);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    components: { MissionsSideBar: __WEBPACK_IMPORTED_MODULE_1__missions_components_MissionsSideBar_vue___default.a, ConductorForm: __WEBPACK_IMPORTED_MODULE_2__components_ConductorForm___default.a, ConductorList: __WEBPACK_IMPORTED_MODULE_3__components_ConductorsList___default.a },
+    data: function data() {
+        return {
+            index: '1-0',
+            conductor: Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialConductorData */])()
+        };
+    },
+
+    computed: _extends({}, Object(__WEBPACK_IMPORTED_MODULE_0_vuex__["mapGetters"])({
+        conductors: 'getConductors'
+    })),
+    mounted: function mounted() {
+        this.$store.dispatch('fetchConductors');
+    },
+
+    methods: {
+        saveConductor: function saveConductor() {
+            var _this = this;
+
+            this.$store.dispatch('saveConductor', { conductor: this.conductor }).then(function (conductor) {
+                _this.$message.success('Le chauffeur ' + conductor.name + ' a été ajouter avec succès.');
+                _this.conductor = Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialConductorData */])();
+            }).catch(function (error) {
+                _this.$message.error('Une erreur innattendue est survenue, merci de contacter votre administrateur!');
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 1031 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-row",
+    [
+      _c(
+        "el-col",
+        { attrs: { span: 4 } },
+        [_c("missions-side-bar", { attrs: { index: _vm.index } })],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-col",
+        { staticClass: "container scrollableY", attrs: { span: 20 } },
+        [
+          _c(
+            "el-breadcrumb",
+            { attrs: { separator: "/" } },
+            [
+              _c(
+                "el-breadcrumb-item",
+                { attrs: { to: { name: "missions:index" } } },
+                [_vm._v("Gestion des missions")]
+              ),
+              _vm._v(" "),
+              _c("el-breadcrumb-item", [_vm._v("Chauffeurs")])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("h3", [_vm._v("Ajouter un chauffeur")]),
+              _vm._v(" "),
+              _c("conductor-form", {
+                attrs: { conductor: _vm.conductor },
+                on: { submit: _vm.saveConductor }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            [
+              _c("h3", [_vm._v("Liste des chauffeurs")]),
+              _vm._v(" "),
+              _c("conductor-list", { attrs: { conductors: _vm.conductors } })
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0f520656", module.exports)
+  }
+}
+
+/***/ }),
+/* 1032 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1033)
+/* template */
+var __vue_template__ = __webpack_require__(1034)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/conductors/components/ConductorForm.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6ea34e47", Component.options)
+  } else {
+    hotAPI.reload("data-v-6ea34e47", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1033 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['conductor'],
+    data: function data() {
+        return {
+            rules: {
+                name: [{ required: true, message: 'Le nom est obligatoire', trigger: 'blur' }, { min: 3, max: 100, message: 'Length should be 3 to 5', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        onSubmit: function onSubmit(formName) {
+            var _this = this;
+
+            this.$refs['conductorForm'].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', _this.conductor);
+                    return true;
+                } else {
+                    _this.$message.error('Merci de vérifier les données saisies.');
+                    return false;
+                }
+            });
+        },
+        resetForm: function resetForm(formName) {
+            this.$refs['conductorForm'].resetFields();
+        }
+    }
+});
+
+/***/ }),
+/* 1034 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-form",
+    { ref: "conductorForm", attrs: { model: _vm.conductor, rules: _vm.rules } },
+    [
+      _c(
+        "el-form-item",
+        { attrs: { label: "Nom", prop: "name" } },
+        [
+          _c("el-input", {
+            attrs: { type: "text" },
+            model: {
+              value: _vm.conductor.name,
+              callback: function($$v) {
+                _vm.$set(_vm.conductor, "name", $$v)
+              },
+              expression: "conductor.name"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        [
+          _c(
+            "el-button",
+            { attrs: { type: "primary" }, on: { click: _vm.onSubmit } },
+            [_vm._v("Sauvegarder")]
+          ),
+          _vm._v(" "),
+          _c("el-button", { on: { click: _vm.resetForm } }, [_vm._v("Annuler")])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6ea34e47", module.exports)
+  }
+}
+
+/***/ }),
+/* 1035 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1036)
+/* template */
+var __vue_template__ = __webpack_require__(1037)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/conductors/components/ConductorsList.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-73e3925e", Component.options)
+  } else {
+    hotAPI.reload("data-v-73e3925e", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1036 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['conductors'],
+    data: function data() {
+        var _this = this;
+
+        return {
+            titles: [{ prop: 'name', label: 'Nom' }],
+            tableProps: {
+                defaultSort: {
+                    prop: 'name'
+                }
+            },
+            actionColDef: {
+                label: 'Actions',
+                width: 250,
+                tableColProps: {
+                    align: 'center'
+                },
+                def: [
+                // {
+                //     name: 'Details',
+                //     handler: row => {
+                //         // this.$router.push({name: 'missions:details', params: {id: row.id}})
+                //     }
+                // },
+                {
+                    name: 'Supprimer',
+                    handler: function handler(row) {
+
+                        _this.$confirm('Etes-vous sûr de vouloir supprimer le chauffeur ' + row.name + '. Continuer?', 'Warning', {
+                            confirmButtonText: 'Valider',
+                            cancelButtonText: 'Annuler',
+                            type: 'warning'
+                        }).then(function () {
+
+                            _this.$store.dispatch('deleteConductor', { conductorID: row.id }).then(function () {
+                                _this.$store.dispatch('fetchConductors');
+                                _this.$message({
+                                    type: 'success',
+                                    message: 'Suppression effectuée avec succès.'
+                                });
+                            }).catch(function () {
+                                _this.$message({
+                                    type: 'error',
+                                    message: 'Une erreur innattendue est survenue, veuillez réessayer.'
+                                });
+                            });
+                        }).catch(function () {
+                            _this.$message({
+                                type: 'info',
+                                message: 'Suppression annulée.'
+                            });
+                        });
+                    }
+                }]
+            }
+        };
+    }
+});
+
+/***/ }),
+/* 1037 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "data-tables",
+    {
+      attrs: {
+        data: _vm.conductors,
+        "table-props": _vm.tableProps,
+        "action-col-def": _vm.actionColDef
+      }
+    },
+    _vm._l(_vm.titles, function(title) {
+      return _c("el-table-column", {
+        key: title.prop,
+        attrs: { prop: title.prop, label: title.label, sortable: "custom" }
+      })
+    })
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-73e3925e", module.exports)
+  }
+}
+
+/***/ }),
+/* 1038 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = initialConductorData;
+function initialConductorData() {
+    return {
+        id: -1,
+        name: null,
+        created_at: null,
+        updated_at: null,
+        tasks: []
+    };
 }
 
 /***/ })

@@ -1,7 +1,7 @@
 <template>
     <el-row>
         <el-col :span="4">
-            <customers-side-bar :index="index"></customers-side-bar>
+            <customers-side-bar :index="index"/>
         </el-col>
         <el-col :span="20" class="container">
             customer dashboard

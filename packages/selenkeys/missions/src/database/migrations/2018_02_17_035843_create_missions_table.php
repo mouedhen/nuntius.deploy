@@ -18,16 +18,17 @@ class CreateMissionsTable extends Migration
 
             $table->string('label')->unique();
             $table->integer('label_id');
-            $table->enum('status', ['planned', 'validated', 'in_progress', 'finished', 'canceled'])
-                ->default('planned');
 
             $table->dateTimeTz('estimated_start_date')->nullable();
-            $table->float('fuel_unit_price')->nullable();
-            $table->integer('customer_id')->unsigned()->nullable();
-            $table->string('start_counter')->nullable();
-
             $table->dateTimeTz('estimated_end_date')->nullable();
+
+            $table->enum('status', ['planned', 'validated', 'in_progress', 'finished', 'canceled'])
+                ->default('planned');
+            $table->float('fuel_unit_price')->nullable();
+            $table->string('start_counter')->nullable();
             $table->string('end_counter')->nullable();
+
+            $table->integer('customer_id')->unsigned()->nullable();
 
             $table->timestamps();
         });

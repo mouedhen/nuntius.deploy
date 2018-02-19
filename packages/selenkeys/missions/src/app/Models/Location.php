@@ -22,10 +22,20 @@ class Location extends Model
     use Notifiable, AutoLabelTrait;
 
     protected $table = 'locations';
-    protected $fillable = ['longitude', 'latitude', 'address'];
+    protected $fillable = ['name', 'longitude', 'latitude', 'address'];
 
     public function missions()
     {
         return $this->hasMany(Mission::class);
+    }
+
+    public function destinations()
+    {
+        return $this->hasMany(Transport::class, 'end_point');
+    }
+
+    public function starts()
+    {
+        return $this->hasMany(Transport::class, 'start_point');
     }
 }
