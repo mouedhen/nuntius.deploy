@@ -1,9 +1,9 @@
 <template>
     <el-row>
-        <el-col :span="4">
+        <el-col :span="4" class="noprint">
             <customers-side-bar :index="index"/>
         </el-col>
-        <el-col :span="20" class="container">
+        <el-col :span="20" class="container scrollableY printcontent">
 
             <el-card class="box-card">
                 <div>
@@ -25,7 +25,7 @@
             </el-card>
 
             <div>
-                <div style="text-align: right; margin-top: 24px">
+                <div style="text-align: right; margin-top: 24px" class="noprint">
                     <el-button type="primary" @click="dialogVisible = true">Ajouter contacts</el-button>
                 </div>
                 <div>

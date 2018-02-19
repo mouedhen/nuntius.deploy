@@ -43,10 +43,9 @@
                     .then((mission) => {
                         this.$message.success('Success, mission' + mission.name + ' created.');
                         this.mission = initialMissionData();
-                        this.$router.push({name: 'missions:tasks', params: {id: mission.id}})
+                        this.$router.push({name: 'missions:details', params: {id: mission.id}})
                     })
                     .catch(error => {
-                        console.log(error)
                         this.$message.error('Error, Record already exit!');
                         this.mission.start_counter = start_counter;
                         this.mission.end_counter = end_counter;

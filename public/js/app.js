@@ -3803,6 +3803,7 @@ var REINIT_CONTACTS = 'missions/contacts/REINIT_CONTACTS';
 var FETCH_MISSIONS = 'missions/missions/FETCH_MISSIONS';
 var FETCH_MISSION = 'missions/missions/MISSION';
 var CREATE_MISSION = 'missions/missions/CREATE_MISSION';
+
 var UPDATE_MISSION = 'missions/missions/UPDATE_MISSION';
 var DELETE_MISSION = 'missions/missions/DELETE_MISSION';
 
@@ -9839,7 +9840,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_1_vuex
         missions: __WEBPACK_IMPORTED_MODULE_9__modules_missions_missions__["a" /* default */],
         tasks: __WEBPACK_IMPORTED_MODULE_10__modules_missions_tasks__["a" /* default */]
     },
-    strict: true
+    strict: false
 }));
 
 /***/ }),
@@ -11718,8 +11719,8 @@ function fetchMissions(_ref2) {
         method: 'GET',
         url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions'
     }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_MISSIONS */], response.data.data);
-        return response.data.data;
+        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["d" /* FETCH_MISSIONS */], response.data);
+        return response.data;
     }).catch(function (error) {
         throw error;
     });
@@ -11733,8 +11734,8 @@ function fetchMission(_ref3, _ref4) {
         method: 'GET',
         url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions/' + missionID
     }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["c" /* FETCH_MISSION */], response.data.data);
-        return response.data.data;
+        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["c" /* FETCH_MISSION */], response.data);
+        return response.data;
     }).catch(function (error) {
         throw error;
     });
@@ -11749,8 +11750,8 @@ function createMission(_ref5, _ref6) {
         url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions',
         data: mission
     }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_MISSION */], response.data.data);
-        return response.data.data;
+        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["a" /* CREATE_MISSION */], response.data);
+        return response.data;
     }).catch(function (error) {
         throw error;
     });
@@ -11758,15 +11759,16 @@ function createMission(_ref5, _ref6) {
 
 function updateMission(_ref7, _ref8) {
     var commit = _ref7.commit;
-    var mission = _ref8.mission;
+    var mission = _ref8.mission,
+        action = _ref8.action;
 
     return __WEBPACK_IMPORTED_MODULE_0_axios___default()({
         method: 'PUT',
-        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions/' + mission.id,
+        url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions/' + mission.id + '/' + action,
         data: mission
     }).then(function (response) {
-        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["f" /* UPDATE_MISSION */], response.data.data);
-        return response.data.data;
+        commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["f" /* UPDATE_MISSION */], response.data);
+        return response.data;
     }).catch(function (error) {
         throw error;
     });
@@ -11781,7 +11783,7 @@ function deleteMission(_ref9, _ref10) {
         url: __WEBPACK_IMPORTED_MODULE_1__config__["a" /* apiDomain */] + '/missions/' + missionID
     }).then(function (response) {
         commit(__WEBPACK_IMPORTED_MODULE_2__mutation_types__["b" /* DELETE_MISSION */], missionID);
-        return response.data.data;
+        return response.data;
     }).catch(function (error) {
         throw error;
     });
@@ -11790,13 +11792,14 @@ function deleteMission(_ref9, _ref10) {
 function saveMission(_ref11, _ref12) {
     var commit = _ref11.commit,
         state = _ref11.state;
-    var mission = _ref12.mission;
+    var mission = _ref12.mission,
+        action = _ref12.action;
 
     var index = state.all.findIndex(function (x) {
         return x.id === mission.id;
     });
     if (index !== -1) {
-        return updateMission({ commit: commit }, { mission: mission });
+        return updateMission({ commit: commit }, { mission: mission, action: action });
     }
     return createMission({ commit: commit }, { mission: mission });
 }
@@ -12391,37 +12394,49 @@ var Authentication = function () {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = initialMissionData;
-/* harmony export (immutable) */ __webpack_exports__["b"] = missionDetails;
+/* unused harmony export initialMissionDetails */
 function initialMissionData() {
     return {
         id: -1,
+        label: null,
+        status: null,
+        // action: store
+        // status: planned
         estimated_start_date: null,
         estimated_end_date: null,
-        service_type: 'ground_work',
         customer_id: null,
-        fuel_unit_price: null,
+        customer: {},
+        location_id: null,
+        location: {},
+        // action: cancel
+        // status: canceled
+        cancellation_cause: null,
+        // action: validate
+        // status: validated
+        start_date: null,
+        // action: launch
+        // status: in_progress
         start_counter: null,
-        end_counter: null
+        fuel_unit_price: null,
+        // action: finish
+        // status: finished
+        end_date: null,
+        end_counter: null,
+
+        tasks: [],
+        transports: []
     };
 }
 
-function missionDetails() {
+function initialMissionDetails() {
     return {
         id: -1,
         label: null,
+
         estimated_start_date: null,
         estimate_end_date: null,
-        service_type: null,
-        customer: {},
-        location: {},
-        step: null,
-        created_at: null,
-        updated_at: null,
-        tasks: [],
-        missions_delays_logs: [],
-        fuel_unit_price: null,
-        start_counter: null,
-        end_counter: null
+        customer_id: null,
+        location_id: null
     };
 }
 
@@ -12584,7 +12599,7 @@ module.exports = Component.exports
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = initialTaskData;
+/* unused harmony export initialTaskData */
 function initialTaskData() {
     return {
         id: -1,
@@ -14602,7 +14617,7 @@ var render = function() {
   return _c(
     "el-menu",
     {
-      staticClass: "viewport-height",
+      staticClass: "viewport-height noprint",
       attrs: {
         router: true,
         "background-color": "#F5F5F5",
@@ -16079,14 +16094,17 @@ var render = function() {
     [
       _c(
         "el-col",
-        { attrs: { span: 4 } },
+        { staticClass: "noprint", attrs: { span: 4 } },
         [_c("customers-side-bar", { attrs: { index: _vm.index } })],
         1
       ),
       _vm._v(" "),
       _c(
         "el-col",
-        { staticClass: "container", attrs: { span: 20 } },
+        {
+          staticClass: "container scrollableY printcontent",
+          attrs: { span: 20 }
+        },
         [
           _c("el-card", { staticClass: "box-card" }, [
             _c("div", [
@@ -16134,7 +16152,10 @@ var render = function() {
           _c("div", [
             _c(
               "div",
-              { staticStyle: { "text-align": "right", "margin-top": "24px" } },
+              {
+                staticClass: "noprint",
+                staticStyle: { "text-align": "right", "margin-top": "24px" }
+              },
               [
                 _c(
                   "el-button",
@@ -16250,9 +16271,6 @@ if (false) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__pages_MissionsList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__pages_MissionsList_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_MissionsDetails_vue__ = __webpack_require__(986);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__pages_MissionsDetails_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__pages_MissionsDetails_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_MissionsTasks_vue__ = __webpack_require__(1009);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_MissionsTasks_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__pages_MissionsTasks_vue__);
-
 
 
 
@@ -16277,11 +16295,6 @@ var routes = [{
     path: '/missions/:id/details',
     name: 'missions:details',
     component: __WEBPACK_IMPORTED_MODULE_3__pages_MissionsDetails_vue___default.a,
-    meta: {}
-}, {
-    path: '/missions/:id/tasks',
-    name: 'missions:tasks',
-    component: __WEBPACK_IMPORTED_MODULE_4__pages_MissionsTasks_vue___default.a,
     meta: {}
 }];
 
@@ -16426,7 +16439,7 @@ var render = function() {
   return _c(
     "el-menu",
     {
-      staticClass: "viewport-height",
+      staticClass: "viewport-height noprint",
       attrs: {
         router: true,
         "background-color": "#F5F5F5",
@@ -16669,9 +16682,8 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
             this.$store.dispatch('saveMission', { mission: mission }).then(function (mission) {
                 _this.$message.success('Success, mission' + mission.name + ' created.');
                 _this.mission = Object(__WEBPACK_IMPORTED_MODULE_4__config__["a" /* initialMissionData */])();
-                _this.$router.push({ name: 'missions:tasks', params: { id: mission.id } });
+                _this.$router.push({ name: 'missions:details', params: { id: mission.id } });
             }).catch(function (error) {
-                console.log(error);
                 _this.$message.error('Error, Record already exit!');
                 _this.mission.start_counter = start_counter;
                 _this.mission.end_counter = end_counter;
@@ -17728,14 +17740,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -17793,7 +17797,12 @@ var render = function() {
     [
       _c(
         "el-form-item",
-        { attrs: { label: "Date de début", prop: "estimated_start_date" } },
+        {
+          attrs: {
+            label: "Date estimée de début",
+            prop: "estimated_start_date"
+          }
+        },
         [
           _c("el-date-picker", {
             staticStyle: { width: "100%" },
@@ -17804,6 +17813,27 @@ var render = function() {
                 _vm.$set(_vm.mission, "estimated_start_date", $$v)
               },
               expression: "mission.estimated_start_date"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        {
+          attrs: { label: "Date estimé de fin", prop: "estimated_start_date" }
+        },
+        [
+          _c("el-date-picker", {
+            staticStyle: { width: "100%" },
+            attrs: { type: "date", placeholder: "choisir une date" },
+            model: {
+              value: _vm.mission.estimated_end_date,
+              callback: function($$v) {
+                _vm.$set(_vm.mission, "estimated_end_date", $$v)
+              },
+              expression: "mission.estimated_end_date"
             }
           })
         ],
@@ -17837,68 +17867,6 @@ var render = function() {
               })
             })
           )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "el-form-item",
-        { attrs: { label: "Compteur arrivé", prop: "start_counter" } },
-        [
-          _c("div", { staticClass: "el-input" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.mission.start_counter,
-                  expression: "mission.start_counter"
-                }
-              ],
-              staticClass: "el-input__inner",
-              attrs: {
-                id: "start_counter",
-                name: "start_counter",
-                "data-inputmask": "'mask': '9999:99'"
-              },
-              domProps: { value: _vm.mission.start_counter },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
-                  }
-                  _vm.$set(_vm.mission, "start_counter", $event.target.value)
-                }
-              }
-            })
-          ])
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "el-form-item",
-        {
-          attrs: {
-            label: "Prix unitaire du carburant",
-            prop: "fuel_unit_price"
-          }
-        },
-        [
-          _c("el-input", {
-            attrs: {
-              placeholder: "merci de spécifier le prix unitaire de carburant",
-              type: "number",
-              clearable: "",
-              min: 0
-            },
-            model: {
-              value: _vm.mission.fuel_unit_price,
-              callback: function($$v) {
-                _vm.$set(_vm.mission, "fuel_unit_price", $$v)
-              },
-              expression: "mission.fuel_unit_price"
-            }
-          })
         ],
         1
       ),
@@ -18208,7 +18176,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         var _this = this;
 
         return {
-            titles: [{ prop: 'label', label: 'ID' }, { prop: 'customer.name', label: 'Customer' }, { prop: 'estimated_start_date', label: 'Estimated Start Date' }, { prop: 'estimated_end_date', label: 'Estimated End Date' }],
+            titles: [{ prop: 'label', label: 'ID' }, { prop: 'customer.name', label: 'Client' }, { prop: 'status', label: 'Status' }],
             tableProps: {
                 defaultSort: {
                     prop: 'label'
@@ -18225,15 +18193,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         _this.$router.push({ name: 'missions:details', params: { id: row.id } });
                     }
                 }, {
-                    name: 'Tasks',
-                    handler: function handler(row) {
-                        _this.$router.push({ name: 'missions:tasks', params: { id: row.id } });
-                    }
-                }, {
-                    name: 'Delete',
+                    name: 'Supprimer',
                     handler: function handler(row) {
                         _this.$store.dispatch('deleteMission', { missionID: row.id }).then(function () {
-                            _this.fetchMissions();
+                            _this.$store.dispatch('fetchMissions');
                         });
                     }
                 }]
@@ -18392,15 +18355,19 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__config__ = __webpack_require__(896);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_MissionsSideBar_vue__ = __webpack_require__(892);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__components_MissionsSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__components_MissionsSideBar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_MissionsDetails_vue__ = __webpack_require__(988);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__components_MissionsDetails_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__components_MissionsDetails_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config__ = __webpack_require__(896);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue__ = __webpack_require__(892);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MissionsDetails_vue__ = __webpack_require__(988);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__components_MissionsDetails_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__components_MissionsDetails_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__workflow_PlannedMission__ = __webpack_require__(1069);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__workflow_PlannedMission___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__workflow_PlannedMission__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__workflow_CanceledMission__ = __webpack_require__(1072);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__workflow_CanceledMission___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4__workflow_CanceledMission__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__workflow_ValidatedMission__ = __webpack_require__(1078);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__workflow_ValidatedMission___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5__workflow_ValidatedMission__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__workflow_InProgressMission__ = __webpack_require__(1075);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__workflow_InProgressMission___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6__workflow_InProgressMission__);
 //
 //
 //
@@ -18417,6 +18384,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -18426,11 +18406,18 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { ElRow: __WEBPACK_IMPORTED_MODULE_1_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_1_element_ui__["Col"], MissionsSideBar: __WEBPACK_IMPORTED_MODULE_3__components_MissionsSideBar_vue___default.a, MissionsDetailsComponent: __WEBPACK_IMPORTED_MODULE_4__components_MissionsDetails_vue___default.a },
+    components: {
+        MissionsSideBar: __WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue___default.a,
+        MissionsDetailsComponent: __WEBPACK_IMPORTED_MODULE_2__components_MissionsDetails_vue___default.a,
+        PlannedMission: __WEBPACK_IMPORTED_MODULE_3__workflow_PlannedMission___default.a,
+        CanceledMission: __WEBPACK_IMPORTED_MODULE_4__workflow_CanceledMission___default.a,
+        ValidatedMission: __WEBPACK_IMPORTED_MODULE_5__workflow_ValidatedMission___default.a,
+        InProgressMission: __WEBPACK_IMPORTED_MODULE_6__workflow_InProgressMission___default.a
+    },
     data: function data() {
         return {
             index: '0-3',
-            mission: Object(__WEBPACK_IMPORTED_MODULE_2__config__["b" /* missionDetails */])()
+            mission: Object(__WEBPACK_IMPORTED_MODULE_0__config__["a" /* initialMissionData */])()
         };
     },
     mounted: function mounted() {
@@ -18441,6 +18428,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         }).catch(function (error) {
             _this.$message.error('Error, can not get records details !');
         });
+    },
+
+    methods: {
+        submit: function submit(action) {
+            var _this2 = this;
+
+            this.$store.dispatch('saveMission', { mission: this.mission, action: action });
+
+            this.$store.dispatch('fetchMission', { missionID: this.$route.params.id }).then(function (mission) {
+                _this2.mission = mission;
+            }).catch(function (error) {
+                _this2.$message.error('Error, can not get records details !');
+            });
+        }
     }
 });
 
@@ -18497,8 +18498,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_ui__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tasks_components_TasksSummary_vue__ = __webpack_require__(990);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__tasks_components_TasksSummary_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__tasks_components_TasksSummary_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksTableDetails_vue__ = __webpack_require__(1004);
@@ -18527,15 +18528,52 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-    components: { ElRow: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Col"], TasksSummary: __WEBPACK_IMPORTED_MODULE_1__tasks_components_TasksSummary_vue___default.a, TasksTable: __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksTableDetails_vue___default.a },
-    props: ['mission']
+    components: { TasksSummary: __WEBPACK_IMPORTED_MODULE_1__tasks_components_TasksSummary_vue___default.a, TasksTable: __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksTableDetails_vue___default.a },
+    props: ['mission'],
+    methods: {
+        formatDate: function formatDate(date) {
+            return __WEBPACK_IMPORTED_MODULE_0_moment___default()(date).format('DD/MM/YYYY');
+        },
+        formatStatus: function formatStatus(status) {
+            switch (status) {
+                case 'planned':
+                    return 'Planifiée';
+                case 'canceled':
+                    return 'Annulée';
+                case 'validated':
+                    return 'Validée';
+                case 'in_progress':
+                    return 'En cours';
+                case 'finished':
+                    return 'Terminée';
+                default:
+                    return 'Non définie';
+            }
+        }
+    }
 });
 
 /***/ }),
@@ -20237,61 +20275,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c("h1", { staticStyle: { "text-align": "center" } }, [
-        _vm._v("Mission - " + _vm._s(_vm.mission.label))
-      ]),
-      _vm._v(" "),
-      _c(
-        "el-row",
-        [
-          _c("el-col", { attrs: { span: 18 } }, [
-            _c("dl", [
-              _c("dt", { staticStyle: { "font-weight": "600" } }, [
-                _vm._v("Client label")
-              ]),
-              _vm._v(" "),
-              _c("dd", [_vm._v(_vm._s(_vm.mission.customer.label))]),
-              _vm._v(" "),
-              _c("dt", { staticStyle: { "font-weight": "600" } }, [
-                _vm._v("Client name")
-              ]),
-              _vm._v(" "),
-              _c("dd", [_vm._v(_vm._s(_vm.mission.customer.name))])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("el-col", { attrs: { span: 6 } }, [
-            _c("dt", { staticStyle: { "font-weight": "600" } }, [
-              _vm._v("Estimated Start Date")
-            ]),
+  return _c("div", { staticClass: "container" }, [
+    _c("div", { staticClass: "box-card" }, [
+      _c("div", [
+        _c("h2", { staticStyle: { "margin-bottom": "0" } }, [
+          _vm._v("Mission - " + _vm._s(_vm.mission.label))
+        ]),
+        _vm._v(" "),
+        _c("small", [_vm._v(_vm._s(_vm.formatStatus(_vm.mission.status)))]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticStyle: { "text-align": "right" } },
+          [
+            _c(
+              "el-row",
+              { attrs: { gutters: 20 } },
+              [
+                _c("el-col", { attrs: { span: 8 } }, [
+                  _vm.mission.customer
+                    ? _c("div", [
+                        _c("b", [_vm._v("ID Client : ")]),
+                        _vm._v(_vm._s(_vm.mission.customer.label))
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mission.customer
+                    ? _c("div", [
+                        _c("b", [_vm._v("Client : ")]),
+                        _vm._v(_vm._s(_vm.mission.customer.name))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("el-col", { attrs: { span: 8 } }, [
+                  _vm.mission.estimated_start_date
+                    ? _c("div", [
+                        _c("b", [_vm._v("Date estimée de début : ")]),
+                        _vm._v(
+                          _vm._s(
+                            _vm.formatDate(_vm.mission.estimated_start_date)
+                          )
+                        )
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mission.estimated_end_date
+                    ? _c("div", [
+                        _c("b", [_vm._v("Date estimée de fin : ")]),
+                        _vm._v(
+                          _vm._s(_vm.formatDate(_vm.mission.estimated_end_date))
+                        )
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("el-col", { attrs: { span: 8 } }, [
+                  _vm.mission.start_date
+                    ? _c("div", [
+                        _c("b", [_vm._v("Date effective de début : ")]),
+                        _vm._v(_vm._s(_vm.formatDate(_vm.mission.start_date)))
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mission.end_date
+                    ? _c("div", [
+                        _c("b", [_vm._v("Date effective de fin : ")]),
+                        _vm._v(_vm._s(_vm.formatDate(_vm.mission.end_date)))
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              1
+            ),
             _vm._v(" "),
-            _c("dd", [_vm._v(_vm._s(_vm.mission.estimated_start_date))]),
-            _vm._v(" "),
-            _c("dt", { staticStyle: { "font-weight": "600" } }, [
-              _vm._v("Estimated End Date")
-            ]),
-            _vm._v(" "),
-            _c("dd", [_vm._v(_vm._s(_vm.mission.estimated_end_date))])
-          ])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("tasks-summary", {
-        attrs: {
-          tasks: _vm.mission.tasks,
-          fuelUnitPrice: _vm.mission.fuel_unit_price
-        }
-      }),
-      _vm._v(" "),
-      _c("tasks-table", { attrs: { tasks: _vm.mission.tasks } })
-    ],
-    1
-  )
+            _c(
+              "el-row",
+              { staticClass: "margin-top" },
+              [
+                _c("el-col", { attrs: { span: 16 } }, [
+                  _vm.mission.fuel_unit_price
+                    ? _c("div", [
+                        _c("b", [_vm._v("Prix unitaire de carbrant : ")]),
+                        _vm._v(_vm._s(_vm.mission.fuel_unit_price))
+                      ])
+                    : _vm._e()
+                ]),
+                _vm._v(" "),
+                _c("el-col", { attrs: { span: 8 } }, [
+                  _vm.mission.start_counter
+                    ? _c("div", [
+                        _c("b", [_vm._v("Compteur de début : ")]),
+                        _vm._v(_vm._s(_vm.mission.start_counter))
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.mission.end_counter
+                    ? _c("div", [
+                        _c("b", [_vm._v("Compteur de fin : ")]),
+                        _vm._v(_vm._s(_vm.mission.end_counter))
+                      ])
+                    : _vm._e()
+                ])
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -20354,7 +20448,52 @@ var render = function() {
             1
           ),
           _vm._v(" "),
-          _c("missions-details-component", { attrs: { mission: _vm.mission } })
+          _c("missions-details-component", { attrs: { mission: _vm.mission } }),
+          _vm._v(" "),
+          _c(
+            "el-steps",
+            {
+              staticClass: "margin-top",
+              attrs: { active: 2, "align-center": "" }
+            },
+            [
+              _c("el-step", { attrs: { title: "Planifiée" } }),
+              _vm._v(" "),
+              _c("el-step", { attrs: { title: "Validée" } }),
+              _vm._v(" "),
+              _c("el-step", { attrs: { title: "En cours" } }),
+              _vm._v(" "),
+              _c("el-step", { attrs: { title: "Terminée" } })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _vm.mission.status === "planned"
+            ? _c("planned-mission", {
+                staticClass: "margin-top",
+                staticStyle: { "text-align": "right" },
+                attrs: { mission: _vm.mission },
+                on: { submit: _vm.submit }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mission.status === "canceled"
+            ? _c("canceled-mission", { attrs: { mission: _vm.mission } })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mission.status === "validated"
+            ? _c("validated-mission", {
+                attrs: { mission: _vm.mission },
+                on: { submit: _vm.submit }
+              })
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.mission.status === "in_progress"
+            ? _c("in-progress-mission", {
+                attrs: { mission: _vm.mission },
+                on: { submit: _vm.submit }
+              })
+            : _vm._e()
         ],
         1
       )
@@ -20373,1047 +20512,15 @@ if (false) {
 }
 
 /***/ }),
-/* 1009 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(466)
-/* script */
-var __vue_script__ = __webpack_require__(1010)
-/* template */
-var __vue_template__ = __webpack_require__(1017)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/modules/missions/missions/pages/MissionsTasks.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-5718b3f2", Component.options)
-  } else {
-    hotAPI.reload("data-v-5718b3f2", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 1010 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_ui__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue__ = __webpack_require__(892);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm_vue__ = __webpack_require__(1011);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable_vue__ = __webpack_require__(1014);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_moment__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__config__ = __webpack_require__(896);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__tasks_config__ = __webpack_require__(901);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-
-
-
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: { ElRow: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Col"], MissionsSideBar: __WEBPACK_IMPORTED_MODULE_1__components_MissionsSideBar_vue___default.a, TasksForm: __WEBPACK_IMPORTED_MODULE_2__tasks_components_TasksForm_vue___default.a, TasksTable: __WEBPACK_IMPORTED_MODULE_3__tasks_components_TasksTable_vue___default.a },
-    data: function data() {
-        return {
-            index: '0-4',
-            mission: Object(__WEBPACK_IMPORTED_MODULE_5__config__["b" /* missionDetails */])(),
-            task: Object(__WEBPACK_IMPORTED_MODULE_6__tasks_config__["a" /* initialTaskData */])()
-        };
-    },
-
-    computed: {
-        start_date: function start_date() {
-            return __WEBPACK_IMPORTED_MODULE_4_moment___default()(this.mission.estimated_start_date).format('DD/MM/YYYY');
-        }
-    },
-    mounted: function mounted() {
-        var _this = this;
-
-        this.$store.dispatch('fetchMission', { missionID: this.$route.params.id }).then(function (mission) {
-            _this.mission = mission;
-        }).catch(function (error) {
-            _this.$message.error('Error, can not get records details !');
-        });
-    },
-
-    methods: {
-        submitTask: function submitTask(task) {
-            var _this2 = this;
-
-            task.mission_id = this.$route.params.id;
-            console.log(task);
-
-            this.$store.dispatch('saveTask', { task: task }).then(function (task) {
-                _this2.$message.success('Success, task' + task.label + ' created.');
-
-                // reinitialize task
-                _this2.task = Object(__WEBPACK_IMPORTED_MODULE_6__tasks_config__["a" /* initialTaskData */])();
-
-                // refresh mission
-                _this2.$store.dispatch('fetchMission', { missionID: _this2.$route.params.id }).then(function (mission) {
-                    _this2.mission = mission;
-                    console.log(_this2.mission);
-                }).catch(function (error) {
-                    _this2.$message.error('Error, can not get records details !');
-                    _this2.task.id = -1;
-                });
-            }).catch(function (error) {
-                _this2.$message.error('Error, Record already exit!');
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 1011 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(466)
-/* script */
-var __vue_script__ = __webpack_require__(1012)
-/* template */
-var __vue_template__ = __webpack_require__(1013)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/modules/missions/tasks/components/TasksForm.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-78eabd58", Component.options)
-  } else {
-    hotAPI.reload("data-v-78eabd58", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 1012 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui__ = __webpack_require__(193);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_element_ui___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_element_ui__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    components: { ElRow: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Row"], ElCol: __WEBPACK_IMPORTED_MODULE_0_element_ui__["Col"] },
-    props: ['task'],
-    data: function data() {
-        return {};
-    },
-
-    computed: {
-        now: function now() {
-            return new Date();
-        }
-    },
-    methods: {
-        submitTask: function submitTask(formName) {
-            this.$emit('submit', this.task);
-        },
-        resetForm: function resetForm(formName) {
-            this.$refs[formName].resetFields();
-        }
-    }
-});
-
-/***/ }),
-/* 1013 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "container" },
-    [
-      _c(
-        "el-form",
-        { ref: "taskForm", attrs: { model: _vm.task } },
-        [
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Start date and time",
-                        prop: "start_date_time"
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "el-input" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.task.start_date_time,
-                              expression: "task.start_date_time"
-                            }
-                          ],
-                          staticClass: "el-input__inner",
-                          attrs: {
-                            id: "start_date_time",
-                            name: "start_date_time",
-                            type: "datetime-local"
-                          },
-                          domProps: { value: _vm.task.start_date_time },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.task,
-                                "start_date_time",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "End date and time",
-                        prop: "end_date_time"
-                      }
-                    },
-                    [
-                      _c("div", { staticClass: "el-input" }, [
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.task.end_date_time,
-                              expression: "task.end_date_time"
-                            }
-                          ],
-                          staticClass: "el-input__inner",
-                          attrs: {
-                            id: "end_date_time",
-                            name: "end_date_time",
-                            type: "datetime-local"
-                          },
-                          domProps: { value: _vm.task.end_date_time },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.task,
-                                "end_date_time",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ])
-                    ]
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Conductor", prop: "conductor" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "text" },
-                        model: {
-                          value: _vm.task.conductor,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "conductor", $$v)
-                          },
-                          expression: "task.conductor"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Tractor", prop: "tractor" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "text" },
-                        model: {
-                          value: _vm.task.tractor,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "tractor", $$v)
-                          },
-                          expression: "task.tractor"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Tool", prop: "tool" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "text" },
-                        model: {
-                          value: _vm.task.tool,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "tool", $$v)
-                          },
-                          expression: "task.tool"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Tool Config",
-                        prop: "tool_configuration"
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.tool_configuration,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "tool_configuration", $$v)
-                          },
-                          expression: "task.tool_configuration"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Depth in CM", prop: "depth_in_cm" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.depth_in_cm,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "depth_in_cm", $$v)
-                          },
-                          expression: "task.depth_in_cm"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Width in M", prop: "width_in_m" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.width_in_m,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "width_in_m", $$v)
-                          },
-                          expression: "task.width_in_m"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: { label: "Average speed", prop: "average_speed" }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.average_speed,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "average_speed", $$v)
-                          },
-                          expression: "task.average_speed"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    { attrs: { label: "Worked area", prop: "worked_area" } },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.worked_area,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "worked_area", $$v)
-                          },
-                          expression: "task.worked_area"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-row",
-            { attrs: { gutter: 20 } },
-            [
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Average consumption",
-                        prop: "average_consumption"
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.average_consumption,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "average_consumption", $$v)
-                          },
-                          expression: "task.average_consumption"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-col",
-                { attrs: { span: 12 } },
-                [
-                  _c(
-                    "el-form-item",
-                    {
-                      attrs: {
-                        label: "Fuel consumption",
-                        prop: "fuel_consumption"
-                      }
-                    },
-                    [
-                      _c("el-input", {
-                        attrs: { type: "number" },
-                        model: {
-                          value: _vm.task.fuel_consumption,
-                          callback: function($$v) {
-                            _vm.$set(_vm.task, "fuel_consumption", $$v)
-                          },
-                          expression: "task.fuel_consumption"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            { attrs: { label: "Observation", prop: "observation" } },
-            [
-              _c("el-input", {
-                attrs: { type: "textarea" },
-                model: {
-                  value: _vm.task.observation,
-                  callback: function($$v) {
-                    _vm.$set(_vm.task, "observation", $$v)
-                  },
-                  expression: "task.observation"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "el-form-item",
-            [
-              _c(
-                "el-button",
-                {
-                  attrs: { type: "primary" },
-                  on: {
-                    click: function($event) {
-                      _vm.submitTask("groundWorkTaskForm")
-                    }
-                  }
-                },
-                [_vm._v("Create")]
-              ),
-              _vm._v(" "),
-              _c(
-                "el-button",
-                {
-                  on: {
-                    click: function($event) {
-                      _vm.resetForm("groundWorkTaskForm")
-                    }
-                  }
-                },
-                [_vm._v("Reset")]
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-78eabd58", module.exports)
-  }
-}
-
-/***/ }),
-/* 1014 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(466)
-/* script */
-var __vue_script__ = __webpack_require__(1015)
-/* template */
-var __vue_template__ = __webpack_require__(1016)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/modules/missions/tasks/components/TasksTable.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-76af522c", Component.options)
-  } else {
-    hotAPI.reload("data-v-76af522c", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
-/* 1015 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_moment___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_moment__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-    props: ['tasks'],
-    computed: {
-        tableTasks: function tableTasks() {
-            return this.tasks.map(function (task) {
-                task.work_time = Object(__WEBPACK_IMPORTED_MODULE_0_moment__["duration"])(new Date(task.end_date_time) - new Date(task.start_date_time)).humanize();
-                return task;
-            });
-        }
-    }
-});
-
-/***/ }),
-/* 1016 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "el-table",
-    { staticStyle: { width: "100%" }, attrs: { data: _vm.tableTasks } },
-    [
-      _c("el-table-column", {
-        attrs: { prop: "conductor", label: "Conductor" }
-      }),
-      _vm._v(" "),
-      _c("el-table-column", { attrs: { prop: "tractor", label: "Tractor" } }),
-      _vm._v(" "),
-      _c("el-table-column", { attrs: { prop: "tool", label: "Tool" } }),
-      _vm._v(" "),
-      _c("el-table-column", {
-        attrs: { prop: "work_time", label: "Work time" }
-      })
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-76af522c", module.exports)
-  }
-}
-
-/***/ }),
-/* 1017 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c(
-    "el-row",
-    [
-      _c(
-        "el-col",
-        { attrs: { span: 4 } },
-        [_c("missions-side-bar", { attrs: { index: _vm.index } })],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "el-col",
-        { staticClass: "scrollableY container", attrs: { span: 20 } },
-        [
-          _c(
-            "el-breadcrumb",
-            { attrs: { separator: "/" } },
-            [
-              _c(
-                "el-breadcrumb-item",
-                { attrs: { to: { name: "missions:index" } } },
-                [_vm._v("Gestion des Missions")]
-              ),
-              _vm._v(" "),
-              _c(
-                "el-breadcrumb-item",
-                { attrs: { to: { name: "missions:list" } } },
-                [_vm._v("Liste des Missions")]
-              ),
-              _vm._v(" "),
-              _c("el-breadcrumb-item", [
-                _vm._v("Liste des Tâches de la Mission")
-              ])
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "container" }, [
-            _c("h1", { staticStyle: { "text-align": "center" } }, [
-              _vm._v("Mission - " + _vm._s(_vm.mission.label))
-            ]),
-            _vm._v(" "),
-            _c("div", { staticStyle: { "text-align": "center" } }, [
-              _vm._v(_vm._s(_vm.start_date))
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              [
-                _c("tasks-form", {
-                  attrs: { task: _vm.task },
-                  on: { submit: _vm.submitTask }
-                }),
-                _vm._v(" "),
-                _c("tasks-table", { attrs: { tasks: _vm.mission.tasks } })
-              ],
-              1
-            )
-          ])
-        ],
-        1
-      )
-    ],
-    1
-  )
-}
-var staticRenderFns = []
-render._withStripped = true
-module.exports = { render: render, staticRenderFns: staticRenderFns }
-if (false) {
-  module.hot.accept()
-  if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-5718b3f2", module.exports)
-  }
-}
-
-/***/ }),
+/* 1009 */,
+/* 1010 */,
+/* 1011 */,
+/* 1012 */,
+/* 1013 */,
+/* 1014 */,
+/* 1015 */,
+/* 1016 */,
+/* 1017 */,
 /* 1018 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -24384,6 +23491,990 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 var getTools = function getTools(state) {
   return state.all;
 };
+
+/***/ }),
+/* 1069 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1070)
+/* template */
+var __vue_template__ = __webpack_require__(1071)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/missions/workflow/PlannedMission.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-90ad8b64", Component.options)
+  } else {
+    hotAPI.reload("data-v-90ad8b64", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1070 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['mission'],
+    data: function data() {
+        return {
+            cancelDialogVisible: false,
+            cancelRules: {
+                cancellation_cause: [{ required: true, message: 'Le raison est obligatoire', trigger: 'blur' }, { min: 5, message: 'Length should be 3 to 5', trigger: 'blur' }]
+            },
+            validateDialogVisible: false,
+            validateRules: {
+                start_date: [{ required: true, message: 'Le date de début est obligatoire', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        cancel: function cancel(formName) {
+            this.$refs[formName].resetFields();
+            if (formName === 'cancelMissionForm') this.cancelDialogVisible = false;else this.validateDialogVisible = false;
+        },
+        submit: function submit(formName) {
+            var _this = this;
+
+            this.$refs[formName].validate(function (valid) {
+                if (valid) {
+                    if (formName === 'cancelMissionForm') {
+                        _this.$emit('submit', 'cancel');
+                        _this.cancelDialogVisible = false;
+                    } else {
+                        _this.$emit('submit', 'validate');
+                        _this.validateDialogVisible = false;
+                    }
+                    return true;
+                } else {
+                    _this.$message.error('Merci de vérifier vos paramètres.');
+                    return false;
+                }
+            });
+        },
+        handleCloseCancelForm: function handleCloseCancelForm(done) {
+            this.$refs['cancelMissionForm'].resetFields();
+            done();
+        },
+        handleCloseValidateForm: function handleCloseValidateForm(done) {
+            this.$refs['validateMissionForm'].resetFields();
+            done();
+        }
+    }
+});
+
+/***/ }),
+/* 1071 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "el-button",
+        {
+          attrs: { type: "default" },
+          on: {
+            click: function($event) {
+              _vm.cancelDialogVisible = true
+            }
+          }
+        },
+        [_vm._v("Annuler la mission")]
+      ),
+      _vm._v(" "),
+      _c(
+        "el-button",
+        {
+          attrs: { type: "primary" },
+          on: {
+            click: function($event) {
+              _vm.validateDialogVisible = true
+            }
+          }
+        },
+        [_vm._v("Valider la mission")]
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          staticStyle: { "text-align": "left" },
+          attrs: {
+            title: "Annuler la mission",
+            visible: _vm.cancelDialogVisible,
+            width: "70%",
+            "before-close": _vm.handleCloseCancelForm
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.cancelDialogVisible = $event
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "cancelMissionForm",
+              attrs: { model: _vm.mission, rules: _vm.cancelRules }
+            },
+            [
+              _c(
+                "el-form-item",
+                {
+                  attrs: {
+                    label: "Raison de l'annulation",
+                    prop: "cancellation_cause"
+                  }
+                },
+                [
+                  _c("el-input", {
+                    attrs: { type: "textarea", rows: 5 },
+                    model: {
+                      value: _vm.mission.cancellation_cause,
+                      callback: function($$v) {
+                        _vm.$set(_vm.mission, "cancellation_cause", $$v)
+                      },
+                      expression: "mission.cancellation_cause"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.cancel("cancelMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Annuler")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submit("cancelMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Valider")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          staticStyle: { "text-align": "left" },
+          attrs: {
+            title: "Valider la mission",
+            visible: _vm.validateDialogVisible,
+            width: "70%",
+            "before-close": _vm.handleCloseValidateForm
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.validateDialogVisible = $event
+            }
+          }
+        },
+        [
+          _c(
+            "el-form",
+            {
+              ref: "validateMissionForm",
+              attrs: { model: _vm.mission, rules: _vm.validateRules }
+            },
+            [
+              _c(
+                "el-form-item",
+                {
+                  attrs: {
+                    label: "Date effective de début",
+                    prop: "start_date"
+                  }
+                },
+                [
+                  _c("el-date-picker", {
+                    staticStyle: { width: "100%" },
+                    attrs: {
+                      type: "date",
+                      placeholder: "Merci de choisir une date"
+                    },
+                    model: {
+                      value: _vm.mission.start_date,
+                      callback: function($$v) {
+                        _vm.$set(_vm.mission, "start_date", $$v)
+                      },
+                      expression: "mission.start_date"
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "span",
+            {
+              staticClass: "dialog-footer",
+              attrs: { slot: "footer" },
+              slot: "footer"
+            },
+            [
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.cancel("validateMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Annuler")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submit("validateMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Valider")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-90ad8b64", module.exports)
+  }
+}
+
+/***/ }),
+/* 1072 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1073)
+/* template */
+var __vue_template__ = __webpack_require__(1074)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/missions/workflow/CanceledMission.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-675f30fd", Component.options)
+  } else {
+    hotAPI.reload("data-v-675f30fd", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1073 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['mission']
+});
+
+/***/ }),
+/* 1074 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "container" }, [
+    _c("h4", [_vm._v("Raison de l'annulation")]),
+    _vm._v(" "),
+    _c("p", [_vm._v(_vm._s(_vm.mission.cancellation_cause))])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-675f30fd", module.exports)
+  }
+}
+
+/***/ }),
+/* 1075 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1076)
+/* template */
+var __vue_template__ = __webpack_require__(1077)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/missions/workflow/InProgressMission.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-d3b8fdf8", Component.options)
+  } else {
+    hotAPI.reload("data-v-d3b8fdf8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1076 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask__ = __webpack_require__(852);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inputmask__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['mission'],
+    data: function data() {
+        return {
+            rules: {
+                end_counter: [{ required: true, message: 'Le compteur retour est obligatoire', trigger: 'blur' }],
+                end_date: [{ required: true, message: 'La date de fin est obligatoire', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        submit: function submit(formName) {
+            var _this = this;
+
+            this.$refs[formName].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', 'finish');
+                    return true;
+                } else {
+                    _this.$message.error('Merci de vérifier vos paramètres.');
+                    return false;
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        __WEBPACK_IMPORTED_MODULE_0_inputmask___default()().mask(document.querySelectorAll("input"));
+    }
+});
+
+/***/ }),
+/* 1077 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "margin-top" },
+    [
+      _c(
+        "el-form",
+        {
+          ref: "endMissionForm",
+          attrs: { model: _vm.mission, rules: _vm.rules }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Compteur retour", prop: "end_counter" } },
+            [
+              _c("div", { staticClass: "el-input" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mission.end_counter,
+                      expression: "mission.end_counter"
+                    }
+                  ],
+                  staticClass: "el-input__inner",
+                  attrs: {
+                    id: "end_counter",
+                    name: "end_counter",
+                    "data-inputmask": "'mask': '9999:99'"
+                  },
+                  domProps: { value: _vm.mission.end_counter },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.mission, "end_counter", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { attrs: { label: "Date de fin", prop: "end_date" } },
+            [
+              _c("el-date-picker", {
+                staticStyle: { width: "100%" },
+                attrs: {
+                  type: "date",
+                  placeholder: "Merci de choisir une date"
+                },
+                model: {
+                  value: _vm.mission.end_date,
+                  callback: function($$v) {
+                    _vm.$set(_vm.mission, "end_date", $$v)
+                  },
+                  expression: "mission.end_date"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { staticStyle: { "text-align": "right" } },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: { click: function($event) {} }
+                },
+                [_vm._v("Nouvelle tâche")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "default" },
+                  on: { click: function($event) {} }
+                },
+                [_vm._v("Nouveaux transport")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "warning" },
+                  on: {
+                    click: function($event) {
+                      _vm.submit("endMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Terminer la mission")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-d3b8fdf8", module.exports)
+  }
+}
+
+/***/ }),
+/* 1078 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(466)
+/* script */
+var __vue_script__ = __webpack_require__(1079)
+/* template */
+var __vue_template__ = __webpack_require__(1080)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/modules/missions/missions/workflow/ValidatedMission.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3077f444", Component.options)
+  } else {
+    hotAPI.reload("data-v-3077f444", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 1079 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask__ = __webpack_require__(852);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_inputmask___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_inputmask__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    props: ['mission'],
+    data: function data() {
+        return {
+            rules: {
+                start_counter: [{ required: true, message: 'Le compteur est obligatoire', trigger: 'blur' }],
+                fuel_unit_price: [{ required: true, message: 'Le prix unitaire du carburant est obligatoire', trigger: 'blur' }]
+            }
+        };
+    },
+
+    methods: {
+        cancel: function cancel(formName) {
+            this.$refs[formName].resetFields();
+        },
+        submit: function submit(formName) {
+            var _this = this;
+
+            this.$refs[formName].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', 'launch');
+                    return true;
+                } else {
+                    _this.$message.error('Merci de vérifier vos paramètres.');
+                    return false;
+                }
+            });
+        }
+    },
+    mounted: function mounted() {
+        __WEBPACK_IMPORTED_MODULE_0_inputmask___default()().mask(document.querySelectorAll("input"));
+    }
+});
+
+/***/ }),
+/* 1080 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "margin-top" },
+    [
+      _c(
+        "el-form",
+        {
+          ref: "launchMissionForm",
+          attrs: { model: _vm.mission, rules: _vm.rules }
+        },
+        [
+          _c(
+            "el-form-item",
+            { attrs: { label: "Compteur arrivé", prop: "start_counter" } },
+            [
+              _c("div", { staticClass: "el-input" }, [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.mission.start_counter,
+                      expression: "mission.start_counter"
+                    }
+                  ],
+                  staticClass: "el-input__inner",
+                  attrs: {
+                    id: "start_counter",
+                    name: "start_counter",
+                    "data-inputmask": "'mask': '9999:99'"
+                  },
+                  domProps: { value: _vm.mission.start_counter },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(
+                        _vm.mission,
+                        "start_counter",
+                        $event.target.value
+                      )
+                    }
+                  }
+                })
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            {
+              attrs: {
+                label: "Prix unitaire du carburant",
+                prop: "fuel_unit_price"
+              }
+            },
+            [
+              _c("el-input", {
+                attrs: {
+                  placeholder:
+                    "merci de spécifier le prix unitaire de carburant",
+                  type: "number",
+                  min: "0",
+                  clearable: ""
+                },
+                model: {
+                  value: _vm.mission.fuel_unit_price,
+                  callback: function($$v) {
+                    _vm.$set(_vm.mission, "fuel_unit_price", $$v)
+                  },
+                  expression: "mission.fuel_unit_price"
+                }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "el-form-item",
+            { staticStyle: { "text-align": "right" } },
+            [
+              _c(
+                "el-button",
+                {
+                  attrs: { type: "primary" },
+                  on: {
+                    click: function($event) {
+                      _vm.submit("launchMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Lancer la mission")]
+              ),
+              _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  on: {
+                    click: function($event) {
+                      _vm.cancel("launchMissionForm")
+                    }
+                  }
+                },
+                [_vm._v("Annuler")]
+              )
+            ],
+            1
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-3077f444", module.exports)
+  }
+}
 
 /***/ })
 ],[467]);

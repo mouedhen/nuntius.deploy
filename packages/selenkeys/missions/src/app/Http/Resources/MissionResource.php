@@ -16,19 +16,21 @@ class MissionResource extends Resource
         return [
             'id' => $this->id,
             'label' => $this->label,
-            'step' => $this->step,
-
-            'estimated_start_date' => (string) $this->estimated_start_date,
+            'status' => $this->status,
+            'estimated_start_date' => $this->estimated_start_date,
+            'estimated_end_date' => $this->estimated_end_date,
+            'customer_id' => $this->customer_id,
             'customer' => $this->customer,
-            'fuel_unit_price' => $this->fuel_unit_price,
+            'location_id' => $this->location_id,
+            'location' => $this->location,
+            'cancellation_cause' => $this->cancellation_cause,
+            'start_date' => $this->start_date,
             'start_counter' => $this->start_counter,
-
-            'estimated_end_date' => (string) $this->estimated_end_date,
-            'service_type' => $this->service_type,
-            'created_at' => (string) $this->created_at,
-            'updated_at' => (string) $this->updated_at,
-            'tasks' => $this->tasks,
+            'fuel_unit_price' => $this->fuel_unit_price,
+            'end_date' => $this->end_date,
             'end_counter' => $this->end_counter,
+            'tasks' => $this->tasks,
+            'transports' => $this->transports,
         ];
     }
 }

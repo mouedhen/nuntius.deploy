@@ -1,9 +1,14 @@
 <template>
     <el-form :model="mission" :rules="rules" ref="missionForm">
 
-        <el-form-item label="Date de début" prop="estimated_start_date">
+        <el-form-item label="Date estimée de début" prop="estimated_start_date">
             <el-date-picker type="date" placeholder="choisir une date"
                             v-model="mission.estimated_start_date" style="width: 100%;"/>
+        </el-form-item>
+
+        <el-form-item label="Date estimé de fin" prop="estimated_start_date">
+            <el-date-picker type="date" placeholder="choisir une date"
+                            v-model="mission.estimated_end_date" style="width: 100%;"/>
         </el-form-item>
 
         <el-form-item label="Client" prop="customer_id">
@@ -16,19 +21,6 @@
                         :value="customer.id">
                 </el-option>
             </el-select>
-        </el-form-item>
-
-        <el-form-item label="Compteur arrivé" prop="start_counter">
-            <div class="el-input">
-                <input class="el-input__inner" id="start_counter" name="start_counter"
-                       data-inputmask="'mask': '9999:99'"
-                       v-model="mission.start_counter"/>
-            </div>
-        </el-form-item>
-
-        <el-form-item label="Prix unitaire du carburant" prop="fuel_unit_price">
-            <el-input placeholder="merci de spécifier le prix unitaire de carburant" v-model="mission.fuel_unit_price" type="number"
-                      clearable :min="0"/>
         </el-form-item>
 
         <el-form-item>

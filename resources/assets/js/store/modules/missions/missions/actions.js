@@ -23,8 +23,8 @@ export function fetchMissions({commit}) {
             url: apiUrl + '/missions',
         })
         .then(response => {
-            commit(FETCH_MISSIONS, response.data.data);
-            return response.data.data
+            commit(FETCH_MISSIONS, response.data);
+            return response.data
         })
         .catch(error => {
             throw error
@@ -38,8 +38,8 @@ export function fetchMission({commit}, {missionID}) {
             url: apiUrl + '/missions/' + missionID,
         })
         .then(response => {
-            commit(FETCH_MISSION, response.data.data);
-            return response.data.data
+            commit(FETCH_MISSION, response.data);
+            return response.data
         })
         .catch(error => {
             throw error
@@ -54,24 +54,24 @@ export function createMission({commit}, {mission}) {
             data: mission
         })
         .then(response => {
-            commit(CREATE_MISSION, response.data.data);
-            return response.data.data
+            commit(CREATE_MISSION, response.data);
+            return response.data
         })
         .catch(error => {
             throw error
         })
 }
 
-export function updateMission({commit}, {mission}) {
+export function updateMission({commit}, {mission, action}) {
     return axios(
         {
             method: 'PUT',
-            url: apiUrl + '/missions/' + mission.id,
+            url: apiUrl + '/missions/' + mission.id + '/' + action,
             data: mission
         })
         .then(response => {
-            commit(UPDATE_MISSION, response.data.data);
-            return response.data.data
+            commit(UPDATE_MISSION, response.data);
+            return response.data
         })
         .catch(error => {
             throw error
@@ -86,17 +86,17 @@ export function deleteMission({commit}, { missionID }) {
         })
         .then(response => {
             commit(DELETE_MISSION, missionID);
-            return response.data.data
+            return response.data
         })
         .catch(error => {
             throw error
         })
 }
 
-export function saveMission({commit, state}, { mission }) {
+export function saveMission({commit, state}, { mission, action }) {
     const index = state.all.findIndex((x) => x.id === mission.id);
     if (index !== -1 ) {
-        return updateMission({commit}, {mission})
+        return updateMission({commit}, {mission, action})
     }
     return createMission({commit}, {mission})
 }

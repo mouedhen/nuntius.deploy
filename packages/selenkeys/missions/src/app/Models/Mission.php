@@ -16,8 +16,9 @@ use Selenkeys\Core\App\Traits\AutoLabelTrait;
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property Customer $customer
- * @property MissionDelayLog[] $missions_delays_logs
  * @property Task[] $tasks
+ * @property Location $location
+ * @property Transport[] $transports
  */
 class Mission extends Model
 {
@@ -25,11 +26,13 @@ class Mission extends Model
 
     protected $table = 'missions';
     protected $fillable = [
-        'estimated_start_date', 'estimated_end_date',
-        'start_date', 'end_date',
-        'start_counter', 'end_counter',
-        'status', 'fuel_unit_price',
-        'customer_id', 'location_id'];
+        'status', // global
+        'estimated_start_date', 'estimated_end_date', 'customer_id', 'location_id', //plan mission
+        'cancellation_cause', // cancel mission
+        'start_date', // validate mission
+        'start_counter', 'fuel_unit_price', // launch mission
+        'end_date',  'end_counter' // finish mission
+    ];
 
     public function customer()
     {

@@ -20,9 +20,8 @@
             return {
                 titles: [
                     {prop: 'label', label: 'ID'},
-                    {prop: 'customer.name', label: 'Customer'},
-                    {prop: 'estimated_start_date', label: 'Estimated Start Date'},
-                    {prop: 'estimated_end_date', label: 'Estimated End Date'},
+                    {prop: 'customer.name', label: 'Client'},
+                    {prop: 'status', label: 'Status'},
                 ],
                 tableProps: {
                     defaultSort: {
@@ -40,15 +39,10 @@
                             this.$router.push({name: 'missions:details', params: {id: row.id}})
                         }
                     },{
-                        name: 'Tasks',
-                        handler: row => {
-                            this.$router.push({name: 'missions:tasks', params: {id: row.id}})
-                        }
-                    }, {
-                        name: 'Delete',
+                        name: 'Supprimer',
                         handler: row => {
                             this.$store.dispatch('deleteMission', {missionID: row.id}).then(() => {
-                                this.fetchMissions();
+                                this.$store.dispatch('fetchMissions');
                             })
                         }
                     }]

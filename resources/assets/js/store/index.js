@@ -29,5 +29,5 @@ export default new Vuex.Store({
         missions,
         tasks,
     },
-    strict: true
+    strict: false
 })

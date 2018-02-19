@@ -2,7 +2,6 @@ import MissionsDashboard from './pages/MissionsDashboard.vue'
 import MissionsCreate from './pages/MissionsCreate.vue'
 import MissionsList from './pages/MissionsList.vue'
 import MissionsDetails from './pages/MissionsDetails.vue'
-import MissionsTasks from './pages/MissionsTasks.vue'
 
 export const routes = [
     {
@@ -29,10 +28,4 @@ export const routes = [
         component: MissionsDetails,
         meta: {}
     },
-    {
-        path: '/missions/:id/tasks',
-        name: 'missions:tasks',
-        component: MissionsTasks,
-        meta: {}
-    }
 ];
