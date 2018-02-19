@@ -20764,7 +20764,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     props: ['task'],
     data: function data() {
         return {
-            rules: {}
+            rules: {
+                start_date_time: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                end_date_time: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                tool_configuration: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                depth_in_cm: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                width_in_m: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                average_speed: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                worked_area: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                average_consumption: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                fuel_consumption: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                conductor_id: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                tractor_id: [{ required: true, message: 'obligatoire', trigger: 'blur' }],
+                tool_id: [{ required: true, message: 'obligatoire', trigger: 'blur' }]
+            }
         };
     },
 
@@ -20779,10 +20792,20 @@ var _extends = Object.assign || function (target) { for (var i = 1; i < argument
     })),
     methods: {
         submitTask: function submitTask(formName) {
-            this.$emit('submit', this.task);
+            var _this = this;
+
+            this.$refs['taskForm'].validate(function (valid) {
+                if (valid) {
+                    _this.$emit('submit', _this.task);
+                    return true;
+                } else {
+                    _this.$message.error('Errors, please check your form input.');
+                    return false;
+                }
+            });
         },
         resetForm: function resetForm(formName) {
-            this.$refs[formName].resetFields();
+            this.$refs['taskForm'].resetFields();
             this.$emit('cancel', this.task);
         }
     },
@@ -20926,7 +20949,7 @@ var render = function() {
                 [
                   _c(
                     "el-form-item",
-                    { attrs: { label: "Chauffeur", prop: "conductor" } },
+                    { attrs: { label: "Chauffeur", prop: "conductor_id" } },
                     [
                       _c(
                         "el-select",
@@ -20967,7 +20990,7 @@ var render = function() {
                 [
                   _c(
                     "el-form-item",
-                    { attrs: { label: "Tracteur", prop: "tractor" } },
+                    { attrs: { label: "Tracteur", prop: "tractor_id" } },
                     [
                       _c(
                         "el-select",
@@ -21015,7 +21038,7 @@ var render = function() {
                 [
                   _c(
                     "el-form-item",
-                    { attrs: { label: "Outil", prop: "tool" } },
+                    { attrs: { label: "Outil", prop: "tool_id" } },
                     [
                       _c(
                         "el-select",
@@ -21425,9 +21448,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 return task;
             });
         }
-    },
-    mounted: function mounted() {
-        console.log(this.tasks);
     }
 });
 
@@ -25070,12 +25090,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         submitTask: function submitTask() {
             this.task.mission_id = this.mission.id;
             this.$store.dispatch('saveTask', { task: this.task });
-            this.asksDialogVisible = false;
+            this.tasksDialogVisible = false;
             this.$emit('newTask');
         },
         cancelTask: function cancelTask() {
             this.task = Object(__WEBPACK_IMPORTED_MODULE_1__tasks_config__["a" /* initialTaskData */])();
-            this.asksDialogVisible = false;
+            this.tasksDialogVisible = false;
         }
     },
     mounted: function mounted() {

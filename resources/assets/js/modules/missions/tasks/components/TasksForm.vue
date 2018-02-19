@@ -24,7 +24,7 @@
 
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="Chauffeur" prop="conductor">
+                    <el-form-item label="Chauffeur" prop="conductor_id">
 
                         <el-select v-model="task.conductor_id"
                                    style="width: 100%"
@@ -40,7 +40,7 @@
                     </el-form-item>
                 </el-col>
                 <el-col :span="12">
-                    <el-form-item label="Tracteur" prop="tractor">
+                    <el-form-item label="Tracteur" prop="tractor_id">
 
                         <el-select v-model="task.tractor_id"
                                    style="width: 100%"
@@ -59,7 +59,7 @@
 
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item label="Outil" prop="tool">
+                    <el-form-item label="Outil" prop="tool_id">
                         <el-select v-model="task.tool_id"
                                    style="width: 100%"
                                    placeholder="Veuillez choisir la catégorie du client">
@@ -139,7 +139,20 @@
         props: ['task'],
         data() {
             return {
-                rules: {}
+                rules: {
+                    start_date_time: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    end_date_time: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    tool_configuration: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    depth_in_cm: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    width_in_m: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    average_speed: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    worked_area: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    average_consumption: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    fuel_consumption: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    conductor_id: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    tractor_id: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                    tool_id: [{required: true, message: 'obligatoire', trigger: 'blur'},],
+                }
             }
         },
         computed: {
@@ -154,10 +167,20 @@
         },
         methods: {
             submitTask(formName) {
-                this.$emit('submit', this.task);
+                this.$refs['taskForm'].validate((valid) => {
+                    if (valid) {
+                        this.$emit('submit', this.task);
+                        return true
+                    } else {
+                        this.$message.error('Errors, please check your form input.');
+                        return false
+                    }
+                })
+
+
             },
             resetForm(formName) {
-                this.$refs[formName].resetFields();
+                this.$refs['taskForm'].resetFields();
                 this.$emit('cancel', this.task);
             },
         },

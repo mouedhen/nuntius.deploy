@@ -37,8 +37,5 @@
                 })
             }
         },
-        mounted() {
-            console.log(this.tasks)
-        }
     }
 </script>

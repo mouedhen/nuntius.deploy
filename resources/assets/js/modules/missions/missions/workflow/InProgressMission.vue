@@ -86,12 +86,12 @@
             submitTask() {
                 this.task.mission_id = this.mission.id;
                 this.$store.dispatch('saveTask', {task: this.task});
-                this.asksDialogVisible = false;
+                this.tasksDialogVisible = false;
                 this.$emit('newTask')
             },
             cancelTask() {
                 this.task = initialTaskData();
-                this.asksDialogVisible = false;
+                this.tasksDialogVisible = false;
             }
         },
         mounted() {
