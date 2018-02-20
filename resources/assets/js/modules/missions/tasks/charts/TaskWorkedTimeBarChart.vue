@@ -94,7 +94,7 @@
                             task.average_area_h = task.worked_area / task.work_time;
                             task.average_consumption_h = task.fuel_consumption / task.work_time;
 
-                            conductors.push(task.conductor);
+                            conductors.push(task.conductor.name);
                             workingTime.push(task.work_time.toFixed(2));
                             averageAreaH.push(task.average_area_h.toFixed(2));
                             averageConsumptionH.push(task.average_consumption_h.toFixed(2));
@@ -110,12 +110,12 @@
                             labels: conductors,
                             datasets: [
                                 {
-                                    label: 'Break times',
+                                    label: 'Pauses',
                                     backgroundColor: '#EF5350',
                                     data: breakingTime
                                 },
                                 {
-                                    label: 'Work times',
+                                    label: 'Temps de Travail',
                                     backgroundColor: '#2196F3',
                                     data: workingTime
                                 },
@@ -125,7 +125,7 @@
                             labels: conductors,
                             datasets: [
                                 {
-                                    label: 'Average Area /H',
+                                    label: 'Surface Moyenne /H',
                                     backgroundColor: '#4CAF50',
                                     data: averageAreaH
                                 },
@@ -136,7 +136,7 @@
                             labels: conductors,
                             datasets: [
                                 {
-                                    label: 'Average Consumption /H',
+                                    label: 'Consommation Moyenne /H',
                                     backgroundColor: '#EF6C00',
                                     data: averageConsumptionH
                                 },

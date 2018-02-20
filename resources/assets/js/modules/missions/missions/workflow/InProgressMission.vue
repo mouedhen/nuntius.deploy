@@ -86,6 +86,7 @@
             submitTask() {
                 this.task.mission_id = this.mission.id;
                 this.$store.dispatch('saveTask', {task: this.task});
+                this.task = initialTaskData();
                 this.tasksDialogVisible = false;
                 this.$emit('newTask')
             },

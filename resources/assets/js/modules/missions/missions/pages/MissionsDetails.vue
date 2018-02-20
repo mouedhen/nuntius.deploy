@@ -10,9 +10,9 @@
                 <el-breadcrumb-item>Détails Mission</el-breadcrumb-item>
             </el-breadcrumb>
 
-            <missions-details-component :mission="mission" />
+            <missions-details-component :mission="mission" class="printcontent" />
 
-            <el-steps v-if="mission.status !== 'canceled'" class="margin-top" :active="step" align-center>
+            <el-steps v-if="(mission.status !== 'canceled') && (mission.status !== 'finished')" class="margin-top" :active="step" align-center>
                 <el-step title="Planifiée"/>
                 <el-step title="Validée"/>
                 <el-step title="En cours"/>
@@ -28,6 +28,7 @@
             <canceled-mission v-if="mission.status === 'canceled'" :mission="mission"/>
             <validated-mission v-if="mission.status === 'validated'" :mission="mission" @submit="submit" />
             <in-progress-mission v-if="mission.status === 'in_progress'" @submit="submit" :mission="mission" @newTask="reload" />
+            <finished-mission class="printcontent" v-if="mission.status === 'finished'" :mission="mission" />
         </el-col>
     </el-row>
 </template>
@@ -40,6 +41,7 @@
     import CanceledMission from './../workflow/CanceledMission'
     import ValidatedMission from './../workflow/ValidatedMission'
     import InProgressMission from './../workflow/InProgressMission'
+    import FinishedMission from './../workflow/FinishedMission'
 
     export default {
         components: {
@@ -49,6 +51,7 @@
             CanceledMission,
             ValidatedMission,
             InProgressMission,
+            FinishedMission,
         },
         data() {
             return {

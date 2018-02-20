@@ -4,59 +4,59 @@
         <el-row style="text-align: center" :gutter="10">
 
             <el-col :span="8">
-                <card-stat :statTitle="'average area /H'" :statValue="metrics.averageAreaH.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'surface moyenne /H'" :statValue="metrics.averageAreaH.toFixed(2)"/>
             </el-col>
             <el-col :span="8">
-                <card-stat :statTitle="'average consumption /H'"
-                           :statValue="metrics.averageConsumptionH.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'consommation moyenne /H'"
+                           :statValue="metrics.averageConsumptionH.toFixed(2)"/>
             </el-col>
             <el-col :span="8">
-                <card-stat :statTitle="'average consumption /HA'"
-                           :statValue="metrics.averageConsumptionHA.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'consommation moyenne /HA'"
+                           :statValue="metrics.averageConsumptionHA.toFixed(2)"/>
             </el-col>
             <el-col :span="8">
-                <card-stat :statTitle="'fuel cost /HA'" :statValue="metrics.fuelCostHA.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'coût du carburant /HA'" :statValue="metrics.fuelCostHA.toFixed(2)"/>
             </el-col>
             <el-col :span="8">
-                <card-stat :statTitle="'average speed'" :statValue="metrics.averageSpeed.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'vitesse moyenne'" :statValue="metrics.averageSpeed.toFixed(2)"/>
             </el-col>
             <el-col :span="8">
-                <card-stat :statTitle="'line change time %'"
-                           :statValue="metrics.lineChangeTime.toFixed(2) * 100"></card-stat>
+                <card-stat :statTitle="'temps de changement de ligne %'"
+                           :statValue="metrics.lineChangeTime.toFixed(2) * 100"/>
             </el-col>
 
         </el-row>
         <hr>
-        <task-worked-time-bar-char></task-worked-time-bar-char>
+        <task-worked-time-bar-char/>
         <hr>
 
         <el-row style="text-align: center" :gutter="10">
             <el-col :span="6">
-                <card-stat :statTitle="'total tasks'" :statValue="metrics.totalTasks"></card-stat>
+                <card-stat :statTitle="'nombre de tâches'" :statValue="metrics.totalTasks"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'work time'"
-                           :statValue="metrics.workTime.format({template: 'hh:mm', forceLength: true, trim: false})"></card-stat>
+                <card-stat :statTitle="'temps de travail'"
+                           :statValue="metrics.workTime.format({template: 'hh:mm', forceLength: true, trim: false})"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'break time'"
-                           :statValue="metrics.breakTime.format({template: 'hh:mm', forceLength: true, trim: false})"></card-stat>
+                <card-stat :statTitle="'pauses'"
+                           :statValue="metrics.breakTime.format({template: 'hh:mm', forceLength: true, trim: false})"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'worked area'" :statValue="metrics.workedArea.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'surface travaillée'" :statValue="metrics.workedArea.toFixed(2)"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'fuel consumption'" :statValue="metrics.fuelConsumption.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'consommation de carburant'" :statValue="metrics.fuelConsumption.toFixed(2)"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'average indicated speed KM'" :statValue="metrics.averageSpeedKM.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'vitesse moyenne indiquée KM'" :statValue="metrics.averageSpeedKM.toFixed(2)"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'average consumption'"
-                           :statValue="metrics.averageConsumption.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'consommation moyenne'"
+                           :statValue="metrics.averageConsumption.toFixed(2)"/>
             </el-col>
             <el-col :span="6">
-                <card-stat :statTitle="'fuel cost'" :statValue="metrics.fuelCost.toFixed(2)"></card-stat>
+                <card-stat :statTitle="'coût du carburant'" :statValue="metrics.fuelCost.toFixed(2)"/>
             </el-col>
         </el-row>
         <hr>
@@ -76,6 +76,7 @@
 
     import CardStat from './../../../metrics/components/CardStat.vue'
     import TaskWorkedTimeBarChar from './../../tasks/charts/TaskWorkedTimeBarChart.vue'
+
     export default {
         components: {CardStat, ElRow, ElCol, TaskWorkedTimeBarChar},
         props: ['tasks', 'fuelUnitPrice'],
@@ -93,12 +94,14 @@
                 let startDateTime = null;
                 let endDateTime = null;
                 let conductors = [];
+
                 if (tasks.length > 0) {
                     startDateTime = tasks[0].start_date_time;
                     endDateTime = tasks[0].end_date_time;
                     tasks.forEach(task => {
-                        if (conductors.indexOf(task.conductor) === -1) {
-                            conductors.push(task.conductor)
+                        let cName = task.conductor.name;
+                        if (conductors.indexOf(cName) === -1) {
+                            conductors.push(cName)
                         }
                     })
                 }

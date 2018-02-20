@@ -6,8 +6,15 @@
                 <el-col :span="12">
                     <el-form-item label="Date et heure de début" prop="start_date_time">
                         <div class="el-input">
-                            <input class="el-input__inner" id="start_date_time" name="start_date_time"
-                                   type="datetime-local" v-model="task.start_date_time"/>
+
+                            <flat-pickr
+                                    v-model="task.start_date_time"
+                                    :config="config"
+                                    class="el-input__inner"
+                                    placeholder="Merci de choisir l'heure et la date"
+                                    name="start_date_time">
+                            </flat-pickr>
+
                         </div>
                     </el-form-item>
                 </el-col>
@@ -15,8 +22,15 @@
                 <el-col :span="12">
                     <el-form-item label="Date et heure de fin" prop="end_date_time">
                         <div class="el-input">
-                            <input class="el-input__inner" id="end_date_time" name="end_date_time"
-                                   type="datetime-local" v-model="task.end_date_time"/>
+
+                            <flat-pickr
+                                    v-model="task.end_date_time"
+                                    :config="config"
+                                    class="el-input__inner"
+                                    placeholder="Merci de choisir l'heure et la date"
+                                    name="end_date_time">
+                            </flat-pickr>
+
                         </div>
                     </el-form-item>
                 </el-col>
@@ -131,14 +145,25 @@
     </div>
 </template>
 <script>
+
+    import flatPickr from 'vue-flatpickr-component';
+    import { French } from "flatpickr/dist/l10n/fr"
+    import 'flatpickr/dist/flatpickr.css';
+
     import {mapGetters} from 'vuex'
     import {Row as ElRow, Col as ElCol} from 'element-ui'
 
     export default {
-        components: {ElRow, ElCol},
+        components: {ElRow, ElCol, flatPickr},
         props: ['task'],
         data() {
             return {
+                config: {
+                    enableTime: true,
+                    // dateFormat: "d/m/Y H:i",
+                    time_24hr: true,
+                    locale: French,
+                },
                 rules: {
                     start_date_time: [{required: true, message: 'obligatoire', trigger: 'blur'},],
                     end_date_time: [{required: true, message: 'obligatoire', trigger: 'blur'},],
@@ -176,8 +201,6 @@
                         return false
                     }
                 })
-
-
             },
             resetForm(formName) {
                 this.$refs['taskForm'].resetFields();
